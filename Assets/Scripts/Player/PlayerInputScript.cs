@@ -12,7 +12,7 @@ public class PlayerInputScript : MonoBehaviour
     private bool canMove = true, canFire = true, isDead;
     private float delayTime = 0.03125f;
 
-    [SerializeField] private DelverzTile myPlayerTile;
+    [SerializeField] private PlayerTile myPlayerTile;
 
     private void Awake()
     {
@@ -52,13 +52,14 @@ public class PlayerInputScript : MonoBehaviour
     {
         if (canMove && moveDir != Vector2.zero && !isDead)
         {
+
             moveDirFloat = moveDir;
             moveDirFloat *= 0.125f;
             Vector3 movePos = new Vector3(transform.position.x + moveDirFloat.x, transform.position.y + moveDirFloat.y, -0.5f);
 
             Bounds moveBounds = new Bounds(movePos, Vector3.one);
 
-            if(myPlayerTile.CanMove(moveBounds)) 
+            if (myPlayerTile.CanMove(moveBounds))
             {
                 myPlayerTile.Move(movePos);
 
@@ -66,6 +67,12 @@ public class PlayerInputScript : MonoBehaviour
                 StartCoroutine(MoveDelay());
             }
         }
+    }
+
+    private void ChangeAnimationDirection()
+    {
+        //if statement for each direction
+        //change animation
     }
 
     /*private void Fire()
