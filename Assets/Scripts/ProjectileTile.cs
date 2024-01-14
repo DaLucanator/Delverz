@@ -19,7 +19,7 @@ public class ProjectileTile : DelverzTile
 
     public override void Move()
     {
-        if (CanMove(bounds))
+        if (CanMove(new Bounds(transform.position + moveDirection, Vector3.one * 0.96875f)))
         {
             foreach (DelverzTile tileIAmTraversingTo in tilesToTraverseTo)
             {
