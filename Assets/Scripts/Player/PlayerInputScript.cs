@@ -55,9 +55,9 @@ public class PlayerInputScript : MonoBehaviour
 
             moveDirFloat = moveDir;
             moveDirFloat *= 0.125f;
-            Vector3 movePos = new Vector3(transform.position.x + moveDirFloat.x, transform.position.y + moveDirFloat.y, -0.5f);
+            Vector3 movePos = new Vector3(transform.position.x + moveDirFloat.x, transform.position.y + moveDirFloat.y, 0f);
 
-            Bounds moveBounds = new Bounds(movePos, Vector3.one);
+            Bounds moveBounds = new Bounds(movePos, Vector3.one * 0.96875f);
 
             if (myPlayerTile.CanMove(moveBounds))
             {

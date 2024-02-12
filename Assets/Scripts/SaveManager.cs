@@ -35,6 +35,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveRoom()
     {
+        tilemap.CompressBounds();
         bounds = tilemap.cellBounds;
         RoomData roomData = new RoomData();
         for(int x = bounds.min.x; x < bounds.max.x; x++)
@@ -43,9 +44,7 @@ public class SaveManager : MonoBehaviour
             {
                 Vector3Int tilePos = new Vector3Int(x, y, 0);
                 TileBase tile = tilemap.GetTile(tilePos);
-                roomData.tiles.Add(tile);
-                roomData.pos.Add(tilePos);
-
+                //roomData.roomTiles.Add(tilePos, tile);
             }
         }
 
@@ -57,6 +56,7 @@ public class SaveManager : MonoBehaviour
 
     public void SetCurrentRoom()
     {
+        /*
         string json = File.ReadAllText(Application.dataPath + "/Saves/Rooms/testRoom 1.json");
         RoomData data = JsonUtility.FromJson<RoomData>(json);
 
@@ -66,15 +66,7 @@ public class SaveManager : MonoBehaviour
         }
 
         //Load Complete
-    }
-
-    public class RoomData
-    {
-        //maybe change this to dictionary
-        public List<TileBase> tiles = new List<TileBase>();
-        public List<Vector3Int> pos = new List<Vector3Int>();
-        public string roomName;
-        public int roomID;
+        */
     }
 
     public class LevelData
@@ -83,4 +75,13 @@ public class SaveManager : MonoBehaviour
         public string levelName;
         public int levelID;
     }
+}
+
+[System.Serializable]
+public class RoomData
+{
+    public string roomName;
+    public string dateLastEdited;
+    public List<Vector3Int> tilePoses;
+    public List<TileBase> tiles;
 }

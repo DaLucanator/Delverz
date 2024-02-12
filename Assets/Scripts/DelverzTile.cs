@@ -23,7 +23,7 @@ public class DelverzTile : MonoBehaviour
 
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
 
-        //GridManager.current.AddToTileDictionary(tileLayer,bounds,this);
+        GridManager.current.AddToTileDictionary(tileLayer,bounds,this);
     }
 
     public ColliderType ReturnColliderType()
