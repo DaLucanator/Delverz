@@ -22,7 +22,7 @@ public class RoomManager : MonoBehaviour
 
     [SerializeField] private Tilemap currentTilemap;
     [SerializeField] private RoomDepthList rooms = new RoomDepthList();
-    [SerializeField] private List<RoomData> roomsToSpawn = new List<RoomData>();
+    private List<RoomData> roomsToSpawn = new List<RoomData>();
     private Vector3Int verticalOffset = new Vector3Int (0,15,0);
     private int roomsSpawned = 0;
 

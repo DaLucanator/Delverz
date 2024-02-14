@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -9,30 +10,52 @@ using UnityEngine.Tilemaps;
 public class Room : MonoBehaviour
 {
     [SerializeField] private Tilemap myTileMap;
+    [SerializeField] private TextAsset roomToLoad;
+    [SerializeField] private bool loadRoom;
     [SerializeField] private User currentUser;
     [SerializeField] private string roomName;
-    [SerializeField] bool saveLevel;
+    [SerializeField] bool saveRoom, overwrite;
 
-    [SerializeField] private RoomData myRoomData;
+    [SerializeField] private RoomData doNotTouch;
 
     void Update()
     {
-        if (saveLevel) 
+        if(loadRoom)
+        {
+            LoadRoom();
+            loadRoom = false;
+        }
+        if (saveRoom) 
         { 
             SaveRoom();
-            saveLevel = false;
-            Debug.Log("Room Data was updated successfully. Remember to save prefab :)");
+            saveRoom = false;
         }
+    }
+    public void LoadRoom()
+    {
+        RoomData dataToLoad = JsonUtility.FromJson<RoomData>(roomToLoad.ToString());
+
+        for (int i = 0; i < dataToLoad.tilePoses.Count; i++)
+        {
+            myTileMap.SetTile(dataToLoad.tilePoses[i], dataToLoad.tiles[i]);
+        }
+        roomToLoad = null;
     }
 
     public void SaveRoom()
     {
-        if(roomName == null) 
+        string filePath = Application.dataPath + "/Rooms/" + currentUser.ToString() + "/" + currentUser.ToString() + "_" + roomName + ".json";
+        if (roomName == null) 
         {
             Debug.Log("Please Name Level");
         }
+        else if(File.Exists(filePath) && !overwrite)
+        {
+            Debug.Log("File name already exists. Please enable overwrite if intended");
+        }
         else
         {
+            RoomData myRoomData = doNotTouch;
             myRoomData.roomName = roomName;
             myRoomData.dateLastEdited = System.DateTime.Now.ToString();
 
@@ -57,10 +80,12 @@ public class Room : MonoBehaviour
             }
 
             string json = JsonUtility.ToJson(myRoomData, true);
-            File.WriteAllText(Application.dataPath + "/Rooms/" + currentUser.ToString() + "/" + currentUser.ToString() + "_" + roomName + ".json", json);
+            File.WriteAllText(filePath, json);
+            
+            roomName = null;
+            overwrite = false;
+            Debug.Log("Room was saved successfully");
         }
-
-        roomName = null;
     }
 
     public enum User
