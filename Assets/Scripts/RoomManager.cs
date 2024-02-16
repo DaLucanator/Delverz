@@ -22,6 +22,7 @@ public class RoomManager : MonoBehaviour
 
     [SerializeField] private Tilemap currentTilemap;
     [SerializeField] private RoomDepthList rooms = new RoomDepthList();
+    [SerializeField] private TileIDsScriptableObject tileIDs;
     private List<RoomData> roomsToSpawn = new List<RoomData>();
     private Vector3Int verticalOffset = new Vector3Int (0,15,0);
     private int roomsSpawned = 0;
@@ -52,7 +53,7 @@ public class RoomManager : MonoBehaviour
 
         for (int i = 0; i < currentRoomData.tilePoses.Count; i++)
         {
-            currentTilemap.SetTile(currentRoomData.tilePoses[i] + (verticalOffset * roomsSpawned) , currentRoomData.tiles[i]);
+            currentTilemap.SetTile(currentRoomData.tilePoses[i] + (verticalOffset * roomsSpawned) , tileIDs.tileIDs[currentRoomData.tileIDs[i]]);
         }
         
         roomsSpawned++;

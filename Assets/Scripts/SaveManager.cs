@@ -83,5 +83,5 @@ public class RoomData
     public string roomName;
     public string dateLastEdited;
     public List<Vector3Int> tilePoses;
-    public List<TileBase> tiles;
+    public List<int> tileIDs;
 }

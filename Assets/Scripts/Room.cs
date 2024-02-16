@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,9 +15,10 @@ public class Room : MonoBehaviour
     [SerializeField] private bool loadRoom;
     [SerializeField] private User currentUser;
     [SerializeField] private string roomName;
-    [SerializeField] bool saveRoom, overwrite;
+    [SerializeField] private bool saveRoom, overwrite;
 
     [SerializeField] private RoomData doNotTouch;
+    [SerializeField] private TileIDsScriptableObject tileIDs;
 
     void Update()
     {
@@ -37,7 +39,7 @@ public class Room : MonoBehaviour
 
         for (int i = 0; i < dataToLoad.tilePoses.Count; i++)
         {
-            myTileMap.SetTile(dataToLoad.tilePoses[i], dataToLoad.tiles[i]);
+            myTileMap.SetTile(dataToLoad.tilePoses[i], tileIDs.tileIDs[dataToLoad.tileIDs[i]]);
         }
         roomToLoad = null;
     }
@@ -45,7 +47,7 @@ public class Room : MonoBehaviour
     public void SaveRoom()
     {
         string filePath = Application.dataPath + "/Rooms/" + currentUser.ToString() + "/" + currentUser.ToString() + "_" + roomName + ".json";
-        if (roomName == null) 
+        if (roomName == "") 
         {
             Debug.Log("Please Name Level");
         }
@@ -62,7 +64,7 @@ public class Room : MonoBehaviour
             myTileMap.CompressBounds();
             BoundsInt myBounds = myTileMap.cellBounds;
             myRoomData.tilePoses.Clear();
-            myRoomData.tiles.Clear();
+            myRoomData.tileIDs.Clear();
 
             for (int x = myBounds.min.x; x < myBounds.max.x; x++)
             {
@@ -73,8 +75,10 @@ public class Room : MonoBehaviour
                     if (!myRoomData.tilePoses.Contains(tilePos))
                     {
                         TileBase tile = myTileMap.GetTile(tilePos);
+                        int tileID = tileIDs.ReturnTileID(tile);
+
                         myRoomData.tilePoses.Add(tilePos);
-                        myRoomData.tiles.Add(tile);
+                        myRoomData.tileIDs.Add(tileID);
                     }
                 }
             }
