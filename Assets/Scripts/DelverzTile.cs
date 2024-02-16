@@ -36,6 +36,11 @@ public class DelverzTile : MonoBehaviour
 
     }
 
+    public virtual void Die()
+    {
+
+    }
+
     public virtual void DestroySelf()
     {
         GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);

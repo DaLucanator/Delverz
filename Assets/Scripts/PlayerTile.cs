@@ -23,7 +23,11 @@ public class PlayerTile : DelverzTile
         }
     }
 
-    public void Die()
+    public override void Trigger(DelverzTile incomingTile)
+    {
+        Die();
+    }
+    public override void Die()
     {
         //Disable Input
         myPlayerInputScript.Die(true);

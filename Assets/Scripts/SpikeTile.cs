@@ -1,16 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class SpikeTile : DelverzTile
 {
-     protected override void Start()
+    bool isAnimated;
+    static bool isOn;
+
+    protected override void Start()
     {
+        if (isAnimated) { TrapClock.current.tick += SwitchOnOff; }
         base.Start();
     }
 
+    private void SwitchOnOff()
+    {
+        isOn = !isOn;
+    }
+
+
+
     public override void Trigger(DelverzTile incomingTile)
     {
-
+        if (!isAnimated) { incomingTile.Die(); }
+        else if (isOn) { incomingTile.Die(); }
     }
 }
