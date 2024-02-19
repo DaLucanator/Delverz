@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.Scripting.APIUpdating;
-using System.Security.Cryptography;
 
 public class DelverzTile : MonoBehaviour
 {
@@ -11,15 +9,15 @@ public class DelverzTile : MonoBehaviour
     private protected int tileLayer;
 
     private protected Bounds bounds;
-    private protected List<DelverzTile> tilesToTraverseTo;
+    private protected List<DelverzTile> tilesToTrigger = new List<DelverzTile>();
     private Tile myTileMapTile;
 
     protected virtual void Start()
     {
-
-        if (colliderType == ColliderType.groundObject) { tileLayer = 1; }
-        else if (colliderType == ColliderType.ground || colliderType == ColliderType.air) { tileLayer = 0; }
-        else { tileLayer = 2; }
+        if (colliderType == ColliderType.ground || colliderType == ColliderType.air) { tileLayer = 0; }
+        else if (colliderType == ColliderType.groundObject) { tileLayer = 1; }
+        else if (colliderType == ColliderType.projectile) { tileLayer = 2; }
+        else { tileLayer = 3; }
 
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
 
@@ -29,6 +27,11 @@ public class DelverzTile : MonoBehaviour
     public ColliderType ReturnColliderType()
     {
         return colliderType;
+    }
+
+    public void SetColliderType(ColliderType typeToSetTo)
+    {
+        colliderType = typeToSetTo;
     }
 
     public virtual void Trigger(DelverzTile incomingTile)
@@ -46,21 +49,14 @@ public class DelverzTile : MonoBehaviour
         GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, Vector3.one);
-    }
-
-
     public bool CanMove(Bounds moveBounds)
     {
-        tilesToTraverseTo = null;
-        tilesToTraverseTo = GridManager.current.ReturnIntersectTiles(moveBounds,this);
-
-        if (tilesToTraverseTo == null) { return false; }
-
-        else return true;
+        tilesToTrigger = null;
+        TileIntersect intersectData = GridManager.current.ReturnIntersectTiles(moveBounds, this);
+        tilesToTrigger = intersectData.tilesToTrigger;
+        return intersectData.canTraverse;
     }
+
     public virtual void Move(Vector3 movePos)
     {
 

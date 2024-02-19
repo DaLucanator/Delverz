@@ -7,6 +7,9 @@ public class PlayerTile : DelverzTile
     [SerializeField] PlayerInputScript myPlayerInputScript;
     private float treasureAmount;
     private int TreasureAmountDisplay;
+    private bool isDead;
+
+    private List<PressurePlateTile> pressurePlateTiles = new List<PressurePlateTile>();
 
     public override void Move(Vector3 movePos)
     {
@@ -16,10 +19,30 @@ public class PlayerTile : DelverzTile
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
 
-        foreach (DelverzTile tileIAmTraversingTo in tilesToTraverseTo)
+        List<PressurePlateTile> tilesToRemove = new List<PressurePlateTile>();
+
+        //depower any pressure plate tiles that aren't in tilesToTrigger anymore and remove them from that list
+        foreach (PressurePlateTile pressurePlate in pressurePlateTiles)
         {
-            Debug.Log(tileIAmTraversingTo);
-            tileIAmTraversingTo.Trigger(this);
+            if(!tilesToTrigger.Contains(pressurePlate)) 
+            {
+                pressurePlate.DePower();
+                tilesToRemove.Add(pressurePlate);
+            }
+        }
+
+        foreach (PressurePlateTile pressurePlateTile in tilesToRemove)
+        {
+            tilesToTrigger.Remove(pressurePlateTile);
+        }
+        tilesToRemove.Clear();
+
+        foreach (DelverzTile tileToTrigger in tilesToTrigger)
+        {
+            tileToTrigger.Trigger(this);
+
+            //add any pressureplate tiles that are in tilesToTrigger to pressurePlateTiles
+            if(tileToTrigger is PressurePlateTile) { pressurePlateTiles.Add(tileToTrigger as PressurePlateTile); }
         }
     }
 
@@ -33,11 +56,17 @@ public class PlayerTile : DelverzTile
         myPlayerInputScript.Die(true);
 
         //Deduct Treasure
-        treasureAmount -= treasureAmount * 0.1f;
+        treasureAmount -= (treasureAmount * 0.1f);
         Mathf.RoundToInt(treasureAmount);
         TreasureAmountDisplay = (int)treasureAmount;
 
         StartCoroutine(RespawnTimer());
+    }
+
+    //this and associated methods are used to track when a player leaves a trigger. i.e pressure plate
+    public void AddToTriggerExit()
+    {
+
     }
 
     private IEnumerator RespawnTimer()

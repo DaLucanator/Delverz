@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 [ExecuteInEditMode]
-public class Room : MonoBehaviour
+public class RoomEditor : MonoBehaviour
 {
     [SerializeField] private Tilemap myTileMap;
     [SerializeField] private TextAsset roomToLoad;
@@ -91,6 +91,31 @@ public class Room : MonoBehaviour
             Debug.Log("Room was saved successfully");
         }
     }
+
+    public void SetUpTrapnetwork()
+    {
+        myTileMap.CompressBounds();
+        BoundsInt myBounds = myTileMap.cellBounds;
+
+        for (int x = myBounds.min.x; x < myBounds.max.x; x++)
+        {
+            for (int y = myBounds.min.y; y < myBounds.max.y; y++)
+            {
+                Vector3Int tilePos = new Vector3Int(x, y, 0);
+                TileBase tile = myTileMap.GetTile(tilePos);
+                //for each tile in the tile map if it's a network1 pressupre plate add it to this list
+
+                //for each tile in the tile map if it's a network2 pressupre plate add it to this list
+
+                //for each tile in the tilemap if it's one of the following tiles add it to this list
+                //for each tile in the tilemap if it's one of the following tiles add it to this list
+            }
+        }
+    }
+
+
+
+
 
     public enum User
     {

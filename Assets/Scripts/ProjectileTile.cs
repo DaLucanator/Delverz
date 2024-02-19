@@ -21,15 +21,11 @@ public class ProjectileTile : DelverzTile
     {
         if (CanMove(new Bounds(transform.position + moveDirection, Vector3.one * 0.96875f)))
         {
-            foreach (DelverzTile tileIAmTraversingTo in tilesToTraverseTo)
+            foreach (DelverzTile tileToTrigger in tilesToTrigger)
             {
-                if (tileIAmTraversingTo.ReturnColliderType() == ColliderType.player)
-                {
-                    tileIAmTraversingTo.DestroySelf();
-                    shouldDestroySelf = true;
-                }
+                tileToTrigger.Die();
             }
-            if (shouldDestroySelf) { DestroySelf(); }
+            if (tilesToTrigger.Count > 0) { DestroySelf();}
 
             else
             {
@@ -43,6 +39,12 @@ public class ProjectileTile : DelverzTile
             canMove = false;
             StartCoroutine(MoveDelay());
         }
+    }
+
+    public override void Trigger(DelverzTile incomingTile)
+    {
+        incomingTile.Die();
+        DestroySelf();
     }
 
     private IEnumerator MoveDelay()
