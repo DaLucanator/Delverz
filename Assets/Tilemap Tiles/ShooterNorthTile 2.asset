@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShooterNorthTile 2
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -115922608, guid: ddd076ed0311042499369328a4214779, type: 3}
-  m_DefaultGameObject: {fileID: 764452270606256282, guid: 1e41a8240702d73419eff3d7973aa4a4, type: 3}
+  m_DefaultGameObject: {fileID: 764452270606256282, guid: f0745cd21c3dd4b48a7e7205f0fd0de8, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: DoorTileClosed
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 2005278314, guid: a843b620f87729341b7722f3c642ec0f, type: 3}
+  m_DefaultGameObject: {fileID: 764452270606256282, guid: 9f23340e01ad82644b12e428e04a6429, type: 3}
+  m_DefaultColliderType: 0
+  m_TilingRules: []

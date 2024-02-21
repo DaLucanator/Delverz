@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShooterWestTile 2
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -1061063069, guid: ddd076ed0311042499369328a4214779, type: 3}
-  m_DefaultGameObject: {fileID: 764452270606256282, guid: adaf878e7daa5844bb4953fd4cb73d28, type: 3}
+  m_DefaultGameObject: {fileID: 764452270606256282, guid: dd9255e0d6bb71347918a95b7aab0dd2, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

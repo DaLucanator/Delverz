@@ -33,7 +33,7 @@ public class PlayerTile : DelverzTile
 
         foreach (PressurePlateTile pressurePlateTile in tilesToRemove)
         {
-            tilesToTrigger.Remove(pressurePlateTile);
+            pressurePlateTiles.Remove(pressurePlateTile);
         }
         tilesToRemove.Clear();
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6740845537791975262}
   - component: {fileID: -7065349549590034855}
   m_Layer: 0
-  m_Name: AnimatedSpikeTilePrefab
+  m_Name: AnimatedSpikeTileOnPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderType: 3
+  isNetworkedTile: 0
   mySpikes: {fileID: 2900598121597562414}
   mySpikeTile: {fileID: 6530414714837859439}
+  isPowered: 1
 --- !u!1 &2900598121597562414
 GameObject:
   m_ObjectHideFlags: 0

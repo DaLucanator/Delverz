@@ -6,7 +6,7 @@ using UnityEngine;
 public class TrapClock : MonoBehaviour
 {
     public static TrapClock current;
-    private bool shouldActivate;
+    private bool shouldActivateOn, shouldActivateOff;
 
     public void Awake()
     {
@@ -19,16 +19,18 @@ public class TrapClock : MonoBehaviour
     }
 
     public event Action tick;
-    public event Action<bool> onOfftick;
+    public event Action<bool> onTick;
+    public event Action<bool> offTick;
     private void TickMethod()
     {
-        shouldActivate = !shouldActivate;
-        tick();
-        onOfftick(shouldActivate);
+        shouldActivateOn = !shouldActivateOn;
+        shouldActivateOff = !shouldActivateOff;
+        if (tick != null) { tick(); }
+        if (onTick != null) { onTick(shouldActivateOn); }
+        if (offTick != null) { offTick(shouldActivateOn); }
 
-        //doors turn on and off
-        //arrow traps turn on and off
-        //arrowas shoot everytime
-
+        //doors switch state
+        //spikes switch state
+        //arrows shoot everytime
     }
 }

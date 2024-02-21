@@ -7,13 +7,26 @@ using UnityEngine;
 public class AnimatedSpikeTile : PoweredTile
 {
     [SerializeField]private GameObject mySpikes;
-    [SerializeField] private DelverzTile mySpikeTile;
+    [SerializeField] private SpikeTile mySpikeTile;
+    [SerializeField] private bool isPowered;
 
     private bool addToDictionary;
-    public override void PowerTile()
+
+    protected override void Start()
     {
+        base.Start();
+        if(!isNetworkedTile)
+        {
+            if (isPowered) { TrapClock.current.onTick += PowerTile; }
+
+            if (!isPowered) { TrapClock.current.offTick += PowerTile; }
+        }
     }
 
+    public bool ReturnIsPowered()
+    {
+        return isPowered;
+    }
 
     public override void PowerTile(bool shouldPower)
     {
@@ -32,7 +45,7 @@ public class AnimatedSpikeTile : PoweredTile
             }
         }
 
-        else if (!shouldPower)
+        else if (!shouldPower && isPowered)
         {
             isPowered = false;
             GridManager.current.RemoveTileFromDictionary(1, bounds);

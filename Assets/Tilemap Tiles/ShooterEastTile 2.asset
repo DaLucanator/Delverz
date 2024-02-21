@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShooterEastTile 2
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 534803170, guid: ddd076ed0311042499369328a4214779, type: 3}
-  m_DefaultGameObject: {fileID: 764452270606256282, guid: bd83b4c332bebdf42ab796a11203a5d0, type: 3}
+  m_DefaultGameObject: {fileID: 764452270606256282, guid: 8fd9277a5f205664295cb37204efd8c6, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

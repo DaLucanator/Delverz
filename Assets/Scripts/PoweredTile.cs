@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PoweredTile : DelverzTile
 {
-    private protected bool isPowered;
+    [SerializeField] protected bool isNetworkedTile;
 
     protected override void Start()
     {
         base.Start();
-        TrapClock.current.tick += PowerTile;
-        TrapClock.current.onOfftick += PowerTile;
+        if (!isNetworkedTile) { TrapClock.current.tick += PowerTile; }
+
     }
 
     public virtual void PowerTile()

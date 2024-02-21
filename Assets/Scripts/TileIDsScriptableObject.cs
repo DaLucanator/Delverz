@@ -9,6 +9,9 @@ using UnityEngine.Tilemaps;
 public class TileIDsScriptableObject : ScriptableObject
 {
     public List<TileBase> tileIDs = new List<TileBase>();
+    [SerializeField] private TileBase pressurePlate1, pressurePlate2;
+    [SerializeField] private List<TileBase> poweredTiles1 = new List<TileBase>();
+    [SerializeField] private List<TileBase> poweredTiles2 = new List<TileBase>();
 
     public int ReturnTileID(TileBase tile)
     {
@@ -22,5 +25,29 @@ public class TileIDsScriptableObject : ScriptableObject
 
         Debug.Log("Tile ID not Found");
         return 0;
+    }
+
+    public bool isPressurePlate1(TileBase tile)
+    {
+        if (pressurePlate1 == tile) { return true; }
+        else return false;
+    }
+
+    public bool isPressurePlate2(TileBase tile)
+    {
+        if (pressurePlate2 == tile) { return true; }
+        else return false;
+    }
+
+    public bool isPoweredTile1(TileBase tile)
+    {
+        if (poweredTiles1.Contains(tile)) { return true; }
+        else return false;
+    }
+
+    public bool isPoweredTile2(TileBase tile)
+    {
+        if (poweredTiles2.Contains(tile)) { return true; }
+        else return false;
     }
 }

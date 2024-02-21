@@ -55,7 +55,37 @@ public class RoomManager : MonoBehaviour
         {
             currentTilemap.SetTile(currentRoomData.tilePoses[i] + (verticalOffset * roomsSpawned) , tileIDs.tileIDs[currentRoomData.tileIDs[i]]);
         }
-        
+
+        // give the list of tiles in network to each pressure plate
+        List<PoweredTile> poweredTiles1 = new List<PoweredTile>();
+        List<PoweredTile> poweredTiles2 = new List<PoweredTile>();
+
+        Debug.Log(currentRoomData.poweredTiles1Poses.Count);
+
+        foreach (Vector3Int poweredTile1Pos in currentRoomData.poweredTiles1Poses)
+        {
+            PoweredTile poweredTile1 = currentTilemap.GetInstantiatedObject(poweredTile1Pos + (verticalOffset * roomsSpawned)).GetComponent<PoweredTile>();
+            poweredTiles1.Add(poweredTile1);
+        }
+
+        foreach (Vector3Int poweredTile2Pos in currentRoomData.poweredTiles2Poses)
+        {
+            PoweredTile poweredTile2 = currentTilemap.GetInstantiatedObject(poweredTile2Pos + (verticalOffset * roomsSpawned)).GetComponent<PoweredTile>();
+            poweredTiles2.Add(poweredTile2);
+        }
+
+        foreach (Vector3Int pressurePlate1Pos in currentRoomData.pressurePlate1Poses)
+        {
+            PressurePlateTile pressurePlate1 = currentTilemap.GetInstantiatedObject(pressurePlate1Pos + (verticalOffset * roomsSpawned)).GetComponent<PressurePlateTile>();
+            pressurePlate1.SetPowerTiles(poweredTiles1);
+        }
+
+        foreach (Vector3Int pressurePlate2Pos in currentRoomData.pressurePlate2Poses)
+        {
+            PressurePlateTile pressurePlate2 = currentTilemap.GetInstantiatedObject(pressurePlate2Pos + (verticalOffset * roomsSpawned)).GetComponent<PressurePlateTile>();
+            pressurePlate2.SetPowerTiles(poweredTiles2);
+        }
+
         roomsSpawned++;
     }
 }

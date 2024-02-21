@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ShooterSouthTile 1
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 1270510184, guid: ddd076ed0311042499369328a4214779, type: 3}
-  m_DefaultGameObject: {fileID: 764452270606256282, guid: 1e41a8240702d73419eff3d7973aa4a4, type: 3}
+  m_DefaultGameObject: {fileID: 764452270606256282, guid: c34f676791d9c4049a0aff7c0c5440b4, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []
