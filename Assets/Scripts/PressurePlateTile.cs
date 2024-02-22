@@ -35,7 +35,6 @@ public class PressurePlateTile : DelverzTile
 
     public override void Trigger(DelverzTile incomingTile)
     {
-        Debug.Log("ouch");
         if (!isPowered) { PowerTiles(); }
     }
 
@@ -53,7 +52,6 @@ public class PressurePlateTile : DelverzTile
 
         if (shouldDepower) 
         {
-            Debug.Log("I'm depowering");
             isPowered = false;
 
             foreach (PoweredTile tileToPower in tilesToPower)
