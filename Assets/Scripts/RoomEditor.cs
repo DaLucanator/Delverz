@@ -60,6 +60,10 @@ public class RoomEditor : MonoBehaviour
         {
             Debug.Log("Please Name Level");
         }
+        else if (currentUser == User.Null)
+        {
+            Debug.Log("Please select user");
+        }
         else if(File.Exists(filePath) && !overwrite)
         {
             Debug.Log("File name already exists. Please enable overwrite if intended");
