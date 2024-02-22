@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PressurePlateTile : DelverzTile
 {
     private List<PoweredTile> tilesToPower = new List<PoweredTile>();
 
-    private bool isPowered;
-
+    private bool isPowered, isdepowering;
     public void SetPowerTiles(List<PoweredTile> tilesToSet)
     {
         tilesToPower = tilesToSet;
@@ -53,6 +53,7 @@ public class PressurePlateTile : DelverzTile
 
         if (shouldDepower) 
         {
+            Debug.Log("I'm depowering");
             isPowered = false;
 
             foreach (PoweredTile tileToPower in tilesToPower)

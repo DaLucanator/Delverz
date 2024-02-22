@@ -496,6 +496,8 @@ MonoBehaviour:
     - roomsToRandomize:
       - {fileID: 4900000, guid: c89ee8da59d510f47891a09eeed65dbd, type: 3}
       - {fileID: 4900000, guid: c89ee8da59d510f47891a09eeed65dbd, type: 3}
+      - {fileID: 4900000, guid: c89ee8da59d510f47891a09eeed65dbd, type: 3}
+      - {fileID: 4900000, guid: c89ee8da59d510f47891a09eeed65dbd, type: 3}
     - roomsToRandomize:
       - {fileID: 4900000, guid: c89ee8da59d510f47891a09eeed65dbd, type: 3}
       - {fileID: 4900000, guid: c89ee8da59d510f47891a09eeed65dbd, type: 3}

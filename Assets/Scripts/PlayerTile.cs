@@ -42,7 +42,7 @@ public class PlayerTile : DelverzTile
             tileToTrigger.Trigger(this);
 
             //add any pressureplate tiles that are in tilesToTrigger to pressurePlateTiles
-            if(tileToTrigger is PressurePlateTile) { pressurePlateTiles.Add(tileToTrigger as PressurePlateTile); }
+            if(tileToTrigger is PressurePlateTile && !pressurePlateTiles.Contains(tileToTrigger as PressurePlateTile)) { pressurePlateTiles.Add(tileToTrigger as PressurePlateTile); }
         }
     }
 
