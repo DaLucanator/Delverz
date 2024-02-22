@@ -43,6 +43,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5214ddc5cb653fa439657086ca5bea5a, type: 2}
   - {fileID: 11400000, guid: 3ef8ff223542eeb4abf92d0afbce68eb, type: 2}
   - {fileID: 11400000, guid: 48fb761983b713a4dbc4fc6d84dc98dc, type: 2}
+  - {fileID: 11400000, guid: c0e8e0f42d7034344ac8547717dc750f, type: 2}
+  - {fileID: 11400000, guid: 200f309ff30c3be4c8a258a53714f7c8, type: 2}
   pressurePlate1: {fileID: 11400000, guid: f2e33a0113d32f74790f22128b5d724d, type: 2}
   pressurePlate2: {fileID: 11400000, guid: efdcddbbcb534d6439c4e7c36e165256, type: 2}
   poweredTiles1:
