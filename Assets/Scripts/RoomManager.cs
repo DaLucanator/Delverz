@@ -41,9 +41,10 @@ public class RoomManager : MonoBehaviour
             roomsToSpawn.Add(JsonUtility.FromJson<RoomData>(randomTextAsset.ToString()));
         }
 
-        SpawnRoom();
-        SpawnRoom();
-        SpawnRoom();
+        for (int i = 0; i < rooms.roomDepth.Count; i++)
+        {
+            SpawnRoom();
+        }
     }
 
     void SpawnRoom()
