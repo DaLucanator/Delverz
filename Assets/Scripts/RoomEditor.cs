@@ -17,7 +17,6 @@ public class RoomEditor : MonoBehaviour
     [SerializeField] private string roomName;
     [SerializeField] private bool saveRoom, overwrite;
 
-    [SerializeField] private RoomData doNotTouch;
     [SerializeField] private TileIDsScriptableObject tileIDs;
 
     private List<Vector3Int> pressurePlate1Poses = new List<Vector3Int>();
@@ -70,14 +69,12 @@ public class RoomEditor : MonoBehaviour
         }
         else
         {
-            RoomData myRoomData = doNotTouch;
+            RoomData myRoomData = new RoomData();
             myRoomData.roomName = roomName;
             myRoomData.dateLastEdited = System.DateTime.Now.ToString();
 
             myTileMap.CompressBounds();
             BoundsInt myBounds = myTileMap.cellBounds;
-            myRoomData.tilePoses.Clear();
-            myRoomData.tileIDs.Clear();
 
             for (int x = myBounds.min.x; x < myBounds.max.x; x++)
             {
