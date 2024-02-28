@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
+public enum User
+{
+    Null,
+    Zion,
+    Jayden,
+    Luc,
+    Bill,
+    Elyes,
+    Izzie
+}
 
 [ExecuteInEditMode]
 public class RoomEditor : MonoBehaviour
@@ -170,20 +178,5 @@ public class RoomEditor : MonoBehaviour
                 Gizmos.DrawLine(point1, point2);
             }
         }
-    }
-
-
-
-
-
-    public enum User
-    {
-        Null,
-        Zion,
-        Jayden,
-        Luc,
-        Bill,
-        Elyes,
-        Izzie
     }
 }
