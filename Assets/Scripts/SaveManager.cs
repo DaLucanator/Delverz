@@ -82,11 +82,11 @@ public class RoomData
 {
     public string roomName;
     public string dateLastEdited;
-    public List<Vector3Int> tilePoses;
-    public List<int> tileIDs;
-    public List<Vector3Int> pressurePlate1Poses;
-    public List<Vector3Int> pressurePlate2Poses;
-    public List<Vector3Int> poweredTiles1Poses;
-    public List<Vector3Int> poweredTiles2Poses;
+    public List<Vector3Int> tilePoses = new List<Vector3Int>();
+    public List<int> tileIDs = new List<int>();
+    public List<Vector3Int> pressurePlate1Poses = new List<Vector3Int>();
+    public List<Vector3Int> pressurePlate2Poses = new List<Vector3Int>();
+    public List<Vector3Int> poweredTiles1Poses = new List<Vector3Int>();
+    public List<Vector3Int> poweredTiles2Poses = new List<Vector3Int>();
 
 }

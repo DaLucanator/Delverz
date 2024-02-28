@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+
+public enum User
+{
+    Null,
+    Zion,
+    Jayden,
+    Luc,
+    Bill,
+    Elyes,
+    Izzie
+}
 
 [ExecuteInEditMode]
 public class RoomEditor : MonoBehaviour
@@ -17,7 +25,6 @@ public class RoomEditor : MonoBehaviour
     [SerializeField] private string roomName;
     [SerializeField] private bool saveRoom, overwrite;
 
-    [SerializeField] private RoomData doNotTouch;
     [SerializeField] private TileIDsScriptableObject tileIDs;
 
     private List<Vector3Int> pressurePlate1Poses = new List<Vector3Int>();
@@ -70,14 +77,12 @@ public class RoomEditor : MonoBehaviour
         }
         else
         {
-            RoomData myRoomData = doNotTouch;
+            RoomData myRoomData = new RoomData();
             myRoomData.roomName = roomName;
             myRoomData.dateLastEdited = System.DateTime.Now.ToString();
 
             myTileMap.CompressBounds();
             BoundsInt myBounds = myTileMap.cellBounds;
-            myRoomData.tilePoses.Clear();
-            myRoomData.tileIDs.Clear();
 
             for (int x = myBounds.min.x; x < myBounds.max.x; x++)
             {
@@ -173,20 +178,5 @@ public class RoomEditor : MonoBehaviour
                 Gizmos.DrawLine(point1, point2);
             }
         }
-    }
-
-
-
-
-
-    public enum User
-    {
-        Null,
-        Zion,
-        Jayden,
-        Luc,
-        Bill,
-        Elyes,
-        Izzie
     }
 }
