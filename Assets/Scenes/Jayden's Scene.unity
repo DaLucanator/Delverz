@@ -504,7 +504,7 @@ MonoBehaviour:
     - roomsToRandomize:
       - {fileID: 4900000, guid: e36f8bdd59c3f7a41a32651116b8a169, type: 3}
     - roomsToRandomize:
-      - {fileID: 4900000, guid: bc50c24e23ceb994fa9b053d5414f13b, type: 3}
+      - {fileID: 4900000, guid: 828ecea8f30f5de43914d342ec2367b7, type: 3}
     - roomsToRandomize:
       - {fileID: 4900000, guid: 0cedf2ae6378c3148b2504d0d11cf4ca, type: 3}
     - roomsToRandomize:
@@ -515,8 +515,6 @@ MonoBehaviour:
       - {fileID: 4900000, guid: 96dd64b43298a8d4ba6f70f6e62dda10, type: 3}
     - roomsToRandomize:
       - {fileID: 4900000, guid: ef3742719ca3ab447848b24a6414571c, type: 3}
-    - roomsToRandomize:
-      - {fileID: 4900000, guid: 828ecea8f30f5de43914d342ec2367b7, type: 3}
   tileIDs: {fileID: 11400000, guid: 5af88dfaafac7c84095d62741f99481e, type: 2}
 --- !u!4 &541717993
 Transform:
