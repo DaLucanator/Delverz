@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerInputScript : MonoBehaviour
 {
@@ -11,11 +12,61 @@ public class PlayerInputScript : MonoBehaviour
     private Vector2 moveDirFloat;
     private bool canMove = true, canFire = true, isDead;
     private float delayTime = 0.03125f;
+    private PlayerColour playerColour;
+    private Joystick myJoystick;
+
+
+    PlayerInputManager inputManager;
 
     [SerializeField] private PlayerTile myPlayerTile;
+    [SerializeField] private GameObject yellowSprite, blueSprite, redSprite, greenSprite;
+    [SerializeField] private TextMeshProUGUI joystickName;
+
+    private enum PlayerColour
+    {
+        yellow,
+        blue,
+        red,
+        green
+    }
+
+    private void MapJoystickControls()
+    {
+        if (Joystick.current != null) 
+        {
+            myJoystick = Joystick.current;
+            joystickName.text = myJoystick.name; 
+        }
+    }
 
     private void Awake()
     {
+        inputManager = PlayerInputManager.instance;
+        MapJoystickControls();
+        //if(Joystick.current != null) { joystickName.text = "Joystick is connected!"; }
+
+
+
+        if (inputManager.playerCount == 1)
+        {
+            playerColour = PlayerColour.yellow;
+            yellowSprite.SetActive(true);
+        }
+        if (inputManager.playerCount == 2)
+        {
+            playerColour = PlayerColour.blue;
+            blueSprite.SetActive(true);
+        }
+        if (inputManager.playerCount == 3)
+        {
+            playerColour = PlayerColour.red;
+            redSprite.SetActive(true);
+        }
+        if (inputManager.playerCount == 4)
+        {
+            playerColour = PlayerColour.green;
+            greenSprite.SetActive(true);
+        }
         input = GetComponent<PlayerInput>();
 
         move = input.actions["Move"];

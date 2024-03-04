@@ -27,9 +27,9 @@ public class DelverzTile : MonoBehaviour
             {
                 tileToTrigger.Die();
             }
-            if (tilesToTrigger.Count > 0) { DestroySelf(); }
+            //if (tilesToTrigger.Count > 0) { DestroySelf(); }
 
-            else { GridManager.current.AddToTileDictionary(tileLayer, bounds, this); }
+            GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
             
         }
 

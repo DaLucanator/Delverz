@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da1cfe02224a474095759be7e56793b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomToFix: {fileID: 4900000, guid: 96dd64b43298a8d4ba6f70f6e62dda10, type: 3}
-  currentUser: 2
-  fixRoom: 1
+  roomToFix: {fileID: 0}
+  currentUser: 0
+  fixRoom: 0
   tileIDs: {fileID: 11400000, guid: 5af88dfaafac7c84095d62741f99481e, type: 2}

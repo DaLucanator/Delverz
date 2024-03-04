@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Luc's Scene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/PlayerJoinTest.unity
+    guid: 4a121a5bf0259f74597eadc508c4336e
   m_configObjects: {}
