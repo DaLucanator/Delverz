@@ -15,8 +15,8 @@ public class DoorTile : PoweredTile
     {
         isOpen = !isOpen;
 
-        //close the door
-        if (isOpen)
+        //open the door
+        if (!isOpen)
         {
             myDoor.SetActive(true);
             tilesToTrigger = null;
@@ -34,8 +34,8 @@ public class DoorTile : PoweredTile
             }
         }
 
-        //open the door
-        else if (!isOpen)
+        //close the door
+        else if (isOpen)
         {
             GridManager.current.RemoveTileFromDictionary(1, bounds);
             GridManager.current.RemoveTileFromDictionary(3, bounds);

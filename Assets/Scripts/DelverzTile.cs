@@ -21,21 +21,8 @@ public class DelverzTile : MonoBehaviour
 
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
 
-        if(CanMove(bounds))
-        {
-            foreach (DelverzTile tileToTrigger in tilesToTrigger)
-            {
-                tileToTrigger.Die();
-            }
-            //if (tilesToTrigger.Count > 0) { DestroySelf(); }
-
-            GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
-            
-        }
-
-        else 
-        {
-        }
+        Debug.Log("boop");
+        GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
     }
 
     public ColliderType ReturnColliderType()
