@@ -1,18 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class Abilities : MonoBehaviour
+public enum Ability
 {
-    // Start is called before the first frame update
-    void Start()
+    crossbow,
+}
+
+public class AbilityManager : MonoBehaviour
+{
+    public static AbilityManager current;
+
+    private Dictionary<Ability, Action<Vector3, Vector3>> Abilities = new Dictionary<Ability, Action<Vector3, Vector3>>();
+
+    void Awake()
     {
-        
+        current = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void UseAbility(Ability abilityToUse, Vector3 abilityDirection, Vector3 playerPos)
     {
-        
+        Abilities[abilityToUse](abilityDirection, playerPos);
+    }
+
+    private void CrossbowAbility(Vector3 abilityDirection, Vector3 playerPos)
+    {
+        //Instantiate a crossbow bolt at playerpos+abilitydirection with direction abilitydirection
     }
 }
