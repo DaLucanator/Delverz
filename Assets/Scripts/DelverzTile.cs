@@ -12,27 +12,23 @@ public class DelverzTile : MonoBehaviour
     private protected List<DelverzTile> tilesToTrigger = new List<DelverzTile>();
     private Tile myTileMapTile;
 
-    protected virtual void Start()
+    private void Awake()
     {
         if (colliderType == ColliderType.ground || colliderType == ColliderType.air) { tileLayer = 0; }
         else if (colliderType == ColliderType.groundObject) { tileLayer = 1; }
         else if (colliderType == ColliderType.projectile) { tileLayer = 2; }
         else { tileLayer = 3; }
+    }
 
+    public virtual void Start()
+    {
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
-
-        Debug.Log("boop");
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
     }
 
     public ColliderType ReturnColliderType()
     {
         return colliderType;
-    }
-
-    public void SetColliderType(ColliderType typeToSetTo)
-    {
-        colliderType = typeToSetTo;
     }
 
     public virtual void Trigger(DelverzTile incomingTile)
@@ -64,6 +60,16 @@ public class DelverzTile : MonoBehaviour
     }
 
     public virtual void Move()
+    {
+
+    }
+
+    protected virtual void FixedUpdate()
+    {
+
+    }
+
+    protected virtual void Update()
     {
 
     }

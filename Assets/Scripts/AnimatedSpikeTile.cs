@@ -12,7 +12,7 @@ public class AnimatedSpikeTile : PoweredTile
 
     private bool addToDictionary;
 
-    protected override void Start()
+    protected virtual void Start()
     {
         base.Start();
         if(!isNetworkedTile)

@@ -8,6 +8,7 @@ public class PlayerTile : DelverzTile
     private float treasureAmount;
     private int TreasureAmountDisplay;
     private bool isDead;
+    private Ability currentAbility;
 
     private List<PressurePlateTile> pressurePlateTiles = new List<PressurePlateTile>();
 
@@ -63,10 +64,18 @@ public class PlayerTile : DelverzTile
         StartCoroutine(RespawnTimer());
     }
 
-    //this and associated methods are used to track when a player leaves a trigger. i.e pressure plate
-    public void AddToTriggerExit()
+    public void UseAbility(Vector3 AbilityDirection)
     {
+    }
 
+    public bool canPickupAbility()
+    {
+        if (currentAbility == Ability.Null) { return false; }
+        else return true;
+    }
+    public void PickupAbility(Ability abilityToPickup)
+    {
+        currentAbility = abilityToPickup;
     }
 
     private IEnumerator RespawnTimer()

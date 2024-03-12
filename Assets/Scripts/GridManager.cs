@@ -42,8 +42,6 @@ public class GridManager : MonoBehaviour
     public void AddToTileDictionary (int tileLayer, Bounds tileBounds, DelverzTile tile)
     {
         tileDictionaries[tileLayer].Add (tileBounds, tile);
-
-        Debug.Log(tileLayer);
     }
 
     public void RemoveTileFromDictionary(int tileLayer, Bounds tileBounds)

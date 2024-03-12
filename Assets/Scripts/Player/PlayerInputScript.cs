@@ -8,8 +8,7 @@ public class PlayerInputScript : MonoBehaviour
 {
     PlayerInput input;
     private InputAction move, fire;
-    private Vector2Int moveDir, fireDir;
-    private Vector2 moveDirFloat;
+    private Vector2Int moveDir;
     private bool canMove = true, canFire = true, isDead;
     private float delayTime = 0.03125f;
     private PlayerColour playerColour;
@@ -90,21 +89,37 @@ public class PlayerInputScript : MonoBehaviour
 
     void FireInput(InputAction.CallbackContext context)
     {
-        //fireDir = context.ReadValue<Vector2>();
+        Vector2 fireDir = Vector2.zero;
+        fireDir = context.ReadValue<Vector2>();
+
+        if (fireDir.x != 0) 
+        { 
+            fireDir.x = Mathf.RoundToInt(fireDir.x);
+            fireDir.y = 0;
+        }
+        //check y axis
+        else if (fireDir.y != 0) 
+        { 
+            fireDir.y = Mathf.RoundToInt(fireDir.y);
+            fireDir.x = 0;
+        }
+
+        Fire(fireDir);
+
     }
 
     private void FixedUpdate()
     {
         Move();
-        // Fire();
     }
 
+    //Movement
     private void Move()
     {
         if (canMove && moveDir != Vector2.zero && !isDead)
         {
 
-            moveDirFloat = moveDir;
+            Vector2 moveDirFloat = moveDir;
             moveDirFloat *= 0.125f;
             Vector3 movePos = new Vector3(transform.position.x + moveDirFloat.x, transform.position.y + moveDirFloat.y, 0f);
 
@@ -117,6 +132,17 @@ public class PlayerInputScript : MonoBehaviour
                 canMove = false;
                 StartCoroutine(MoveDelay());
             }
+        }
+    }
+
+    //Abilities
+    private void Fire(Vector2 directionToFire)
+    {
+        Debug.Log(directionToFire);
+        Vector3 abilityDirection = directionToFire;
+        if (directionToFire != Vector2.zero && !isDead)
+        {
+            myPlayerTile.UseAbility(abilityDirection);
         }
     }
 

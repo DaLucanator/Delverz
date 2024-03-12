@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764452270606256282}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-5929213633190638919
 MonoBehaviour:
@@ -45,5 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliderType: 1
+  isNetworkedTile: 0
+  projectileDirection: 3
   spawnPos: {x: -1, y: 0, z: 0}
-  projectileToSpawn: {fileID: 4618219739604283182, guid: d5c5938952e9dd3448550fb8da1b03ac, type: 3}
+  projectileToSpawn: {fileID: 4618219739604283182, guid: f6fd96da93e76d94e9ef63caf8895880, type: 3}

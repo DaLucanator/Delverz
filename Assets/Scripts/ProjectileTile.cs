@@ -1,23 +1,37 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
+public enum Direction
+{
+    North,
+    East,
+    South,
+    West
+}
 public class ProjectileTile : DelverzTile
 {
-    [SerializeField] private Vector3 moveDirection;
-    private bool shouldDestroySelf, canMove = true;
+    private Vector3 moveDirection;
+    [SerializeField] private GameObject spriteNorth, spriteEast, spriteSouth, spriteWest;
+    private float moveAmount = 0.3125f;
+    private bool shouldDestroySelf, canMove = false;
     private float delayTime = 0.03125f;
 
-    protected override void Start()
+    public override void Start()
     {
-        if (colliderType == ColliderType.ground || colliderType == ColliderType.air) { tileLayer = 0; }
-        else if (colliderType == ColliderType.groundObject) { tileLayer = 1; }
-        else if (colliderType == ColliderType.projectile) { tileLayer = 2; }
-        else { tileLayer = 3; }
+        Debug.Log("override working");
+    }
 
+    public void SetDirection(Direction projectileDirection)
+    {
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+        //Set the Direction
+        if (projectileDirection == Direction.North) { moveDirection = new Vector3(0, moveAmount, 0); spriteNorth.SetActive(true); }
+        else if (projectileDirection == Direction.East) { moveDirection = new Vector3(moveAmount, 0, 0); spriteEast.SetActive(true); }
+        else if (projectileDirection == Direction.South) { moveDirection = new Vector3(0, -moveAmount, 0); spriteSouth.SetActive(true); }
+        else if (projectileDirection == Direction.West) { moveDirection = new Vector3(-moveAmount, 0,0); spriteWest.SetActive(true); }
 
+
+        //Populate tile in GridManager
         if (CanMove(bounds))
         {
             foreach (DelverzTile tileToTrigger in tilesToTrigger)
@@ -30,12 +44,12 @@ public class ProjectileTile : DelverzTile
             else
             {
                 GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
+                canMove = true;
             }
-
         }
     }
 
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         if(canMove)
         {

@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityPickupTile : MonoBehaviour
+public class AbilityPickupTile : DelverzTile
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Trigger(DelverzTile incomingTile)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+       if(incomingTile is PlayerTile)
+        {
+            PlayerTile currentPlayerTile = incomingTile as PlayerTile;
+            currentPlayerTile.
+        }
     }
 }

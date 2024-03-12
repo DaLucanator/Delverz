@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum Ability
 {
-    crossbow,
+    Null,
+    Crossbow
 }
 
 public class AbilityManager : MonoBehaviour
@@ -18,7 +19,7 @@ public class AbilityManager : MonoBehaviour
         current = this;
     }
 
-    private void UseAbility(Ability abilityToUse, Vector3 abilityDirection, Vector3 playerPos)
+    public void UseAbility(Ability abilityToUse, Vector3 abilityDirection, Vector3 playerPos)
     {
         Abilities[abilityToUse](abilityDirection, playerPos);
     }
