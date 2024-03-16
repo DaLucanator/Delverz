@@ -27,13 +27,13 @@ public class TileIDsScriptableObject : ScriptableObject
 
     public bool isPressurePlate1(TileBase tile)
     {
-        if (pressurePlate1 == tile) { return true; }
+        if (tile == pressurePlate1) { return true; }
         else return false;
     }
 
     public bool isPressurePlate2(TileBase tile)
     {
-        if (pressurePlate2 == tile) { return true; }
+        if (tile == pressurePlate2) { return true; }
         else return false;
     }
 

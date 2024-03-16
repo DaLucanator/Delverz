@@ -20,7 +20,7 @@ public class DelverzTile : MonoBehaviour
         else { tileLayer = 3; }
     }
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
@@ -64,11 +64,11 @@ public class DelverzTile : MonoBehaviour
 
     }
 
+    //I put these here in case it fixed a bug. I left it because no harm.
     protected virtual void FixedUpdate()
     {
 
     }
-
     protected virtual void Update()
     {
 

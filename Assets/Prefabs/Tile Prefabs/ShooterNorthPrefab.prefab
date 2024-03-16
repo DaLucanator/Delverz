@@ -46,7 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliderType: 1
   isNetworkedTile: 0
-  projectileDirection: 0
+  projectileDirection: {x: 0, y: 1, z: 0}
   spawnPos: {x: 0, y: 1, z: 0}
   projectileToSpawn: {fileID: 4618219739604283182, guid: f6fd96da93e76d94e9ef63caf8895880, type: 3}
-  projectileTile: {fileID: 2687336348262443300, guid: f6fd96da93e76d94e9ef63caf8895880, type: 3}

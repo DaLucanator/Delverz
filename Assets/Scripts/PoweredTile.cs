@@ -6,10 +6,9 @@ public class PoweredTile : DelverzTile
 {
     [SerializeField] protected bool isNetworkedTile;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
-        Debug.Log("Base netowrk tile");
         if (!isNetworkedTile) { TrapClock.current.tick += PowerTile; }
 
     }

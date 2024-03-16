@@ -1,13 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-public enum Direction
-{
-    North,
-    East,
-    South,
-    West
-}
 public class ProjectileTile : DelverzTile
 {
     private Vector3 moveDirection;
@@ -16,20 +9,17 @@ public class ProjectileTile : DelverzTile
     private bool shouldDestroySelf, canMove = false;
     private float delayTime = 0.03125f;
 
-    public override void Start()
-    {
-        Debug.Log("override working");
-    }
-
-    public void SetDirection(Direction projectileDirection)
+    public void SetDirection(Vector3 direction)
     {
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
-        //Set the Direction
-        if (projectileDirection == Direction.North) { moveDirection = new Vector3(0, moveAmount, 0); spriteNorth.SetActive(true); }
-        else if (projectileDirection == Direction.East) { moveDirection = new Vector3(moveAmount, 0, 0); spriteEast.SetActive(true); }
-        else if (projectileDirection == Direction.South) { moveDirection = new Vector3(0, -moveAmount, 0); spriteSouth.SetActive(true); }
-        else if (projectileDirection == Direction.West) { moveDirection = new Vector3(-moveAmount, 0,0); spriteWest.SetActive(true); }
 
+        //Set the Direction
+        moveDirection = direction *= moveAmount;
+
+        if(moveDirection == new Vector3(0, moveAmount, 0)) { spriteNorth.SetActive(true); }
+        else if (moveDirection == new Vector3(moveAmount, 0, 0)) { spriteEast.SetActive(true); }
+        else if (moveDirection == new Vector3(0, -moveAmount, 0)) { spriteSouth.SetActive(true); }
+        else if (moveDirection == new Vector3(-moveAmount, 0, 0)) { spriteWest.SetActive(true); }
 
         //Populate tile in GridManager
         if (CanMove(bounds))

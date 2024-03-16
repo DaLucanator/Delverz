@@ -87,6 +87,11 @@ public class PlayerInputScript : MonoBehaviour
         moveDir.y = Mathf.RoundToInt(moveDirTemp.y);
     }
 
+    void FireCancel()
+    {
+        
+    }
+
     void FireInput(InputAction.CallbackContext context)
     {
         Vector2 fireDir = Vector2.zero;

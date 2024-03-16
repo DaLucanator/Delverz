@@ -66,6 +66,7 @@ public class PlayerTile : DelverzTile
 
     public void UseAbility(Vector3 AbilityDirection)
     {
+        AbilityManager.current.UseAbility(currentAbility, AbilityDirection, transform.position);
     }
 
     public bool canPickupAbility()
