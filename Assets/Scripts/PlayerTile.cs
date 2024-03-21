@@ -8,7 +8,7 @@ public class PlayerTile : DelverzTile
     private float treasureAmount;
     private int TreasureAmountDisplay;
     private bool isDead;
-    private Ability currentAbility;
+    private Ability currentAbility = Ability.Null;
 
     private List<PressurePlateTile> pressurePlateTiles = new List<PressurePlateTile>();
 
@@ -66,17 +66,23 @@ public class PlayerTile : DelverzTile
 
     public void UseAbility(Vector3 AbilityDirection)
     {
-        AbilityManager.current.UseAbility(currentAbility, AbilityDirection, transform.position);
+        AbilityManager.current.UseAbility(currentAbility, AbilityDirection, this);
     }
 
     public bool canPickupAbility()
     {
-        if (currentAbility == Ability.Null) { return false; }
-        else return true;
+        if (currentAbility == Ability.Null) { return true; }
+        else return false;
     }
     public void PickupAbility(Ability abilityToPickup)
     {
         currentAbility = abilityToPickup;
+        Debug.Log("you picked up " + currentAbility.ToString());
+    }
+
+    public void SpendAbility()
+    {
+        currentAbility = Ability.Null;
     }
 
     private IEnumerator RespawnTimer()

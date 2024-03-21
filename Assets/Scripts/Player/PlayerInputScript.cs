@@ -9,6 +9,7 @@ public class PlayerInputScript : MonoBehaviour
     PlayerInput input;
     private InputAction move, fire;
     private Vector2Int moveDir;
+    private Vector2 fireDir;
     private bool canMove = true, canFire = true, isDead;
     private float delayTime = 0.03125f;
     private PlayerColour playerColour;
@@ -29,22 +30,9 @@ public class PlayerInputScript : MonoBehaviour
         green
     }
 
-    private void MapJoystickControls()
-    {
-        if (Joystick.current != null) 
-        {
-            myJoystick = Joystick.current;
-            joystickName.text = myJoystick.name; 
-        }
-    }
-
     private void Awake()
     {
         inputManager = PlayerInputManager.instance;
-        MapJoystickControls();
-        //if(Joystick.current != null) { joystickName.text = "Joystick is connected!"; }
-
-
 
         if (inputManager.playerCount == 1)
         {
@@ -75,42 +63,27 @@ public class PlayerInputScript : MonoBehaviour
         move.canceled += MoveInput;
 
         fire.performed += FireInput;
-        fire.canceled += FireInput;
+        fire.canceled += FireCancel;
     }
 
     void MoveInput(InputAction.CallbackContext context)
     {
-
         Vector2 moveDirTemp = context.ReadValue<Vector2>();
 
         moveDir.x = Mathf.RoundToInt(moveDirTemp.x);
         moveDir.y = Mathf.RoundToInt(moveDirTemp.y);
     }
 
-    void FireCancel()
-    {
-        
-    }
-
     void FireInput(InputAction.CallbackContext context)
     {
-        Vector2 fireDir = Vector2.zero;
         fireDir = context.ReadValue<Vector2>();
 
-        if (fireDir.x != 0) 
-        { 
-            fireDir.x = Mathf.RoundToInt(fireDir.x);
-            fireDir.y = 0;
-        }
-        //check y axis
-        else if (fireDir.y != 0) 
-        { 
-            fireDir.y = Mathf.RoundToInt(fireDir.y);
-            fireDir.x = 0;
-        }
+        Fire();
+    }
 
-        Fire(fireDir);
-
+    void FireCancel(InputAction.CallbackContext context)
+    {
+        canFire = true;
     }
 
     private void FixedUpdate()
@@ -141,13 +114,15 @@ public class PlayerInputScript : MonoBehaviour
     }
 
     //Abilities
-    private void Fire(Vector2 directionToFire)
+    private void Fire()
     {
-        Debug.Log(directionToFire);
-        Vector3 abilityDirection = directionToFire;
-        if (directionToFire != Vector2.zero && !isDead)
+        if (!isDead && canFire && !myPlayerTile.canPickupAbility())
         {
+            canFire = false;
+            Vector3 abilityDirection = new Vector3(fireDir.x, fireDir.y, 0f);
             myPlayerTile.UseAbility(abilityDirection);
+
+            fireDir = Vector2.zero;
         }
     }
 

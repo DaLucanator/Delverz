@@ -15,8 +15,12 @@ public class ProjectileTile : DelverzTile
 
         //Set the Direction
         moveDirection = direction *= moveAmount;
+        spriteNorth.SetActive(false);
+        spriteEast.SetActive(false);
+        spriteSouth.SetActive(false);
+        spriteWest.SetActive(false);
 
-        if(moveDirection == new Vector3(0, moveAmount, 0)) { spriteNorth.SetActive(true); }
+        if (moveDirection == new Vector3(0, moveAmount, 0)) { spriteNorth.SetActive(true); }
         else if (moveDirection == new Vector3(moveAmount, 0, 0)) { spriteEast.SetActive(true); }
         else if (moveDirection == new Vector3(0, -moveAmount, 0)) { spriteSouth.SetActive(true); }
         else if (moveDirection == new Vector3(-moveAmount, 0, 0)) { spriteWest.SetActive(true); }
@@ -37,6 +41,11 @@ public class ProjectileTile : DelverzTile
                 canMove = true;
             }
         }
+    }
+
+    protected override void Start()
+    {
+
     }
 
     protected override void FixedUpdate()

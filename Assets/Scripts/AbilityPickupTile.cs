@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class AbilityPickupTile : DelverzTile
 {
-    AbilityScriptableObject abilityToPickup;
-    SpriteRenderer spriteRenderer;
+    [SerializeField] AbilityScriptableObject abilityToPickup;
+    [SerializeField] SpriteRenderer spriteRenderer;
+
+    protected override void Start()
+    {
+        spriteRenderer.sprite = abilityToPickup.ReturnSprite();
+        base.Start();
+    }
 
     public override void Trigger(DelverzTile incomingTile)
     {
@@ -16,6 +22,7 @@ public class AbilityPickupTile : DelverzTile
             if(currentPlayerTile.canPickupAbility())
             {
                 currentPlayerTile.PickupAbility(abilityToPickup.ReturnAbility());
+                spriteRenderer.sprite = null;
                 DestroySelf();
             }
         }

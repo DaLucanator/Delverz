@@ -64,6 +64,12 @@ public class DelverzTile : MonoBehaviour
 
     }
 
+    //if I'm off the screen destroy me
+    private void OffScreenCheck()
+    {
+        
+    }
+
     //I put these here in case it fixed a bug. I left it because no harm.
     protected virtual void FixedUpdate()
     {

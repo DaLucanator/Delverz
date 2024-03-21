@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -72,7 +70,7 @@ public class GridManager : MonoBehaviour
                     //if I'm a player and incoming tile is a another player that isn't me return hardcollision
                     else if (myColliderType == ColliderType.player && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.canTraverse = false; return intersectData; }
                     //if I'm a player and incoming tile is not the ground and isn't me return triggeringcollision
-                    else if (myColliderType == ColliderType.player && otherColliderType != ColliderType.ground && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    else if (myColliderType == ColliderType.player && otherColliderType != ColliderType.ground && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); Debug.Log("boop"); }
 
                     //if I'm a projectile and incoming tile is a projectile that isn't me return triggeringcollision
                     else if (myColliderType == ColliderType.projectile && otherColliderType == ColliderType.projectile && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
@@ -80,7 +78,7 @@ public class GridManager : MonoBehaviour
                     else if (myColliderType == ColliderType.projectile && (otherColliderType == ColliderType.player || otherColliderType == ColliderType.wall)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
 
                     //if I'm a ground object and incoming tile is a player return triggering collision
-                    else if (myColliderType == ColliderType.groundObject && otherColliderType == ColliderType.projectile && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    else if (myColliderType == ColliderType.groundObject && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
                 }
             }
         }

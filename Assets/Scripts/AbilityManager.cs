@@ -12,7 +12,10 @@ public class AbilityManager : MonoBehaviour
 {
     public static AbilityManager current;
 
-    private Dictionary<Ability, Action<Vector3, Vector3>> Abilities = new Dictionary<Ability, Action<Vector3, Vector3>>();
+    private Dictionary<Ability, Action<Vector3, PlayerTile>> Abilities = new Dictionary<Ability, Action<Vector3, PlayerTile>>()
+    {
+        { Ability.Crossbow, (Vector3, playerTile) => current.CrossbowAbility(Vector3, playerTile) }
+    };
 
     [SerializeField] private GameObject crossbowBolt, sword, shield, fireball;
 
@@ -21,17 +24,19 @@ public class AbilityManager : MonoBehaviour
         current = this;
     }
 
-    public void UseAbility(Ability abilityToUse, Vector3 abilityDirection, Vector3 playerPos)
+    public void UseAbility(Ability abilityToUse, Vector3 abilityDirection, PlayerTile playerTile)
     {
-        Abilities[abilityToUse](abilityDirection, playerPos);
+        Abilities[abilityToUse](abilityDirection, playerTile);
     }
 
-    private void CrossbowAbility(Vector3 abilityDirection, Vector3 playerPos)
+    private void CrossbowAbility(Vector3 abilityDirection, PlayerTile playerTile)
     {
         //Instantiate a crossbow bolt at playerpos+abilitydirection with direction abilitydirection
-        GameObject crossBowBolt = Instantiate(crossbowBolt, playerPos + abilityDirection, Quaternion.identity);
-        ProjectileTile currentProjectile = crossbowBolt.GetComponent<ProjectileTile>();
+        GameObject currentCrossbowBolt = Instantiate(crossbowBolt, playerTile.transform.position + abilityDirection, Quaternion.identity);
+        ProjectileTile currentProjectile = currentCrossbowBolt.GetComponent<ProjectileTile>();
         currentProjectile.SetDirection(abilityDirection);
+
+        playerTile.SpendAbility();
     }
 
     private void SwordAbility()

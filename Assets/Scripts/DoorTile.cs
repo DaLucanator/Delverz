@@ -23,14 +23,19 @@ public class DoorTile : PoweredTile
             if (addToDictionary) 
             { 
                 GridManager.current.AddToTileDictionary(1, bounds, mySpikeTile);
-                GridManager.current.AddToTileDictionary(3, bounds, myWallTile);
             }
             TileIntersect intersectData = GridManager.current.ReturnIntersectTiles(bounds, mySpikeTile);
             tilesToTrigger = intersectData.tilesToTrigger;
 
             foreach (DelverzTile tile in intersectData.tilesToTrigger)
             {
+                Debug.Log(tile.gameObject.ToString());
                 tile.Die();
+            }
+
+            if (addToDictionary)
+            {
+                GridManager.current.AddToTileDictionary(3, bounds, myWallTile);
             }
         }
 

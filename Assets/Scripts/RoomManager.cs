@@ -47,7 +47,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    void SpawnRoom()
+    public void SpawnRoom()
     {
        RoomData currentRoomData = roomsToSpawn[roomsSpawned];
 
