@@ -6,7 +6,8 @@ public class GroundTile : DelverzTile
 {
     protected override void Start()
     {
-        base.Start();
-        RespawnManager.current.AddRespawnPos(transform.position);
+        bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+        GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
+        RespawnManager.current.AddRespawnPos(bounds);
     }
 }

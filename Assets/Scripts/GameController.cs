@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Vector3 moveDirection;
     [SerializeField] private float delayTime;
     [SerializeField] private RoomManager roomManager;
+    [SerializeField] private Transform boundaryY1, boundaryY2, boundaryX1, boundaryX2;
     bool canMove = true;
 
     //move the camera
@@ -23,10 +24,14 @@ public class GameController : MonoBehaviour
         current = this;
     }
 
-    public Camera ReturnMainCamera()
+    public bool ReturnIsOffScreen(Vector3 vectorToCheck)
     {
-        return mainCamera;
-    }
+        if(vectorToCheck.x < boundaryX1.position.x) { return true; }
+        if (vectorToCheck.x > boundaryX2.position.x) { return true; }
+        if (vectorToCheck.y < boundaryY2.position.y) { return true; }
+
+        else return false;
+    } 
 
     private void FixedUpdate()
     {
@@ -39,7 +44,7 @@ public class GameController : MonoBehaviour
             if(transform.position.y >= spawnOffset)
             {
                 roomManager.SpawnRoom();
-                spawnOffset += spawnOffset;
+                spawnOffset += 15f;
             }
         }
     }

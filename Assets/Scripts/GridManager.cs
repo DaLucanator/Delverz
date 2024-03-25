@@ -70,7 +70,7 @@ public class GridManager : MonoBehaviour
                     //if I'm a player and incoming tile is a another player that isn't me return hardcollision
                     else if (myColliderType == ColliderType.player && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.canTraverse = false; return intersectData; }
                     //if I'm a player and incoming tile is not the ground and isn't me return triggeringcollision
-                    else if (myColliderType == ColliderType.player && otherColliderType != ColliderType.ground && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); Debug.Log("boop"); }
+                    else if (myColliderType == ColliderType.player && otherColliderType != ColliderType.ground && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
 
                     //if I'm a projectile and incoming tile is a projectile that isn't me return triggeringcollision
                     else if (myColliderType == ColliderType.projectile && otherColliderType == ColliderType.projectile && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }

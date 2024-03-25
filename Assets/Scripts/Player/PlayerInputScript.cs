@@ -14,7 +14,7 @@ public class PlayerInputScript : MonoBehaviour
     private float delayTime = 0.03125f;
     private PlayerColour playerColour;
     private Joystick myJoystick;
-
+    private GameObject mySprite;
 
     PlayerInputManager inputManager;
 
@@ -37,23 +37,25 @@ public class PlayerInputScript : MonoBehaviour
         if (inputManager.playerCount == 1)
         {
             playerColour = PlayerColour.yellow;
-            yellowSprite.SetActive(true);
+            mySprite = yellowSprite;
         }
         if (inputManager.playerCount == 2)
         {
             playerColour = PlayerColour.blue;
-            blueSprite.SetActive(true);
+            mySprite = blueSprite;
         }
         if (inputManager.playerCount == 3)
         {
             playerColour = PlayerColour.red;
-            redSprite.SetActive(true);
+            mySprite = redSprite;
         }
         if (inputManager.playerCount == 4)
         {
             playerColour = PlayerColour.green;
-            greenSprite.SetActive(true);
+            mySprite = greenSprite;
         }
+        mySprite.SetActive(true);
+
         input = GetComponent<PlayerInput>();
 
         move = input.actions["Move"];
@@ -132,20 +134,6 @@ public class PlayerInputScript : MonoBehaviour
         //change animation
     }
 
-    /*private void Fire()
-     {
-         if (canFire && fireDir != Vector2.zero && currentItem != null)
-         {
-             canFire = false;
-
-             currentItem.UseItem(fireDir);
-
-             StartCoroutine(FireDelay());
-         }
-     }
-
-     */
-
 
     private IEnumerator MoveDelay()
     {
@@ -162,5 +150,10 @@ public class PlayerInputScript : MonoBehaviour
     public void Die( bool shouldKill)
     {
         isDead = shouldKill;
+    }
+
+    public void EnableSprite (bool shouldEnable)
+    {
+        mySprite.SetActive(shouldEnable);
     }
 }

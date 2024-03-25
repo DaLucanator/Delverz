@@ -35,6 +35,7 @@ public class DoorTile : PoweredTile
 
             if (addToDictionary)
             {
+                GridManager.current.RemoveTileFromDictionary(1, bounds);
                 GridManager.current.AddToTileDictionary(3, bounds, myWallTile);
             }
         }

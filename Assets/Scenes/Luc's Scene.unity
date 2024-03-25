@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &176333744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 176333745}
+  m_Layer: 0
+  m_Name: BondaryX2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &176333745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176333744}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 481753104}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &209007899
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +600,7 @@ GameObject:
   - component: {fileID: 481753103}
   - component: {fileID: 481753102}
   - component: {fileID: 481753101}
-  - component: {fileID: 481753100}
+  - component: {fileID: 481753105}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -577,20 +608,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &481753100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 481753099}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9eca5d25e41c2d4ba17969ca9aed99e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDirection: {x: 0, y: 0.03125, z: 0}
-  delayTime: 0.03125
 --- !u!114 &481753101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +615,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 481753099}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
@@ -684,8 +701,32 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 266840659}
+  - {fileID: 771453073}
+  - {fileID: 1387833850}
+  - {fileID: 1508019887}
+  - {fileID: 985525378}
+  - {fileID: 176333745}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &481753105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 481753099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 212351f6338a3a64c9885544b06ff8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: {x: 0, y: 0.03125, z: 0}
+  delayTime: 0.03125
+  roomManager: {fileID: 541717992}
+  boundaryY1: {fileID: 1387833850}
+  boundaryY2: {fileID: 1508019887}
+  boundaryX1: {fileID: 985525378}
+  boundaryX2: {fileID: 176333745}
 --- !u!1 &541717991
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,10 +761,304 @@ MonoBehaviour:
     roomDepth:
     - roomsToRandomize:
       - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
     - roomsToRandomize:
       - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
     - roomsToRandomize:
       - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
+    - roomsToRandomize:
+      - {fileID: 4900000, guid: 3a8012b38fe21eb4c977df41f1eca099, type: 3}
+      - {fileID: 4900000, guid: 84d1640b36c9ba74bb7115572d5b2c1d, type: 3}
   tileIDs: {fileID: 11400000, guid: 5af88dfaafac7c84095d62741f99481e, type: 2}
 --- !u!4 &541717993
 Transform:
@@ -926,6 +1261,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &771453071
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 771453073}
+  - component: {fileID: 771453072}
+  m_Layer: 0
+  m_Name: RespawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &771453072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771453071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a08fd54042d694493336802d935681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnBoundary: {fileID: 1723390096}
+--- !u!4 &771453073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771453071}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1723390096}
+  m_Father: {fileID: 481753104}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791571401
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,6 +1351,99 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1fd577b4cdd4d48b13d4becaff2b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &985525377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 985525378}
+  m_Layer: 0
+  m_Name: BondaryX1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &985525378
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985525377}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -17, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 481753104}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1387833849
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1387833850}
+  m_Layer: 0
+  m_Name: BoundaryY1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1387833850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387833849}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 481753104}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1508019886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1508019887}
+  m_Layer: 0
+  m_Name: BoundaryY2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1508019887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508019886}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 481753104}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1669136025
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,7 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89931f8508e9cc4197419993a9be214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crossbowBolt: {fileID: 0}
+  crossbowBolt: {fileID: 4618219739604283182, guid: f6fd96da93e76d94e9ef63caf8895880, type: 3}
   sword: {fileID: 0}
   shield: {fileID: 0}
   fireball: {fileID: 0}
@@ -1017,6 +1491,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1723390095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723390096}
+  m_Layer: 0
+  m_Name: RespawnBoundary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1723390096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723390095}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 9, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 771453073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1982273080
 GameObject:

@@ -50,6 +50,7 @@ public class ProjectileTile : DelverzTile
 
     protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         if(canMove)
         {
             Move();

@@ -17,9 +17,6 @@ public class RoomDepthList
 
 public class RoomManager : MonoBehaviour
 {
-    //spawn first room
-    //first room's tilemap becomes my tilemap
-
     [SerializeField] private Tilemap currentTilemap;
     [SerializeField] private RoomDepthList rooms = new RoomDepthList();
     [SerializeField] private TileIDsScriptableObject tileIDs;
@@ -41,7 +38,7 @@ public class RoomManager : MonoBehaviour
             roomsToSpawn.Add(JsonUtility.FromJson<RoomData>(randomTextAsset.ToString()));
         }
 
-        for (int i = 0; i < rooms.roomDepth.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
             SpawnRoom();
         }
