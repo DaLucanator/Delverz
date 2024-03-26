@@ -1,15 +1,56 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileTile : DelverzTile
 {
-    [SerializeField] private Vector3 moveDirection;
-    private bool shouldDestroySelf, canMove = true;
+    private Vector3 moveDirection;
+    [SerializeField] private GameObject spriteNorth, spriteEast, spriteSouth, spriteWest;
+    private float moveAmount = 0.3125f;
+    private bool shouldDestroySelf, canMove = false;
     private float delayTime = 0.03125f;
 
-    void FixedUpdate()
+    public void SetDirection(Vector3 direction)
     {
+        bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+
+        //Set the Direction
+        moveDirection = direction *= moveAmount;
+        spriteNorth.SetActive(false);
+        spriteEast.SetActive(false);
+        spriteSouth.SetActive(false);
+        spriteWest.SetActive(false);
+
+        if (moveDirection == new Vector3(0, moveAmount, 0)) { spriteNorth.SetActive(true); }
+        else if (moveDirection == new Vector3(moveAmount, 0, 0)) { spriteEast.SetActive(true); }
+        else if (moveDirection == new Vector3(0, -moveAmount, 0)) { spriteSouth.SetActive(true); }
+        else if (moveDirection == new Vector3(-moveAmount, 0, 0)) { spriteWest.SetActive(true); }
+
+        //Populate tile in GridManager
+        if (CanMove(bounds))
+        {
+            foreach (DelverzTile tileToTrigger in tilesToTrigger)
+            {
+                tileToTrigger.Die();
+            }
+
+            if (tilesToTrigger.Count > 0) { DestroySelf(); }
+
+            else
+            {
+                GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
+                canMove = true;
+            }
+        }
+    }
+
+    protected override void Start()
+    {
+
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
         if(canMove)
         {
             Move();
@@ -51,6 +92,11 @@ public class ProjectileTile : DelverzTile
     {
         yield return new WaitForSeconds(delayTime);
         canMove = true;
+    }
+
+    public override void Die()
+    {
+        DestroySelf();
     }
 
     public override void DestroySelf()

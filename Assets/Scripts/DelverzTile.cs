@@ -12,40 +12,23 @@ public class DelverzTile : MonoBehaviour
     private protected List<DelverzTile> tilesToTrigger = new List<DelverzTile>();
     private Tile myTileMapTile;
 
-    protected virtual void Start()
+    private void Awake()
     {
         if (colliderType == ColliderType.ground || colliderType == ColliderType.air) { tileLayer = 0; }
         else if (colliderType == ColliderType.groundObject) { tileLayer = 1; }
         else if (colliderType == ColliderType.projectile) { tileLayer = 2; }
         else { tileLayer = 3; }
+    }
 
+    protected virtual void Start()
+    {
         bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
-
-        if(CanMove(bounds))
-        {
-            foreach (DelverzTile tileToTrigger in tilesToTrigger)
-            {
-                tileToTrigger.Die();
-            }
-            if (tilesToTrigger.Count > 0) { DestroySelf(); }
-
-            else { GridManager.current.AddToTileDictionary(tileLayer, bounds, this); }
-            
-        }
-
-        else 
-        {
-        }
+        GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
     }
 
     public ColliderType ReturnColliderType()
     {
         return colliderType;
-    }
-
-    public void SetColliderType(ColliderType typeToSetTo)
-    {
-        colliderType = typeToSetTo;
     }
 
     public virtual void Trigger(DelverzTile incomingTile)
@@ -61,6 +44,7 @@ public class DelverzTile : MonoBehaviour
     public virtual void DestroySelf()
     {
         GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
+        Destroy(gameObject);
     }
 
     public bool CanMove(Bounds moveBounds)
@@ -77,6 +61,15 @@ public class DelverzTile : MonoBehaviour
     }
 
     public virtual void Move()
+    {
+
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        if (GameController.current.ReturnIsOffScreen(transform.position)) { DestroySelf(); }
+    }
+    protected virtual void Update()
     {
 
     }

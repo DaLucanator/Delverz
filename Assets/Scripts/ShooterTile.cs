@@ -9,6 +9,7 @@ public class ShooterTile : PoweredTile
 
     public override void PowerTile()
     {
-        Instantiate(projectileToSpawn, transform.position + spawnPos, Quaternion.identity);
+        GameObject currentProjectile = Instantiate(projectileToSpawn, transform.position + spawnPos, Quaternion.identity);
+        currentProjectile.GetComponent<ProjectileTile>().SetDirection(spawnPos);
     }
 }

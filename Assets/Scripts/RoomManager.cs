@@ -17,9 +17,6 @@ public class RoomDepthList
 
 public class RoomManager : MonoBehaviour
 {
-    //spawn first room
-    //first room's tilemap becomes my tilemap
-
     [SerializeField] private Tilemap currentTilemap;
     [SerializeField] private RoomDepthList rooms = new RoomDepthList();
     [SerializeField] private TileIDsScriptableObject tileIDs;
@@ -41,15 +38,14 @@ public class RoomManager : MonoBehaviour
             roomsToSpawn.Add(JsonUtility.FromJson<RoomData>(randomTextAsset.ToString()));
         }
 
-        for (int i = 0; i < rooms.roomDepth.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
             SpawnRoom();
         }
     }
 
-    void SpawnRoom()
+    public void SpawnRoom()
     {
-       Debug.Log("boop");
        RoomData currentRoomData = roomsToSpawn[roomsSpawned];
 
         for (int i = 0; i < currentRoomData.tilePoses.Count; i++)
@@ -60,8 +56,6 @@ public class RoomManager : MonoBehaviour
         // give the list of tiles in network to each pressure plate
         List<PoweredTile> poweredTiles1 = new List<PoweredTile>();
         List<PoweredTile> poweredTiles2 = new List<PoweredTile>();
-
-        Debug.Log(currentRoomData.poweredTiles1Poses.Count);
 
         foreach (Vector3Int poweredTile1Pos in currentRoomData.poweredTiles1Poses)
         {

@@ -15,27 +15,33 @@ public class DoorTile : PoweredTile
     {
         isOpen = !isOpen;
 
-        //close the door
-        if (isOpen)
+        //open the door
+        if (!isOpen)
         {
             myDoor.SetActive(true);
             tilesToTrigger = null;
             if (addToDictionary) 
             { 
                 GridManager.current.AddToTileDictionary(1, bounds, mySpikeTile);
-                GridManager.current.AddToTileDictionary(3, bounds, myWallTile);
             }
             TileIntersect intersectData = GridManager.current.ReturnIntersectTiles(bounds, mySpikeTile);
             tilesToTrigger = intersectData.tilesToTrigger;
 
             foreach (DelverzTile tile in intersectData.tilesToTrigger)
             {
+                Debug.Log(tile.gameObject.ToString());
                 tile.Die();
+            }
+
+            if (addToDictionary)
+            {
+                GridManager.current.RemoveTileFromDictionary(1, bounds);
+                GridManager.current.AddToTileDictionary(3, bounds, myWallTile);
             }
         }
 
-        //open the door
-        else if (!isOpen)
+        //close the door
+        else if (isOpen)
         {
             GridManager.current.RemoveTileFromDictionary(1, bounds);
             GridManager.current.RemoveTileFromDictionary(3, bounds);

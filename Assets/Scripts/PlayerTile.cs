@@ -8,8 +8,16 @@ public class PlayerTile : DelverzTile
     private float treasureAmount;
     private int TreasureAmountDisplay;
     private bool isDead;
+    private Ability currentAbility = Ability.Null;
+    [SerializeField]private GameObject bloodSplat;
 
     private List<PressurePlateTile> pressurePlateTiles = new List<PressurePlateTile>();
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, bounds.size);
+    }
 
     public override void Move(Vector3 movePos)
     {
@@ -48,10 +56,17 @@ public class PlayerTile : DelverzTile
 
     public override void Trigger(DelverzTile incomingTile)
     {
-        Die();
+        if (!isDead)
+        {
+            Die();
+        }
     }
     public override void Die()
     {
+        myPlayerInputScript.EnableSprite(false);
+        Instantiate(bloodSplat, transform.position, Quaternion.identity);
+        GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
+        isDead = true;
         //Disable Input
         myPlayerInputScript.Die(true);
 
@@ -60,25 +75,58 @@ public class PlayerTile : DelverzTile
         Mathf.RoundToInt(treasureAmount);
         TreasureAmountDisplay = (int)treasureAmount;
 
-        StartCoroutine(RespawnTimer());
+        StartCoroutine(RespawnTimer(5f));
     }
 
-    //this and associated methods are used to track when a player leaves a trigger. i.e pressure plate
-    public void AddToTriggerExit()
+    public void UseAbility(Vector3 AbilityDirection)
     {
-
+        AbilityManager.current.UseAbility(currentAbility, AbilityDirection, this);
     }
 
-    private IEnumerator RespawnTimer()
+    public bool canPickupAbility()
     {
+        if (currentAbility == Ability.Null) { return true; }
+        else return false;
+    }
+    public void PickupAbility(Ability abilityToPickup)
+    {
+        currentAbility = abilityToPickup;
+        Debug.Log("you picked up " + currentAbility.ToString());
+    }
+
+    public void SpendAbility()
+    {
+        currentAbility = Ability.Null;
+    }
+
+    private IEnumerator RespawnTimer(float timeToWait)
+    {
+
         yield return new WaitForSeconds(5f);
 
-        myPlayerInputScript.Die(false);
+        Vector3 positionToRespawn = RespawnManager.current.ReturnRespawnPos(this);
+
+        if (positionToRespawn != new Vector3 (0,0, -1000)) 
+        {
+            myPlayerInputScript.EnableSprite(true);
+            transform.SetPositionAndRotation(positionToRespawn, Quaternion.identity);
+            bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+            GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
+            myPlayerInputScript.Die(false);
+            isDead = false;
+        }
+
+        else
+        {
+            RespawnTimer(0.5f);
+        }
     }
 
     public override void DestroySelf()
     {
-        base.DestroySelf();
-        Die();
+        if (!isDead)
+        {
+            Die();
+        }
     }
 }
