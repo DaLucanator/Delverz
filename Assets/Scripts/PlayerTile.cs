@@ -9,22 +9,41 @@ public class PlayerTile : DelverzTile
     private int TreasureAmountDisplay;
     private bool isDead;
     private Ability currentAbility = Ability.Null;
+    private Equipment currentEquipment;
     [SerializeField]private GameObject bloodSplat;
+
 
     private List<PressurePlateTile> pressurePlateTiles = new List<PressurePlateTile>();
 
-    void OnDrawGizmos()
+    public Bounds ReturnBounds()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, bounds.size);
+        return bounds;
     }
 
+    public void PickupTreasure(int treasureToAdd)
+    {
+        treasureAmount += treasureToAdd;
+    }
+
+    /*public override bool CanMove(Bounds moveBounds)
+    {
+        //check if my equipment can move first
+       /* if (currentEquipment.CanMove(moveBounds))
+        {
+            return base.CanMove(moveBounds);
+        } 
+
+
+        else return false;
+    } */
+
+    //the rest of the movement is handled by PlayerInputScript
     public override void Move(Vector3 movePos)
     {
         GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
 
         transform.SetPositionAndRotation(movePos, Quaternion.identity);
-        bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+        bounds = new Bounds(transform.position, bounds.size);
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
 
         List<PressurePlateTile> tilesToRemove = new List<PressurePlateTile>();
@@ -47,7 +66,6 @@ public class PlayerTile : DelverzTile
 
         foreach (DelverzTile tileToTrigger in tilesToTrigger)
         {
-            tileToTrigger.Trigger(this);
 
             //add any pressureplate tiles that are in tilesToTrigger to pressurePlateTiles
             if(tileToTrigger is PressurePlateTile && !pressurePlateTiles.Contains(tileToTrigger as PressurePlateTile)) { pressurePlateTiles.Add(tileToTrigger as PressurePlateTile); }

@@ -11,20 +11,22 @@ public class ProjectileTile : DelverzTile
 
     public void SetDirection(Vector3 direction)
     {
-        bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
-
         //Set the Direction
+        //This happens instead of Start function in DelverzTile
         moveDirection = direction *= moveAmount;
         spriteNorth.SetActive(false);
         spriteEast.SetActive(false);
         spriteSouth.SetActive(false);
         spriteWest.SetActive(false);
 
-        if (moveDirection == new Vector3(0, moveAmount, 0)) { spriteNorth.SetActive(true); }
-        else if (moveDirection == new Vector3(moveAmount, 0, 0)) { spriteEast.SetActive(true); }
-        else if (moveDirection == new Vector3(0, -moveAmount, 0)) { spriteSouth.SetActive(true); }
-        else if (moveDirection == new Vector3(-moveAmount, 0, 0)) { spriteWest.SetActive(true); }
+        if (moveDirection == new Vector3(0, moveAmount, 0)) { spriteNorth.SetActive(true); myCollider = spriteNorth.GetComponent<BoxCollider2D>(); }
+        else if (moveDirection == new Vector3(moveAmount, 0, 0)) { spriteEast.SetActive(true); myCollider = spriteEast.GetComponent<BoxCollider2D>(); }
+        else if (moveDirection == new Vector3(0, -moveAmount, 0)) { spriteSouth.SetActive(true); myCollider = spriteSouth.GetComponent<BoxCollider2D>(); }
+        else if (moveDirection == new Vector3(-moveAmount, 0, 0)) { spriteWest.SetActive(true); myCollider = spriteWest.GetComponent<BoxCollider2D>(); }
 
+        bounds = myCollider.bounds;
+        myCollider.enabled = false;
+        bounds.center = transform.position;
         //Populate tile in GridManager
         if (CanMove(bounds))
         {
@@ -60,7 +62,7 @@ public class ProjectileTile : DelverzTile
 
     public override void Move()
     {
-        if (CanMove(new Bounds(transform.position + moveDirection, Vector3.one * 0.96875f)))
+        if (CanMove(new Bounds(transform.position + moveDirection, bounds.size)))
         {
             foreach (DelverzTile tileToTrigger in tilesToTrigger)
             {
@@ -73,7 +75,7 @@ public class ProjectileTile : DelverzTile
                 GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
 
                 transform.SetPositionAndRotation(transform.position + moveDirection, Quaternion.identity);
-                bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+                bounds = new Bounds(transform.position, bounds.size);
                 GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
             }
 

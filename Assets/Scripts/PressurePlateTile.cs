@@ -28,6 +28,12 @@ public class PressurePlateTile : DelverzTile
                 AnimatedSpikeTile spikeTile = tileToPower as AnimatedSpikeTile;
                 spikeTile.PowerTile(!spikeTile.ReturnIsPowered());
             }
+
+            if (tileToPower is DoorTile)
+            {
+                DoorTile doorTile = tileToPower as DoorTile;
+                doorTile.PowerTile(!doorTile.ReturnIsPowered());
+            }
         }
 
         isPowered = true;

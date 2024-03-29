@@ -10,7 +10,9 @@ public enum ColliderType
     projectile,
     ground,
     groundObject,
-    air
+    air,
+    sword,
+    shield
 }
 
 public struct TileIntersect
@@ -65,20 +67,32 @@ public class GridManager : MonoBehaviour
                     ColliderType otherColliderType = tileIAmTraversingTo.ReturnColliderType();
                     ColliderType myColliderType = myTile.ReturnColliderType();
 
-                    //if I'm a player and incoming tile is a wall return hardcollisiom
-                    if (myColliderType == ColliderType.player  && otherColliderType == ColliderType.wall) { intersectData.canTraverse = false; return intersectData; }
+                    //if I'm a player and incoming tile is a wall or a shield return hardcollisiom
+                    if (myColliderType == ColliderType.player  && (otherColliderType == ColliderType.wall || otherColliderType == ColliderType.shield)) { intersectData.canTraverse = false; return intersectData; }
                     //if I'm a player and incoming tile is a another player that isn't me return hardcollision
-                    else if (myColliderType == ColliderType.player && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.canTraverse = false; return intersectData; }
+                    else if (myColliderType == ColliderType.player && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.canTraverse = false;  return intersectData; }
                     //if I'm a player and incoming tile is not the ground and isn't me return triggeringcollision
                     else if (myColliderType == ColliderType.player && otherColliderType != ColliderType.ground && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
 
                     //if I'm a projectile and incoming tile is a projectile that isn't me return triggeringcollision
                     else if (myColliderType == ColliderType.projectile && otherColliderType == ColliderType.projectile && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
-                    //if I'm a projectile and incoming tile is a player or a wall return triggeringcollision
-                    else if (myColliderType == ColliderType.projectile && (otherColliderType == ColliderType.player || otherColliderType == ColliderType.wall)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    //if I'm a projectile and incoming tile is a player or a wall or a shield return triggeringcollision
+                    else if (myColliderType == ColliderType.projectile && (otherColliderType == ColliderType.player || otherColliderType == ColliderType.wall || otherColliderType == ColliderType.shield)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
 
                     //if I'm a ground object and incoming tile is a player return triggering collision
                     else if (myColliderType == ColliderType.groundObject && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+
+                    //if I'm a sword and incoming tile is a wall return hardcollision
+                    else if (myColliderType == ColliderType.sword && otherColliderType == ColliderType.wall) { intersectData.canTraverse = false; return intersectData; }
+                    //if I'm a sword and incoming tyle is a sword that isn't me return triggering collision
+                    else if (myColliderType == ColliderType.sword && otherColliderType == ColliderType.sword && tileIAmTraversingTo != myTile) { intersectData.canTraverse = false; return intersectData; }
+                    //if I'm a sword and incoming tile a player or a shield return triggering collision
+
+
+                    //if I'm a shield and incoming tile is a wall or a player return hardCollision
+                    //if I'm a shield and incoming tile is a shield that isn't me return triggering collision
+                    //if I'm a shield and incoming tile is a projectile or a sword return triggering collision
+
                 }
             }
         }

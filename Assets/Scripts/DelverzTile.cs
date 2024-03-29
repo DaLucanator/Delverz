@@ -11,6 +11,7 @@ public class DelverzTile : MonoBehaviour
     private protected Bounds bounds;
     private protected List<DelverzTile> tilesToTrigger = new List<DelverzTile>();
     private Tile myTileMapTile;
+    protected BoxCollider2D myCollider;
 
     private void Awake()
     {
@@ -22,7 +23,10 @@ public class DelverzTile : MonoBehaviour
 
     protected virtual void Start()
     {
-        bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+        myCollider = this.GetComponent<BoxCollider2D>();
+        bounds = myCollider.bounds;
+        bounds.center = transform.position;
+        myCollider.enabled = false;
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
     }
 
@@ -47,7 +51,7 @@ public class DelverzTile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public bool CanMove(Bounds moveBounds)
+    public virtual bool CanMove(Bounds moveBounds)
     {
         tilesToTrigger = null;
         TileIntersect intersectData = GridManager.current.ReturnIntersectTiles(moveBounds, this);
