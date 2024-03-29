@@ -66,6 +66,7 @@ public class PlayerTile : DelverzTile
 
         foreach (DelverzTile tileToTrigger in tilesToTrigger)
         {
+            tileToTrigger.Trigger(this);
 
             //add any pressureplate tiles that are in tilesToTrigger to pressurePlateTiles
             if(tileToTrigger is PressurePlateTile && !pressurePlateTiles.Contains(tileToTrigger as PressurePlateTile)) { pressurePlateTiles.Add(tileToTrigger as PressurePlateTile); }

@@ -5,13 +5,10 @@ using UnityEngine;
 public class DoorTile : PoweredTile
 {
     [SerializeField]private bool isOpen;
-    [SerializeField] private GameObject myDoor;
+    [SerializeField] private GameObject myWall, mySpikes;
     [SerializeField] private SpikeTile mySpikeTile;
     [SerializeField] private DelverzTile myWallTile;
-    private bool addToDictionary;
-    private BoxCollider2D doorCollider;
-    [SerializeField] private Bounds doorBounds;
-    bool shouldBruteForce;
+    bool shouldRemove = true;
 
     protected override void Start()
     {
@@ -22,8 +19,6 @@ public class DoorTile : PoweredTile
 
             if (isOpen) { TrapClock.current.offTick += PowerTile; }
         }
-
-        doorBounds.center = transform.position;
     }
 
     public override void DestroySelf()
@@ -44,25 +39,19 @@ public class DoorTile : PoweredTile
 
     public override void PowerTile(bool shouldOpen)
     {
-        //brute forcing because of a stupid bug
-        if(shouldBruteForce)
-        {
-            GridManager.current.RemoveTileFromDictionary(1, new Bounds(transform.position, Vector3.zero));
-            GridManager.current.RemoveTileFromDictionary(3, new Bounds(transform.position, Vector3.zero));
-            shouldBruteForce = false;
-        }
-
-
         if (!shouldOpen && isOpen)
         {
             isOpen = false;
-            myDoor.SetActive(true);
+            myWall.SetActive(true);
+            GridManager.current.RemoveTileFromDictionary(4, new Bounds(transform.position, Vector3.zero));
+            mySpikes.SetActive(true);
+            GridManager.current.RemoveTileFromDictionary(1, new Bounds(transform.position, Vector3.zero));
 
             tilesToTrigger = null;
-            Debug.Log(doorBounds);
-            GridManager.current.AddToTileDictionary(1, doorBounds, mySpikeTile);
+            Debug.Log(bounds);
+            GridManager.current.AddToTileDictionary(1, bounds, mySpikeTile);
 
-            TileIntersect intersectData = GridManager.current.ReturnIntersectTiles(doorBounds, mySpikeTile);
+            TileIntersect intersectData = GridManager.current.ReturnIntersectTiles(bounds, mySpikeTile);
             tilesToTrigger = intersectData.tilesToTrigger;
 
             foreach (DelverzTile tile in intersectData.tilesToTrigger)
@@ -70,19 +59,18 @@ public class DoorTile : PoweredTile
                 tile.Die();
             }
 
-            GridManager.current.RemoveTileFromDictionary(1, doorBounds);
-            GridManager.current.AddToTileDictionary(3, doorBounds, myWallTile);
+            GridManager.current.RemoveTileFromDictionary(1, bounds);
+            GridManager.current.AddToTileDictionary(4, bounds, myWallTile);
         }
 
         //open the door
         else if (shouldOpen && !isOpen)
         {
+            GridManager.current.RemoveTileFromDictionary(1, bounds);
+            GridManager.current.RemoveTileFromDictionary(4, bounds);
+            mySpikes.SetActive(false);
+            myWall.SetActive(false);
             isOpen = true;
-            GridManager.current.RemoveTileFromDictionary(1, doorBounds);
-            GridManager.current.RemoveTileFromDictionary(3, doorBounds);
-            myDoor.SetActive(false);
-
-            addToDictionary = true;
         }
     }
 }

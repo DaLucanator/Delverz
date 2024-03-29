@@ -18,7 +18,8 @@ public class DelverzTile : MonoBehaviour
         if (colliderType == ColliderType.ground || colliderType == ColliderType.air) { tileLayer = 0; }
         else if (colliderType == ColliderType.groundObject) { tileLayer = 1; }
         else if (colliderType == ColliderType.projectile) { tileLayer = 2; }
-        else { tileLayer = 3; }
+        else if (colliderType == ColliderType.player) { tileLayer = 3; }
+        else if (colliderType == ColliderType.wall) { tileLayer = 4; }
     }
 
     protected virtual void Start()
@@ -27,6 +28,7 @@ public class DelverzTile : MonoBehaviour
         bounds = myCollider.bounds;
         bounds.center = transform.position;
         myCollider.enabled = false;
+        Debug.Log(gameObject.name);
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
     }
 
