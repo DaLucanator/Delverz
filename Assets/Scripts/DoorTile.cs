@@ -73,4 +73,20 @@ public class DoorTile : PoweredTile
             isOpen = true;
         }
     }
+
+    public class SpawnableWallTile: DelverzTile
+    {
+        protected override void Start()
+        {
+
+        }
+    }
+
+    public class SpawnableSpikeTile : SpikeTile
+    {
+        protected override void Start()
+        {
+
+        }
+    }
 }
