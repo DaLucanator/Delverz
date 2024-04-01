@@ -28,7 +28,6 @@ public class DelverzTile : MonoBehaviour
         bounds = myCollider.bounds;
         bounds.center = transform.position;
         myCollider.enabled = false;
-        Debug.Log(gameObject.name);
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
     }
 

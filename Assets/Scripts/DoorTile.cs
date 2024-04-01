@@ -5,10 +5,9 @@ using UnityEngine;
 public class DoorTile : PoweredTile
 {
     [SerializeField]private bool isOpen;
-    [SerializeField] private GameObject myWall, mySpikes;
-    [SerializeField] private SpikeTile mySpikeTile;
-    [SerializeField] private DelverzTile myWallTile;
-    bool shouldRemove = true;
+    [SerializeField] private SpawnableSpikeTile mySpikeTile;
+    [SerializeField] private SpawnableWallTile myWallTile;
+    [SerializeField] private SpriteRenderer mySpriteRenderer;
 
     protected override void Start()
     {
@@ -18,6 +17,13 @@ public class DoorTile : PoweredTile
             if (!isOpen) { TrapClock.current.onTick += PowerTile; }
 
             if (isOpen) { TrapClock.current.offTick += PowerTile; }
+        }
+
+        if (isOpen)
+        {
+            mySpriteRenderer.enabled = false;
+
+            //I should tell the tiles to depopulate here but I don't want it to happen before their start functions so I'll ignore it and just not put any doors in the first room
         }
     }
 
@@ -29,7 +35,6 @@ public class DoorTile : PoweredTile
 
             if (!isOpen) { TrapClock.current.offTick += PowerTile; }
         }
-        base.DestroySelf();
     }
 
     public bool ReturnIsPowered()
@@ -39,54 +44,24 @@ public class DoorTile : PoweredTile
 
     public override void PowerTile(bool shouldOpen)
     {
+        //close the door
         if (!shouldOpen && isOpen)
         {
             isOpen = false;
-            myWall.SetActive(true);
-            GridManager.current.RemoveTileFromDictionary(4, new Bounds(transform.position, Vector3.zero));
-            mySpikes.SetActive(true);
-            GridManager.current.RemoveTileFromDictionary(1, new Bounds(transform.position, Vector3.zero));
+            mySpriteRenderer.enabled = true;
 
-            tilesToTrigger = null;
-            Debug.Log(bounds);
-            GridManager.current.AddToTileDictionary(1, bounds, mySpikeTile);
-
-            TileIntersect intersectData = GridManager.current.ReturnIntersectTiles(bounds, mySpikeTile);
-            tilesToTrigger = intersectData.tilesToTrigger;
-
-            foreach (DelverzTile tile in intersectData.tilesToTrigger)
-            {
-                tile.Die();
-            }
-
-            GridManager.current.RemoveTileFromDictionary(1, bounds);
-            GridManager.current.AddToTileDictionary(4, bounds, myWallTile);
+            mySpikeTile.PopulateTile();
+            myWallTile.PopulateTile();
         }
 
         //open the door
         else if (shouldOpen && !isOpen)
         {
-            GridManager.current.RemoveTileFromDictionary(1, bounds);
-            GridManager.current.RemoveTileFromDictionary(4, bounds);
-            mySpikes.SetActive(false);
-            myWall.SetActive(false);
+            mySpikeTile.DePopulateTile();
+            myWallTile.DePopulateTile();
+
+            mySpriteRenderer.enabled = false;
             isOpen = true;
-        }
-    }
-
-    public class SpawnableWallTile: DelverzTile
-    {
-        protected override void Start()
-        {
-
-        }
-    }
-
-    public class SpawnableSpikeTile : SpikeTile
-    {
-        protected override void Start()
-        {
-
         }
     }
 }
