@@ -21,7 +21,7 @@ public class DoorTile : PoweredTile
 
         if (isOpen)
         {
-            mySpriteRenderer.enabled = false;
+            if (mySpriteRenderer != null) { mySpriteRenderer.enabled = false; }
 
             //I should tell the tiles to depopulate here but I don't want it to happen before their start functions so I'll ignore it and just not put any doors in the first room
         }
@@ -48,7 +48,7 @@ public class DoorTile : PoweredTile
         if (!shouldOpen && isOpen)
         {
             isOpen = false;
-            mySpriteRenderer.enabled = true;
+            if (mySpriteRenderer != null) { mySpriteRenderer.enabled = true; }
 
             mySpikeTile.PopulateTile();
             myWallTile.PopulateTile();
@@ -60,7 +60,7 @@ public class DoorTile : PoweredTile
             mySpikeTile.DePopulateTile();
             myWallTile.DePopulateTile();
 
-            mySpriteRenderer.enabled = false;
+            if (mySpriteRenderer != null) { mySpriteRenderer.enabled = false; }
             isOpen = true;
         }
     }

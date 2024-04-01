@@ -36,7 +36,7 @@ public class DelverzTile : MonoBehaviour
         return colliderType;
     }
 
-    public virtual void Trigger(DelverzTile incomingTile)
+    public virtual void Trigger(PlayerTile incomingTile)
     {
 
     }
@@ -49,7 +49,7 @@ public class DelverzTile : MonoBehaviour
     public virtual void DestroySelf()
     {
         GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
-        Destroy(gameObject);
+        if (gameObject != null) { Destroy(gameObject); }
     }
 
     public virtual bool CanMove(Bounds moveBounds)

@@ -13,18 +13,13 @@ public class AbilityPickupTile : DelverzTile
         base.Start();
     }
 
-    public override void Trigger(DelverzTile incomingTile)
+    public override void Trigger(PlayerTile incomingTile)
     {
-       if(incomingTile is PlayerTile)
+        if (incomingTile.canPickupAbility())
         {
-            PlayerTile currentPlayerTile = incomingTile as PlayerTile;
-
-            if(currentPlayerTile.canPickupAbility())
-            {
-                currentPlayerTile.PickupAbility(abilityToPickup.ReturnAbility());
-                spriteRenderer.sprite = null;
-                DestroySelf();
-            }
+            incomingTile.PickupAbility(abilityToPickup.ReturnAbility());
+            spriteRenderer.sprite = null;
+            DestroySelf();
         }
     }
 

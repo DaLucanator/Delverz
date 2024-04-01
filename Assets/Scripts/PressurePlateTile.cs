@@ -40,9 +40,9 @@ public class PressurePlateTile : DelverzTile
         isPowered = true;
     }
 
-    public override void Trigger(DelverzTile incomingTile)
+    public override void Trigger(PlayerTile incomingTile)
     {
-        if (!isPowered) { PowerTiles();  Debug.Log("boop"); }
+        if (!isPowered) { PowerTiles(); }
     }
 
     //only used by animatedSpikeTile, triggerd by player tile

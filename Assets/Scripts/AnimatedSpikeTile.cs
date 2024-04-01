@@ -23,7 +23,7 @@ public class AnimatedSpikeTile : PoweredTile
 
         if (!isPowered)
         {
-            mySpriteRenderer.enabled = false;
+            if (mySpriteRenderer != null) { mySpriteRenderer.enabled = false; }
 
             //I should tell the tiles to depopulate here but I don't want it to happen before their start functions so I'll ignore it and just not put any AnimatedSpikes in the first room
         }
@@ -51,7 +51,7 @@ public class AnimatedSpikeTile : PoweredTile
         if (shouldPower && !isPowered)
         {
             isPowered = true;
-            mySpriteRenderer.enabled = true;
+            if (mySpriteRenderer != null) { mySpriteRenderer.enabled = true; } 
 
             mySpikeTile.PopulateTile();
         }
@@ -61,7 +61,7 @@ public class AnimatedSpikeTile : PoweredTile
         {
             mySpikeTile.DePopulateTile();
 
-            mySpriteRenderer.enabled = false;
+            if (mySpriteRenderer != null) { mySpriteRenderer.enabled = false; }
             isPowered = false;
         }
     }

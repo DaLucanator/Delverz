@@ -64,8 +64,11 @@ public class PlayerTile : DelverzTile
         }
         tilesToRemove.Clear();
 
+        //for some reason player trigggers tiles after it moves. Everything else in the game triggers tiles before it moves. idk I guess it makes sense. It hurts my head so I didn't change it.
         foreach (DelverzTile tileToTrigger in tilesToTrigger)
         {
+            //other tiles will be more explicit about what methods they want tiles to call here (often DelverzTile.Die())
+            //Player has lots of unique interactions with tiles that other tiles don't (ability pickups etc.). So it fetches what to do from other tiles instead via DelverzTile.Trigger()
             tileToTrigger.Trigger(this);
 
             //add any pressureplate tiles that are in tilesToTrigger to pressurePlateTiles
@@ -73,7 +76,7 @@ public class PlayerTile : DelverzTile
         }
     }
 
-    public override void Trigger(DelverzTile incomingTile)
+    public override void Trigger(PlayerTile incomingTile)
     {
         if (!isDead)
         {

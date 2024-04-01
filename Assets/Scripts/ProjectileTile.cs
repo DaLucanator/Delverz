@@ -4,7 +4,8 @@ using UnityEngine;
 public class ProjectileTile : DelverzTile
 {
     private Vector3 moveDirection;
-    [SerializeField] private GameObject spriteNorth, spriteEast, spriteSouth, spriteWest;
+    [SerializeField] private SpriteRenderer spriteNorth, spriteEast, spriteSouth, spriteWest;
+    [SerializeField] private GameObject north, east, south, west;
     private float moveAmount = 0.3125f;
     private bool shouldDestroySelf, canMove = false;
     private float delayTime = 0.03125f;
@@ -14,15 +15,16 @@ public class ProjectileTile : DelverzTile
         //Set the Direction
         //This happens instead of Start function in DelverzTile
         moveDirection = direction *= moveAmount;
-        spriteNorth.SetActive(false);
-        spriteEast.SetActive(false);
-        spriteSouth.SetActive(false);
-        spriteWest.SetActive(false);
 
-        if (moveDirection == new Vector3(0, moveAmount, 0)) { spriteNorth.SetActive(true); myCollider = spriteNorth.GetComponent<BoxCollider2D>(); }
-        else if (moveDirection == new Vector3(moveAmount, 0, 0)) { spriteEast.SetActive(true); myCollider = spriteEast.GetComponent<BoxCollider2D>(); }
-        else if (moveDirection == new Vector3(0, -moveAmount, 0)) { spriteSouth.SetActive(true); myCollider = spriteSouth.GetComponent<BoxCollider2D>(); }
-        else if (moveDirection == new Vector3(-moveAmount, 0, 0)) { spriteWest.SetActive(true); myCollider = spriteWest.GetComponent<BoxCollider2D>(); }
+        spriteNorth.enabled = false;
+        spriteEast.enabled = false;
+        spriteSouth.enabled = false;
+        spriteWest.enabled = false;
+
+        if (moveDirection == new Vector3(0, moveAmount, 0)) { spriteNorth.enabled = true; myCollider = north.GetComponent<BoxCollider2D>(); }
+        else if (moveDirection == new Vector3(moveAmount, 0, 0)) { spriteEast.enabled = true; myCollider = east.GetComponent<BoxCollider2D>(); }
+        else if (moveDirection == new Vector3(0, -moveAmount, 0)) { spriteSouth.enabled = true; myCollider = south.GetComponent<BoxCollider2D>(); }
+        else if (moveDirection == new Vector3(-moveAmount, 0, 0)) { spriteWest.enabled = true; myCollider = west.GetComponent<BoxCollider2D>(); }
 
         bounds = myCollider.bounds;
         myCollider.enabled = false;
@@ -30,12 +32,18 @@ public class ProjectileTile : DelverzTile
         //Populate tile in GridManager
         if (CanMove(bounds))
         {
+            bool isSword = false;
             foreach (DelverzTile tileToTrigger in tilesToTrigger)
             {
+                if (tileToTrigger is SwordTile)
+                {
+                    Reflect();
+                    isSword = true;
+                }
                 tileToTrigger.Die();
             }
 
-            if (tilesToTrigger.Count > 0) { DestroySelf(); }
+            if (tilesToTrigger.Count > 0 && !isSword) { DestroySelf(); }
 
             else
             {
@@ -64,11 +72,17 @@ public class ProjectileTile : DelverzTile
     {
         if (CanMove(new Bounds(transform.position + moveDirection, bounds.size)))
         {
+            bool isSword = false;
             foreach (DelverzTile tileToTrigger in tilesToTrigger)
             {
+                if (tileToTrigger is SwordTile)
+                {
+                    Reflect();
+                    isSword = true;
+                }
                 tileToTrigger.Die();
             }
-            if (tilesToTrigger.Count > 0) { DestroySelf();}
+            if (tilesToTrigger.Count > 0 && !isSword) { DestroySelf(); }
 
             else
             {
@@ -84,7 +98,12 @@ public class ProjectileTile : DelverzTile
         }
     }
 
-    public override void Trigger(DelverzTile incomingTile)
+    public void Reflect()
+    {
+        SetDirection(moveDirection *= -1f);
+    }
+
+    public override void Trigger(PlayerTile incomingTile)
     {
         incomingTile.Die();
         DestroySelf();
@@ -99,11 +118,5 @@ public class ProjectileTile : DelverzTile
     public override void Die()
     {
         DestroySelf();
-    }
-
-    public override void DestroySelf()
-    {
-        base.DestroySelf();
-        Destroy(gameObject);
     }
 }
