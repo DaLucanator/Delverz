@@ -26,6 +26,8 @@ public class SwordTile : DelverzTile
         bounds = myCollider.bounds;
         myCollider.enabled = false;
         bounds.center = myDirection.transform.position;
+        myPlayer = transform.parent.GetComponent<PlayerTile>();
+        myPlayer.SetSword(this);
 
         //Populate tile in GridManager
         if (CanMove(bounds))

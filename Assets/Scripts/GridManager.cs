@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -12,7 +13,7 @@ public enum ColliderType
     groundObject,
     air,
     sword,
-    shield
+    bat
 }
 
 public struct TileIntersect
@@ -56,6 +57,8 @@ public class GridManager : MonoBehaviour
         intersectData.tilesToTrigger = new List<DelverzTile>();
         intersectData.canTraverse = true;
 
+        //I'm aware that dictionaries is probably not the best use case for this anymore. It used to be. I haven't bothered to update it.
+
         //for each layer of the tile dictionary
         for (int i = 4; i >= 0; i--)
         {
@@ -68,32 +71,43 @@ public class GridManager : MonoBehaviour
                     ColliderType otherColliderType = tileIAmTraversingTo.ReturnColliderType();
                     ColliderType myColliderType = myTile.ReturnColliderType();
 
-                    //if I'm a player and incoming tile is a wall or a shield return hardcollisiom
-                    if (myColliderType == ColliderType.player  && (otherColliderType == ColliderType.wall || otherColliderType == ColliderType.shield)) { intersectData.canTraverse = false; return intersectData; }
+                    //There's probably a better way to do this :(
+                    //updating this is very annoying if things are changed or new collision types are added.
+
+                    //--HARD COLLISIONS--
+                    //-PLAYER-
+                    //if I'm a player and incoming tile is a wall or a bat return hardcollisiom
+                    if (myColliderType == ColliderType.player && (otherColliderType == ColliderType.wall || otherColliderType == ColliderType.bat)) { intersectData.canTraverse = false; return intersectData; }
                     //if I'm a player and incoming tile is a another player that isn't me return hardcollision
-                    else if (myColliderType == ColliderType.player && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.canTraverse = false;  return intersectData; }
-                    //if I'm a player and incoming tile is not the ground and isn't me return triggeringcollision
-                    else if (myColliderType == ColliderType.player && otherColliderType != ColliderType.ground && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
-
-                    //if I'm a projectile and incoming tile is a projectile that isn't me return triggeringcollision
-                    else if (myColliderType == ColliderType.projectile && otherColliderType == ColliderType.projectile && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
-                    //if I'm a projectile and incoming tile is a player or a wall or a shield return triggeringcollision
-                    else if (myColliderType == ColliderType.projectile && (otherColliderType == ColliderType.player || otherColliderType == ColliderType.wall || otherColliderType == ColliderType.shield)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
-
-                    //if I'm a ground object and incoming tile is a player return triggering collision
-                    else if (myColliderType == ColliderType.groundObject && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
-
+                    else if (myColliderType == ColliderType.player && (otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile)) { intersectData.canTraverse = false; return intersectData; }
+                    //-SWORD-
                     //if I'm a sword and incoming tile is a wall return hardcollision
                     else if (myColliderType == ColliderType.sword && otherColliderType == ColliderType.wall) { intersectData.canTraverse = false; return intersectData; }
-                    //if I'm a sword and incoming tyle is a sword that isn't me return triggering collision
-                    else if (myColliderType == ColliderType.sword && otherColliderType == ColliderType.sword && tileIAmTraversingTo != myTile) { intersectData.canTraverse = false; return intersectData; }
-                    //if I'm a sword and incoming tile a player or a shield return triggering collision
+                    //-BAT-
+                    //If I'm a bat and incoming tile is a bat that isn't me return hardcollision
+                    //If I'm a bat and incoming tils is a player or a wall return hardcollision
 
-
-                    //if I'm a shield and incoming tile is a wall or a player return hardCollision
-                    //if I'm a shield and incoming tile is a shield that isn't me return triggering collision
-                    //if I'm a shield and incoming tile is a projectile or a sword return triggering collision
-
+                    //--TRIGGERING COLLISIONS--
+                    //-PLAYER-
+                    //if I'm a player and incoming tile is a sword that isn't mine return triggering collision
+                    else if (myColliderType == ColliderType.player && (otherColliderType == ColliderType.sword && tileIAmTraversingTo != myTile.ReturnSword())) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    //I'f I'm a player and incoming tile is a projectile or a groundObject return triggering collision
+                    else if (myColliderType == ColliderType.player && (otherColliderType == ColliderType.projectile || otherColliderType == ColliderType.groundObject)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    //-GROUNDOBJECT-
+                    //if I'm a ground object and incoming tile is a player return triggering collision
+                    else if (myColliderType == ColliderType.groundObject && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    //-SWORD-
+                    //if I'm a sword and incoming tile is a sword that isn't me return triggering collision
+                    else if (myColliderType == ColliderType.sword && (otherColliderType == ColliderType.sword && tileIAmTraversingTo != myTile)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    //if I'm a sword and incoming tile is a player that isn't mine return triggering collision
+                    else if (myColliderType == ColliderType.sword && (otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile.ReturnPlayer())) { intersectData.tilesToTrigger.Add(boundsY.Value); Debug.Log(myTile.ReturnPlayer()); }
+                    //if I'm a sword and incoming tile is a projectile return triggering collision
+                    else if (myColliderType == ColliderType.sword && otherColliderType == ColliderType.projectile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    //-PROJECTILE-
+                    //if I'm a projectile and incoming tile is a projectile that isn't me return triggeringcollision
+                    else if (myColliderType == ColliderType.projectile && otherColliderType == ColliderType.projectile && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    //if I'm a projectile and incoming tile is a player or a wall or a sword return triggeringcollision
+                    else if (myColliderType == ColliderType.projectile && (otherColliderType == ColliderType.sword || otherColliderType == ColliderType.wall || otherColliderType == ColliderType.player)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
                 }
             }
         }

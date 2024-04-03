@@ -20,6 +20,12 @@ public class PlayerTile : DelverzTile
         return bounds;
     }
 
+    public void SetSword(SwordTile swordToSet)
+    {
+        mySword = swordToSet;
+    }
+
+
     public void PickupTreasure(int treasureToAdd)
     {
         treasureAmount += treasureToAdd;
@@ -76,28 +82,30 @@ public class PlayerTile : DelverzTile
         }
     }
 
+    //This is for debugging. It shouldn't happen.
     public override void Trigger(PlayerTile incomingTile)
     {
-        if (!isDead)
-        {
-            Die();
-        }
+        Debug.Log("player was triggered by" + incomingTile.name);
     }
+
     public override void Die()
     {
-        myPlayerInputScript.EnableSprite(false);
-        Instantiate(bloodSplat, transform.position, Quaternion.identity);
-        GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
-        isDead = true;
-        //Disable Input
-        myPlayerInputScript.Die(true);
+        if(!isDead)
+        {
+            myPlayerInputScript.EnableSprite(false);
+            Instantiate(bloodSplat, transform.position, Quaternion.identity);
+            GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
+            isDead = true;
+            //Disable Input
+            myPlayerInputScript.Die(true);
 
-        //Deduct Treasure
-        treasureAmount -= (treasureAmount * 0.1f);
-        Mathf.RoundToInt(treasureAmount);
-        TreasureAmountDisplay = (int)treasureAmount;
+            //Deduct Treasure
+            treasureAmount -= (treasureAmount * 0.1f);
+            Mathf.RoundToInt(treasureAmount);
+            TreasureAmountDisplay = (int)treasureAmount;
 
-        StartCoroutine(RespawnTimer(5f));
+            StartCoroutine(RespawnTimer(5f));
+        }
     }
 
     public void UseAbility(Vector3 AbilityDirection)

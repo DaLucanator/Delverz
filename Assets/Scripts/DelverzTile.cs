@@ -13,6 +13,10 @@ public class DelverzTile : MonoBehaviour
     private Tile myTileMapTile;
     protected BoxCollider2D myCollider;
 
+    //only PlayerTile & SwordTile uses this. It's kinda bad to have it here but it makes gridmanager less messy
+    public SwordTile mySword;
+    protected PlayerTile myPlayer;
+
     private void Awake()
     {
         if (colliderType == ColliderType.ground || colliderType == ColliderType.air) { tileLayer = 0; }
@@ -29,6 +33,17 @@ public class DelverzTile : MonoBehaviour
         bounds.center = transform.position;
         myCollider.enabled = false;
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
+    }
+
+    //only PlayerTile & SwordTile uses this. It's kinda bad to have it here but it makes gridmanager less messy
+    public SwordTile ReturnSword()
+    {
+        return mySword;
+    }
+
+    public PlayerTile ReturnPlayer()
+    {
+        return myPlayer;
     }
 
     public ColliderType ReturnColliderType()
