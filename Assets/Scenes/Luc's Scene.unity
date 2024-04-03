@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crossbowBolt: {fileID: 4618219739604283182, guid: f6fd96da93e76d94e9ef63caf8895880, type: 3}
-  sword: {fileID: 0}
+  sword: {fileID: 7206526720997053458, guid: 8d8c81cfe99232a459ec27ae54cf028d, type: 3}
   shield: {fileID: 0}
   fireball: {fileID: 0}
 --- !u!4 &1669136027

@@ -14,7 +14,7 @@ public class DelverzTile : MonoBehaviour
     protected BoxCollider2D myCollider;
 
     //only PlayerTile & SwordTile uses this. It's kinda bad to have it here but it makes gridmanager less messy
-    public SwordTile mySword;
+    protected SwordTile mySword;
     protected PlayerTile myPlayer;
 
     private void Awake()
