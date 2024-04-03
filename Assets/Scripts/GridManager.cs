@@ -100,7 +100,7 @@ public class GridManager : MonoBehaviour
                     //if I'm a sword and incoming tile is a sword that isn't me return triggering collision
                     else if (myColliderType == ColliderType.sword && (otherColliderType == ColliderType.sword && tileIAmTraversingTo != myTile)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
                     //if I'm a sword and incoming tile is a player that isn't mine return triggering collision
-                    else if (myColliderType == ColliderType.sword && (otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile.ReturnPlayer())) { intersectData.tilesToTrigger.Add(boundsY.Value); Debug.Log(myTile.ReturnPlayer()); }
+                    else if (myColliderType == ColliderType.sword && (otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile.ReturnPlayer())) { intersectData.tilesToTrigger.Add(boundsY.Value); }
                     //if I'm a sword and incoming tile is a projectile return triggering collision
                     else if (myColliderType == ColliderType.sword && otherColliderType == ColliderType.projectile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
                     //-PROJECTILE-
