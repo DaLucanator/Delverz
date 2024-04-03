@@ -9,22 +9,47 @@ public class PlayerTile : DelverzTile
     private int TreasureAmountDisplay;
     private bool isDead;
     private Ability currentAbility = Ability.Null;
+    private Equipment currentEquipment;
     [SerializeField]private GameObject bloodSplat;
+
 
     private List<PressurePlateTile> pressurePlateTiles = new List<PressurePlateTile>();
 
-    void OnDrawGizmos()
+    public Bounds ReturnBounds()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, bounds.size);
+        return bounds;
     }
 
+    public void SetSword(SwordTile swordToSet)
+    {
+        mySword = swordToSet;
+    }
+
+
+    public void PickupTreasure(int treasureToAdd)
+    {
+        treasureAmount += treasureToAdd;
+    }
+
+    /*public override bool CanMove(Bounds moveBounds)
+    {
+        //check if my equipment can move first
+       /* if (currentEquipment.CanMove(moveBounds))
+        {
+            return base.CanMove(moveBounds);
+        } 
+
+
+        else return false;
+    } */
+
+    //the rest of the movement is handled by PlayerInputScript
     public override void Move(Vector3 movePos)
     {
         GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
 
         transform.SetPositionAndRotation(movePos, Quaternion.identity);
-        bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+        bounds = new Bounds(transform.position, bounds.size);
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
 
         List<PressurePlateTile> tilesToRemove = new List<PressurePlateTile>();
@@ -45,8 +70,11 @@ public class PlayerTile : DelverzTile
         }
         tilesToRemove.Clear();
 
+        //for some reason player trigggers tiles after it moves. Everything else in the game triggers tiles before it moves. idk I guess it makes sense. It hurts my head so I didn't change it.
         foreach (DelverzTile tileToTrigger in tilesToTrigger)
         {
+            //other tiles will be more explicit about what methods they want tiles to call here (often DelverzTile.Die())
+            //Player has lots of unique interactions with tiles that other tiles don't (ability pickups etc.). So it fetches what to do from other tiles instead via DelverzTile.Trigger()
             tileToTrigger.Trigger(this);
 
             //add any pressureplate tiles that are in tilesToTrigger to pressurePlateTiles
@@ -54,28 +82,30 @@ public class PlayerTile : DelverzTile
         }
     }
 
-    public override void Trigger(DelverzTile incomingTile)
+    //This is for debugging. It shouldn't happen.
+    public override void Trigger(PlayerTile incomingTile)
     {
-        if (!isDead)
-        {
-            Die();
-        }
+        Debug.Log("player was triggered by" + incomingTile.name);
     }
+
     public override void Die()
     {
-        myPlayerInputScript.EnableSprite(false);
-        Instantiate(bloodSplat, transform.position, Quaternion.identity);
-        GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
-        isDead = true;
-        //Disable Input
-        myPlayerInputScript.Die(true);
+        if(!isDead)
+        {
+            myPlayerInputScript.EnableSprite(false);
+            Instantiate(bloodSplat, transform.position, Quaternion.identity);
+            GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
+            isDead = true;
+            //Disable Input
+            myPlayerInputScript.Die(true);
 
-        //Deduct Treasure
-        treasureAmount -= (treasureAmount * 0.1f);
-        Mathf.RoundToInt(treasureAmount);
-        TreasureAmountDisplay = (int)treasureAmount;
+            //Deduct Treasure
+            treasureAmount -= (treasureAmount * 0.1f);
+            Mathf.RoundToInt(treasureAmount);
+            TreasureAmountDisplay = (int)treasureAmount;
 
-        StartCoroutine(RespawnTimer(5f));
+            StartCoroutine(RespawnTimer(5f));
+        }
     }
 
     public void UseAbility(Vector3 AbilityDirection)

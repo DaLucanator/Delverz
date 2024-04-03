@@ -1,6 +1,6 @@
 public class SpikeTile : DelverzTile
 {  
-    public override void Trigger(DelverzTile incomingTile)
+    public override void Trigger(PlayerTile incomingTile)
     {
         incomingTile.Die();
     }

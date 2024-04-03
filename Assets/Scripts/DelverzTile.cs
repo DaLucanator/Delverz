@@ -11,19 +11,39 @@ public class DelverzTile : MonoBehaviour
     private protected Bounds bounds;
     private protected List<DelverzTile> tilesToTrigger = new List<DelverzTile>();
     private Tile myTileMapTile;
+    protected BoxCollider2D myCollider;
+
+    //only PlayerTile & SwordTile uses this. It's kinda bad to have it here but it makes gridmanager less messy
+    protected SwordTile mySword;
+    protected PlayerTile myPlayer;
 
     private void Awake()
     {
         if (colliderType == ColliderType.ground || colliderType == ColliderType.air) { tileLayer = 0; }
         else if (colliderType == ColliderType.groundObject) { tileLayer = 1; }
         else if (colliderType == ColliderType.projectile) { tileLayer = 2; }
-        else { tileLayer = 3; }
+        else if (colliderType == ColliderType.player) { tileLayer = 3; }
+        else if (colliderType == ColliderType.wall) { tileLayer = 4; }
     }
 
     protected virtual void Start()
     {
-        bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
+        myCollider = this.GetComponent<BoxCollider2D>();
+        bounds = myCollider.bounds;
+        bounds.center = transform.position;
+        myCollider.enabled = false;
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
+    }
+
+    //only PlayerTile & SwordTile uses this. It's kinda bad to have it here but it makes gridmanager less messy
+    public SwordTile ReturnSword()
+    {
+        return mySword;
+    }
+
+    public PlayerTile ReturnPlayer()
+    {
+        return myPlayer;
     }
 
     public ColliderType ReturnColliderType()
@@ -31,7 +51,7 @@ public class DelverzTile : MonoBehaviour
         return colliderType;
     }
 
-    public virtual void Trigger(DelverzTile incomingTile)
+    public virtual void Trigger(PlayerTile incomingTile)
     {
 
     }
@@ -44,10 +64,10 @@ public class DelverzTile : MonoBehaviour
     public virtual void DestroySelf()
     {
         GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
-        Destroy(gameObject);
+        if (gameObject != null) { Destroy(gameObject); }
     }
 
-    public bool CanMove(Bounds moveBounds)
+    public virtual bool CanMove(Bounds moveBounds)
     {
         tilesToTrigger = null;
         TileIntersect intersectData = GridManager.current.ReturnIntersectTiles(moveBounds, this);

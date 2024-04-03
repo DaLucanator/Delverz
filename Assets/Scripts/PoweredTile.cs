@@ -18,8 +18,16 @@ public class PoweredTile : DelverzTile
 
     }
 
+    public override void DestroySelf()
+    {
+        if (!isNetworkedTile) { TrapClock.current.tick -= PowerTile; }
+        base.DestroySelf();
+    }
+
     public virtual void PowerTile(bool shouldPower)
     {
 
     }
+
+
 }

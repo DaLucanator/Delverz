@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DoorTileOpen 2
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -1227278351, guid: bf1a2994399d1c8409adb6a0354e5302, type: 3}
-  m_DefaultGameObject: {fileID: 764452270606256282, guid: 38ab8a6857de30d44a9794fe12f0980c, type: 3}
+  m_DefaultGameObject: {fileID: 764452270606256282, guid: 1b7af53ef5ddaa144a50d3848ecb67fc, type: 3}
   m_DefaultColliderType: 0
   m_TilingRules: []
