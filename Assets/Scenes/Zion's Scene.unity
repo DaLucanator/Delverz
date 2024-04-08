@@ -778,7 +778,7 @@ MonoBehaviour:
     - roomsToRandomize:
       - {fileID: 4900000, guid: 982080c778cd6f1409ebd9e5e3ea4774, type: 3}
     - roomsToRandomize:
-      - {fileID: 4900000, guid: 3b88e8b6632d58e4694b58852bdf8fc2, type: 3}
+      - {fileID: 4900000, guid: ecf5c121c683c014787a13819a592310, type: 3}
     - roomsToRandomize:
       - {fileID: 4900000, guid: 71fce7b119341314b8b1dd89ab977b5c, type: 3}
     - roomsToRandomize:
