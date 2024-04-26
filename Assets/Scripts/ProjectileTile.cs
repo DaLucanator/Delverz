@@ -100,7 +100,9 @@ public class ProjectileTile : DelverzTile
 
     public void Reflect()
     {
-        SetDirection(moveDirection *= -1f);
+        GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
+        Vector3 baseDirection = (moveDirection / moveAmount);
+        SetDirection(baseDirection *= -1f);
     }
 
     public override void Trigger(PlayerTile incomingTile)

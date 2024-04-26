@@ -10,25 +10,15 @@ public class PlayerInputScript : MonoBehaviour
     private InputAction move, fire;
     private Vector2Int moveDir;
     private Vector2 fireDir;
-    private bool canMove = true, canFire = true, isDead;
+    private bool canMove = true, canFire = true, isDead, joined, ready;
     private float delayTime = 0.03125f;
-    private PlayerColour playerColour;
-    private Joystick myJoystick;
-    private GameObject mySprite;
+    private SwordTile mySwordTile;
 
     PlayerInputManager inputManager;
 
     [SerializeField] private PlayerTile myPlayerTile;
-    [SerializeField] private GameObject yellowSprite, blueSprite, redSprite, greenSprite;
-    [SerializeField] private TextMeshProUGUI joystickName;
-
-    private enum PlayerColour
-    {
-        yellow,
-        blue,
-        red,
-        green
-    }
+    [SerializeField] private PlayerVisualHandler myPlayerVisualHandler;
+    [SerializeField] private AudioSource footsteps;
 
     private void Awake()
     {
@@ -36,25 +26,24 @@ public class PlayerInputScript : MonoBehaviour
 
         if (inputManager.playerCount == 1)
         {
-            playerColour = PlayerColour.yellow;
-            mySprite = yellowSprite;
+            myPlayerVisualHandler.SetColour(PlayerColour.yellow);
+            myPlayerVisualHandler.SetRoleExplicit(0);
         }
         if (inputManager.playerCount == 2)
         {
-            playerColour = PlayerColour.blue;
-            mySprite = blueSprite;
+            myPlayerVisualHandler.SetColour(PlayerColour.blue);
+            myPlayerVisualHandler.SetRoleExplicit(1);
         }
         if (inputManager.playerCount == 3)
         {
-            playerColour = PlayerColour.red;
-            mySprite = redSprite;
+            myPlayerVisualHandler.SetColour(PlayerColour.red);
+            myPlayerVisualHandler.SetRoleExplicit(2);
         }
         if (inputManager.playerCount == 4)
         {
-            playerColour = PlayerColour.green;
-            mySprite = greenSprite;
+            myPlayerVisualHandler.SetColour(PlayerColour.green);
+            myPlayerVisualHandler.SetRoleExplicit(3);
         }
-        mySprite.SetActive(true);
 
         input = GetComponent<PlayerInput>();
 
@@ -66,6 +55,7 @@ public class PlayerInputScript : MonoBehaviour
 
         fire.performed += FireInput;
         fire.canceled += FireCancel;
+
     }
 
     void MoveInput(InputAction.CallbackContext context)
@@ -97,14 +87,76 @@ public class PlayerInputScript : MonoBehaviour
     //Movement
     private void Move()
     {
-        if (canMove && moveDir != Vector2.zero && !isDead)
+        if(moveDir!= Vector2.zero)
         {
+            footsteps.enabled = true;
+        }
 
+        else { footsteps.enabled = false; }
+
+        //Character Select
+
+        //If I'm in the specific part of the character select where you change character (I'm not being asked to join and I haven't readied up)
+        if(canMove && moveDir != Vector2.zero && GameData.current.CanInputUI() && joined && !ready)
+        {
+            //If I press Right
+            if (moveDir.x > 0) 
+            {
+                //iterate to next portrait and ability text
+                myPlayerVisualHandler.SetRole(true);
+
+                canMove = false;
+                StartCoroutine(MoveDelay());
+            }
+
+            //If I press left
+            if (moveDir.x > 0)
+            {
+                //iterate to previous portrait and ability text
+                myPlayerVisualHandler.SetRole(false);
+
+                canMove = false;
+                StartCoroutine(MoveDelay());
+            }
+        }
+
+        //Movement
+        if (canMove && moveDir != Vector2.zero && !isDead && GameData.current.CanInputMove())
+        {
             Vector2 moveDirFloat = moveDir;
-            moveDirFloat *= 0.125f;
+            moveDirFloat *= 0.125f * myPlayerTile.ReturnCurrentSpeed();
             Vector3 movePos = new Vector3(transform.position.x + moveDirFloat.x, transform.position.y + moveDirFloat.y, 0f);
 
             Bounds moveBounds = new Bounds(movePos, myPlayerTile.ReturnBounds().size);
+
+            //Sword Stuff
+            if (myPlayerTile.ReturnHasSword())
+            {
+                if (mySwordTile == null) { mySwordTile = myPlayerTile.ReturnSword(); }
+                if (mySwordTile.ReturnIsSlashing())
+                {
+                    Vector3 swordPos = mySwordTile.ReturnDirection().transform.position;
+                    Vector3 swordMovePos = new Vector3(swordPos.x + moveDirFloat.x, swordPos.y + moveDirFloat.y, 0f);
+                    Bounds swordMoveBounds = new Bounds(swordMovePos, mySwordTile.ReturnBounds().size);
+
+                    if (mySwordTile.CanMove(swordMoveBounds) && myPlayerTile.CanMove(moveBounds))
+                    {
+                        mySwordTile.Move(swordMovePos);
+                        myPlayerTile.Move(movePos);
+
+                        canMove = false;
+                        StartCoroutine(MoveDelay());
+                    }
+                }
+
+                else if (myPlayerTile.CanMove(moveBounds))
+                {
+                    myPlayerTile.Move(movePos);
+
+                    canMove = false;
+                    StartCoroutine(MoveDelay());
+                }
+            }
 
             if (myPlayerTile.CanMove(moveBounds))
             {
@@ -115,6 +167,7 @@ public class PlayerInputScript : MonoBehaviour
             }
         }
     }
+
 
     //Abilities
     private void Fire()
@@ -127,6 +180,20 @@ public class PlayerInputScript : MonoBehaviour
 
             fireDir = Vector2.zero;
         }
+    }
+
+    private void Select()
+    {
+        //If I'm in the character Select
+        if (joined == true) { ready = true; }
+        else if (joined == false) { joined = true; }
+    }
+
+    private void Back()
+    {
+        //If I'm in the character Select
+        if (ready == true && joined == true) { ready = false; }
+        else if (joined == true) { joined = false; }
     }
 
     private void ChangeAnimationDirection()
@@ -155,6 +222,6 @@ public class PlayerInputScript : MonoBehaviour
 
     public void EnableSprite (bool shouldEnable)
     {
-        mySprite.SetActive(shouldEnable);
+        //mySprite.SetActive(shouldEnable);
     }
 }

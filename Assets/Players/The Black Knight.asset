@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46bfeb11fa807446a13eddd3db00d4e, type: 3}
+  m_Name: The Black Knight
+  m_EditorClassIdentifier: 
+  yellow: {fileID: 21300000, guid: c3bf917d99ba86642922390e5ae33478, type: 3}
+  red: {fileID: 21300000, guid: f41c0f0f5efc25e46b61277cb4e3cf1b, type: 3}
+  blue: {fileID: 21300000, guid: 5fb463b2bfffc6d408e75f143018be5a, type: 3}
+  green: {fileID: 21300000, guid: 731849e1fbe5c2c41bc7c5667061e32c, type: 3}
+  roleName: "The Black \nKnight"
+  abilityDescription: "Push \nother \nplayers"
+  innateAbility: 0

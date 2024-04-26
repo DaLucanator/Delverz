@@ -75,6 +75,12 @@ public class DelverzTile : MonoBehaviour
         return intersectData.canTraverse;
     }
 
+    public virtual bool CanMove (Bounds moveBounds, Bounds swordBounds)
+    {
+        Debug.Log("base CanMove method called. This shouldn't happen");
+        return false;
+    }
+
     public virtual void Move(Vector3 movePos)
     {
 
@@ -87,7 +93,8 @@ public class DelverzTile : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (GameController.current.ReturnIsOffScreen(transform.position)) { DestroySelf(); }
+        //if current gamemode is play
+        //if (GameController.current.ReturnIsOffScreen(transform.position)) { DestroySelf(); }
     }
     protected virtual void Update()
     {

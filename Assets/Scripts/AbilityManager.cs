@@ -52,13 +52,16 @@ public class AbilityManager : MonoBehaviour
         currentSword.ChangeDirection(abilityDirection);
     }
 
-    private void ShieldAbility()
+    private void InvisibilityPotionAbility(Vector3 abilityDirection, PlayerTile playerTile)
     {
-        //Instantiate a shield at playerpos+abilitydirection with direction abilitydirection
-        //the player can change the direction of the shield whilst it exists
-        //the script on the shield follows the player (or maybe script here)
-        //it reflects projectiles and stops sword blows
-        //afterwhich it crumbles away
+        playerTile.StartCoroutine(playerTile.InvisibilityPotion());
+        playerTile.SpendAbility();
+    }
+
+    private void SpeedPotionAbility(Vector3 abilityDirection, PlayerTile playerTile)
+    {
+        playerTile.StartCoroutine(playerTile.SpeedPotion());
+        playerTile.SpendAbility();
     }
 
     private void FireballAbility()

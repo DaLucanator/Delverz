@@ -113,4 +113,15 @@ public class GridManager : MonoBehaviour
         }
         return intersectData;
     }
+
+    public void SetGroundOnFireInRadius(float explosionRadius)
+    {
+        //for each piece of ground
+        foreach(KeyValuePair<Bounds, DelverzTile> boundsY in tileDictionaries[0])
+        {
+
+        }
+
+        //set it on fire if it's within this radius
+    }
 }
