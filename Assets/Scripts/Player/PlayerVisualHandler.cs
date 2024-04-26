@@ -29,15 +29,15 @@ public class PlayerVisualHandler : MonoBehaviour
         myPlayerColour = colourToSet;
     }
 
-    public void SetRoleExplicit( int roleNum)
+    public void SetRoleExplicit(int roleNum)
     {
         myRoleInt = roleNum;
         myPlayerRole = playerRoles[myRoleInt];
 
-        if (myPlayerColour == PlayerColour.yellow) { yellowRoleText.text = myPlayerRole.ReturnRoleName(); yellowAbilityText.text = myPlayerRole.ReturnabilityDescription(); yellowCharacterSprite.sprite = myPlayerRole.ReturnPortrait(PlayerColour.yellow); }
-        else if (myPlayerColour == PlayerColour.blue) { blueRoleText.text = myPlayerRole.ReturnRoleName(); blueAbilityText.text = myPlayerRole.ReturnabilityDescription(); blueCharacterSprite.sprite = myPlayerRole.ReturnPortrait(PlayerColour.blue); }
-        else if (myPlayerColour == PlayerColour.red) { redRoleText.text = myPlayerRole.ReturnRoleName(); redAbilityText.text = myPlayerRole.ReturnabilityDescription(); redCharacterSprite.sprite = myPlayerRole.ReturnPortrait(PlayerColour.red); }
-        else if (myPlayerColour == PlayerColour.green) { greenRoleText.text = myPlayerRole.ReturnRoleName(); greenAbilityText.text = myPlayerRole.ReturnabilityDescription(); greenCharacterSprite.sprite = myPlayerRole.ReturnPortrait(PlayerColour.green); }
+        if (myPlayerColour == PlayerColour.yellow) { yellowRoleText.text = myPlayerRole.ReturnRoleString(); yellowAbilityText.text = myPlayerRole.ReturnAbilityString(); yellowCharacterSprite.sprite = myPlayerRole.ReturnPortraitSprite(PlayerColour.yellow); yellowAbilitySprite.sprite = myPlayerRole.ReturnAbilitySprite(); }
+        else if (myPlayerColour == PlayerColour.blue) { blueRoleText.text = myPlayerRole.ReturnRoleString(); blueAbilityText.text = myPlayerRole.ReturnAbilityString(); blueCharacterSprite.sprite = myPlayerRole.ReturnPortraitSprite(PlayerColour.blue); blueAbilitySprite.sprite = myPlayerRole.ReturnAbilitySprite(); }
+        else if (myPlayerColour == PlayerColour.red) { redRoleText.text = myPlayerRole.ReturnRoleString(); redAbilityText.text = myPlayerRole.ReturnAbilityString(); redCharacterSprite.sprite = myPlayerRole.ReturnPortraitSprite(PlayerColour.red); redAbilitySprite.sprite = myPlayerRole.ReturnAbilitySprite(); }
+        else if (myPlayerColour == PlayerColour.green) { greenRoleText.text = myPlayerRole.ReturnRoleString(); greenAbilityText.text = myPlayerRole.ReturnAbilityString(); greenCharacterSprite.sprite = myPlayerRole.ReturnPortraitSprite(PlayerColour.green); greenAbilitySprite.sprite = myPlayerRole.ReturnAbilitySprite(); }
     }
 
     public void SetRole(bool shouldIncrease)
@@ -50,15 +50,15 @@ public class PlayerVisualHandler : MonoBehaviour
 
         myPlayerRole = playerRoles[myRoleInt];
 
-        if (myPlayerColour == PlayerColour.yellow) { yellowRoleText.text = myPlayerRole.ReturnRoleName(); yellowAbilityText.text = myPlayerRole.ReturnabilityDescription(); yellowCharacterSprite.sprite = myPlayerRole.ReturnPortrait(PlayerColour.yellow); }
-        else if (myPlayerColour == PlayerColour.blue) { blueRoleText.text = myPlayerRole.ReturnRoleName(); blueAbilityText.text = myPlayerRole.ReturnabilityDescription(); blueCharacterSprite.sprite = myPlayerRole.ReturnPortrait(PlayerColour.blue); }
-        else if (myPlayerColour == PlayerColour.red) { redRoleText.text = myPlayerRole.ReturnRoleName(); redAbilityText.text = myPlayerRole.ReturnabilityDescription(); redCharacterSprite.sprite = myPlayerRole.ReturnPortrait(PlayerColour.red); }
-        else if (myPlayerColour == PlayerColour.green) { greenRoleText.text = myPlayerRole.ReturnRoleName(); greenAbilityText.text = myPlayerRole.ReturnabilityDescription(); greenCharacterSprite.sprite = myPlayerRole.ReturnPortrait(PlayerColour.green); }
+        if (myPlayerColour == PlayerColour.yellow) { yellowRoleText.text = myPlayerRole.ReturnRoleString(); yellowAbilityText.text = myPlayerRole.ReturnAbilityString(); yellowCharacterSprite.sprite = myPlayerRole.ReturnPortraitSprite(PlayerColour.yellow); yellowAbilitySprite.sprite = myPlayerRole.ReturnAbilitySprite(); }
+        else if (myPlayerColour == PlayerColour.blue) { blueRoleText.text = myPlayerRole.ReturnRoleString(); blueAbilityText.text = myPlayerRole.ReturnAbilityString(); blueCharacterSprite.sprite = myPlayerRole.ReturnPortraitSprite(PlayerColour.blue); blueAbilitySprite.sprite = myPlayerRole.ReturnAbilitySprite(); }
+        else if (myPlayerColour == PlayerColour.red) { redRoleText.text = myPlayerRole.ReturnRoleString(); redAbilityText.text = myPlayerRole.ReturnAbilityString(); redCharacterSprite.sprite = myPlayerRole.ReturnPortraitSprite(PlayerColour.red); redAbilitySprite.sprite = myPlayerRole.ReturnAbilitySprite(); }
+        else if (myPlayerColour == PlayerColour.green) { greenRoleText.text = myPlayerRole.ReturnRoleString(); greenAbilityText.text = myPlayerRole.ReturnAbilityString(); greenCharacterSprite.sprite = myPlayerRole.ReturnPortraitSprite(PlayerColour.green); greenAbilitySprite.sprite = myPlayerRole.ReturnAbilitySprite(); }
     }
 
     public void Update()
     {
-        if(GameData.current.isCharacterSelect())
+        if(SceneController.current.IsCharacterSelectScene())
         {
             if(myPlayerColour == PlayerColour.yellow)
             {

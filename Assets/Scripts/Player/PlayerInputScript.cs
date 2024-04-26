@@ -97,7 +97,7 @@ public class PlayerInputScript : MonoBehaviour
         //Character Select
 
         //If I'm in the specific part of the character select where you change character (I'm not being asked to join and I haven't readied up)
-        if(canMove && moveDir != Vector2.zero && GameData.current.CanInputUI() && joined && !ready)
+        if(canMove && moveDir != Vector2.zero && SceneController.current.IsCharacterSelectScene() && joined && !ready)
         {
             //If I press Right
             if (moveDir.x > 0) 
@@ -121,7 +121,7 @@ public class PlayerInputScript : MonoBehaviour
         }
 
         //Movement
-        if (canMove && moveDir != Vector2.zero && !isDead && GameData.current.CanInputMove())
+        if (canMove && moveDir != Vector2.zero && !isDead && SceneController.current.IsMainScene())
         {
             Vector2 moveDirFloat = moveDir;
             moveDirFloat *= 0.125f * myPlayerTile.ReturnCurrentSpeed();
@@ -184,9 +184,11 @@ public class PlayerInputScript : MonoBehaviour
 
     private void Select()
     {
-        //If I'm in the character Select
-        if (joined == true) { ready = true; }
-        else if (joined == false) { joined = true; }
+        if(SceneController.current.IsCharacterSelectScene())
+        {
+            if (joined == true) { ready = true; }
+            else if (joined == false) { joined = true; }
+        }
     }
 
     private void Back()

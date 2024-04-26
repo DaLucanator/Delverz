@@ -6,21 +6,22 @@ using UnityEngine;
 public class PlayerRole : ScriptableObject
 {
     [SerializeField] private Sprite yellow, red, blue, green;
+    [SerializeField] private AnimatorOverrideController yellowAnim, redAnim, blueAnim, greenAnim;
     [TextArea]
     [SerializeField] private string roleName, abilityDescription;
-    [SerializeField] private Ability innateAbility;
+    [SerializeField] private AbilityScriptableObject innateAbility;
 
-    public string ReturnRoleName()
+    public string ReturnRoleString()
     {
         return roleName;
     }
 
-    public string ReturnabilityDescription()
+    public string ReturnAbilityString()
     {
         return abilityDescription;
     }
     
-    public Sprite ReturnPortrait(PlayerColour myColour)
+    public Sprite ReturnPortraitSprite(PlayerColour myColour)
     {
         if (myColour == PlayerColour.yellow) { return yellow; }
         else if (myColour == PlayerColour.blue) { return blue; }
@@ -28,5 +29,10 @@ public class PlayerRole : ScriptableObject
         else if (myColour == PlayerColour.green) { return green; }
 
         else return null;
+    }
+
+    public Sprite ReturnAbilitySprite()
+    {
+        return innateAbility.ReturnSprite();
     }
 }

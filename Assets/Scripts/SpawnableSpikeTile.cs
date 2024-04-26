@@ -37,7 +37,6 @@ public class SpawnableSpikeTile : SpikeTile
         {
             tile.Die();
         }
-        GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
     }
     public void DePopulateTile()
     {
