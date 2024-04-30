@@ -130,9 +130,9 @@ public class PlayerTile : DelverzTile
         if (pickupAbility == Ability.Null) { return true; }
         else return false;
     }
-    public void PickupAbility(Ability abilityToPickup)
+    public void PickupAbility(AbilityScriptableObject abilityToPickup)
     {
-        pickupAbility = abilityToPickup;
+        pickupAbility = abilityToPickup.ReturnAbility();
         Debug.Log("you picked up " + currentAbility.ToString());
     }
 

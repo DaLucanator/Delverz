@@ -93,8 +93,11 @@ public class DelverzTile : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        //if current gamemode is play
-        //if (GameController.current.ReturnIsOffScreen(transform.position)) { DestroySelf(); }
+        if(SceneController.current.IsMainScene())
+        {
+            if (GameController.current.ReturnIsOffScreen(transform.position)) { DestroySelf(); }
+        }
+
     }
     protected virtual void Update()
     {

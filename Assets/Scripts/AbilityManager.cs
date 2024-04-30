@@ -6,7 +6,8 @@ public enum Ability
 {
     Null,
     Crossbow,
-    Sword
+    Sword,
+    SpeedPotion
 }
 
 public class AbilityManager : MonoBehaviour

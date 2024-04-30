@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46bfeb11fa807446a13eddd3db00d4e, type: 3}
+  m_Name: The Cultist
+  m_EditorClassIdentifier: 
+  yellow: {fileID: 21300000, guid: a5d4a1144d296854084d6883052427a5, type: 3}
+  red: {fileID: 21300000, guid: 8ae036160e2c955448c4df973a727771, type: 3}
+  blue: {fileID: 21300000, guid: 97317b1d1e174c24689cad574a54b982, type: 3}
+  green: {fileID: 21300000, guid: ffd620261b0f64349b78830103060a1e, type: 3}
+  yellowAnim: {fileID: 22100000, guid: e094b8f0fbeb62341a7b30e05530872a, type: 2}
+  redAnim: {fileID: 22100000, guid: 1910f6d98c8fa224797837c393beba5a, type: 2}
+  blueAnim: {fileID: 22100000, guid: 3b5e0728bfdfc2646bdcb156b0af8215, type: 2}
+  greenAnim: {fileID: 22100000, guid: 8c667cd604ca53c4388fcd8951351c43, type: 2}
+  roleName: The Cultist
+  abilityDescription: "Fire a \nchaotic \nprojectile"
+  innateAbility: {fileID: 11400000, guid: b62bcc0957671bc4390383ee83055146, type: 2}

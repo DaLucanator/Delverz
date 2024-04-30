@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Scriptable Objects", menuName = "ScriptableObjects/PlayerRoles")]
 public class PlayerRole : ScriptableObject
 {
-    [SerializeField] private Sprite yellow, red, blue, green;
+    [SerializeField] private Sprite yellow, red, blue, green, yellowSmall, redSmall, blueSmall, greenSmall;
     [SerializeField] private AnimatorOverrideController yellowAnim, redAnim, blueAnim, greenAnim;
     [TextArea]
     [SerializeField] private string roleName, abilityDescription;
@@ -21,7 +21,7 @@ public class PlayerRole : ScriptableObject
         return abilityDescription;
     }
     
-    public Sprite ReturnPortraitSprite(PlayerColour myColour)
+    public Sprite ReturnPortraitSpriteLarge(PlayerColour myColour)
     {
         if (myColour == PlayerColour.yellow) { return yellow; }
         else if (myColour == PlayerColour.blue) { return blue; }
@@ -31,8 +31,28 @@ public class PlayerRole : ScriptableObject
         else return null;
     }
 
-    public Sprite ReturnAbilitySprite()
+    public Sprite ReturnPortraitSpriteSmall(PlayerColour myColour)
+    {
+        if (myColour == PlayerColour.yellow) { return yellowSmall; }
+        else if (myColour == PlayerColour.blue) { return blueSmall; }
+        else if (myColour == PlayerColour.red) { return redSmall; }
+        else if (myColour == PlayerColour.green) { return greenSmall; }
+
+        else return null;
+    }
+
+    public Sprite ReturnAbilitySpriteSmall()
     {
         return innateAbility.ReturnSprite();
+    }
+
+    public AnimatorOverrideController ReturnAnimatorController(PlayerColour myColour)
+    {
+        if (myColour == PlayerColour.yellow) { return yellowAnim; }
+        else if (myColour == PlayerColour.blue) { return blueAnim; }
+        else if (myColour == PlayerColour.red) { return redAnim; }
+        else if (myColour == PlayerColour.green) { return greenAnim; }
+
+        else return null;
     }
 }

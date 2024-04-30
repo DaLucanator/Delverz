@@ -6,16 +6,25 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public static SceneController current;
-    [SerializeField] private Scene characterSelectScene, mainScene;
 
     public void Awake()
     {
-
+        current = this;
     }
 
     public bool IsCharacterSelectScene()
     {
-        if (SceneManager.GetActiveScene() == characterSelectScene)
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
+        {
+            return true;
+        }
+
+        else return false;
+    }
+
+    public bool IsScoreScene()
+    {
+        if (SceneManager.GetActiveScene().name == "ScoreScene")
         {
             return true;
         }
@@ -25,7 +34,7 @@ public class SceneController : MonoBehaviour
 
     public bool IsMainScene()
     {
-        if (SceneManager.GetActiveScene() == mainScene)
+        if (SceneManager.GetActiveScene().name == "Luc's Scene")
         {
             return true;
         }

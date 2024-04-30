@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46bfeb11fa807446a13eddd3db00d4e, type: 3}
+  m_Name: The Black Knight
+  m_EditorClassIdentifier: 
+  yellow: {fileID: 21300000, guid: c3bf917d99ba86642922390e5ae33478, type: 3}
+  red: {fileID: 21300000, guid: f41c0f0f5efc25e46b61277cb4e3cf1b, type: 3}
+  blue: {fileID: 21300000, guid: 5fb463b2bfffc6d408e75f143018be5a, type: 3}
+  green: {fileID: 21300000, guid: 731849e1fbe5c2c41bc7c5667061e32c, type: 3}
+  yellowSmall: {fileID: 21300000, guid: 94faf7550d9318a4aad970ae7087b46c, type: 3}
+  redSmall: {fileID: 21300000, guid: 20ea9848d165e424a8e9f250f85125a6, type: 3}
+  blueSmall: {fileID: 21300000, guid: 800bb4ef34066dd4bafed075f0c244dd, type: 3}
+  greenSmall: {fileID: 21300000, guid: 2e00c8271af765d48887a93c41426954, type: 3}
+  yellowAnim: {fileID: 22100000, guid: 0a6e1a9630c8a4d41abf104b8cbe7291, type: 2}
+  redAnim: {fileID: 22100000, guid: c5a86405604feed4da5b7f49181ea1ef, type: 2}
+  blueAnim: {fileID: 22100000, guid: a63b7f7f95f959244b1c1b53220abe85, type: 2}
+  greenAnim: {fileID: 22100000, guid: d69b53cf5d00c2c4aa572c6d095b6b65, type: 2}
+  roleName: "The Black \nKnight"
+  abilityDescription: "Push \nother \nplayers"
+  innateAbility: {fileID: 11400000, guid: b62bcc0957671bc4390383ee83055146, type: 2}

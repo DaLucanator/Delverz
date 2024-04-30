@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46bfeb11fa807446a13eddd3db00d4e, type: 3}
+  m_Name: The Witch
+  m_EditorClassIdentifier: 
+  yellow: {fileID: 21300000, guid: 5dbf68faaf7e1604e83e6c299d87235c, type: 3}
+  red: {fileID: 21300000, guid: 0c44705046a3c6143bb488f5d858834b, type: 3}
+  blue: {fileID: 21300000, guid: 181381f8df3708f4483fca5e46577f5e, type: 3}
+  green: {fileID: 21300000, guid: 9c50400fc6ccc144ca4b9be3258d2c8e, type: 3}
+  yellowSmall: {fileID: 21300000, guid: 56797b1b29bb62941a1fad90fc190562, type: 3}
+  redSmall: {fileID: 21300000, guid: cf60f5892370c274aa2324173442cc17, type: 3}
+  blueSmall: {fileID: 21300000, guid: 953b02003dd4acc4ab15df1891ce255a, type: 3}
+  greenSmall: {fileID: 21300000, guid: 98169f03f6eaa5c4fb2cc52e9a35dee9, type: 3}
+  yellowAnim: {fileID: 22100000, guid: c3a5575630d49424ca8c203d5daa3586, type: 2}
+  redAnim: {fileID: 22100000, guid: fa6de0fc88a3c9b49aac5206f737ba80, type: 2}
+  blueAnim: {fileID: 22100000, guid: 771b03b62428abe46b86909c230c74b6, type: 2}
+  greenAnim: {fileID: 22100000, guid: a53863e69f8329043ade3978315f1f5e, type: 2}
+  roleName: The Witch
+  abilityDescription: "Fire an \nexplosive \nprojectile"
+  innateAbility: {fileID: 11400000, guid: b62bcc0957671bc4390383ee83055146, type: 2}

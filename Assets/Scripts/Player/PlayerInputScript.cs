@@ -11,14 +11,14 @@ public class PlayerInputScript : MonoBehaviour
     private Vector2Int moveDir;
     private Vector2 fireDir;
     private bool canMove = true, canFire = true, isDead, joined, ready;
-    private float delayTime = 0.03125f;
+    private float delayTime = 0.03125f, rotOffset;
     private SwordTile mySwordTile;
 
     PlayerInputManager inputManager;
 
     [SerializeField] private PlayerTile myPlayerTile;
     [SerializeField] private PlayerVisualHandler myPlayerVisualHandler;
-    [SerializeField] private AudioSource footsteps;
+    [SerializeField] private float rotOffset1, rotOffset2;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class PlayerInputScript : MonoBehaviour
         {
             myPlayerVisualHandler.SetColour(PlayerColour.yellow);
             myPlayerVisualHandler.SetRoleExplicit(0);
+            rotOffset = rotOffset1;
         }
         if (inputManager.playerCount == 2)
         {
@@ -43,6 +44,7 @@ public class PlayerInputScript : MonoBehaviour
         {
             myPlayerVisualHandler.SetColour(PlayerColour.green);
             myPlayerVisualHandler.SetRoleExplicit(3);
+            rotOffset = rotOffset2;
         }
 
         input = GetComponent<PlayerInput>();
@@ -60,7 +62,9 @@ public class PlayerInputScript : MonoBehaviour
 
     void MoveInput(InputAction.CallbackContext context)
     {
-        Vector2 moveDirTemp = context.ReadValue<Vector2>();
+        Vector3 moveDirTemp = context.ReadValue<Vector2>();
+
+        moveDirTemp = Quaternion.AngleAxis(rotOffset, Vector3.forward) * moveDirTemp;
 
         moveDir.x = Mathf.RoundToInt(moveDirTemp.x);
         moveDir.y = Mathf.RoundToInt(moveDirTemp.y);
@@ -81,19 +85,13 @@ public class PlayerInputScript : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        myPlayerVisualHandler.CheckAnimState(moveDir);
     }
 
 
     //Movement
     private void Move()
     {
-        if(moveDir!= Vector2.zero)
-        {
-            footsteps.enabled = true;
-        }
-
-        else { footsteps.enabled = false; }
-
         //Character Select
 
         //If I'm in the specific part of the character select where you change character (I'm not being asked to join and I haven't readied up)
@@ -193,17 +191,13 @@ public class PlayerInputScript : MonoBehaviour
 
     private void Back()
     {
-        //If I'm in the character Select
-        if (ready == true && joined == true) { ready = false; }
-        else if (joined == true) { joined = false; }
-    }
+        if (SceneController.current.IsCharacterSelectScene())
+        {
+            if (ready == true && joined == true) { ready = false; }
+            else if (joined == true) { joined = false; }
+        }
 
-    private void ChangeAnimationDirection()
-    {
-        //if statement for each direction
-        //change animation
     }
-
 
     private IEnumerator MoveDelay()
     {
