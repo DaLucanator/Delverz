@@ -6,7 +6,6 @@ using System.Linq;
 
 public class UIController : MonoBehaviour
 {
-    private string score;
     [SerializeField] GameObject CharacterSelectUI, MainSceneUI;
     [SerializeField] PlayerColour myPlayerColour;
     [SerializeField] private SpriteRenderer characterPortraitRendererMain;
@@ -29,9 +28,10 @@ public class UIController : MonoBehaviour
         string addToScore = "";
         string scoreTemp = ScoreToset.ToString();
 
-        if (score.Length > 4) { addToScore += "0"; }
-        if (score.Length > 3) { addToScore += "0"; }
-        if (score.Length > 2) { addToScore += "0"; }
+        if (scoreTemp.Length < 4) { addToScore += "0"; }
+        if (scoreTemp.Length < 3) { addToScore += "0"; }
+        if (scoreTemp.Length < 2) { addToScore += "0"; }
+        if (scoreTemp.Length < 1) { addToScore += "0"; }
 
         scoreText.text = addToScore + scoreTemp;
     }

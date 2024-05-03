@@ -52,8 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPlayerTile: {fileID: 3018837899833657944}
   myPlayerVisualHandler: {fileID: 2470005336676181959}
-  rotOffset1: 0
-  rotOffset2: 0
+  rotOffset1: -45
+  rotOffset2: 45
 --- !u!114 &3018837899833657944
 MonoBehaviour:
   m_ObjectHideFlags: 0

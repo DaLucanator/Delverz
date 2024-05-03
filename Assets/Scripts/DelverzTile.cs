@@ -10,7 +10,6 @@ public class DelverzTile : MonoBehaviour
 
     private protected Bounds bounds;
     private protected List<DelverzTile> tilesToTrigger = new List<DelverzTile>();
-    private Tile myTileMapTile;
     protected BoxCollider2D myCollider;
 
     //only PlayerTile & SwordTile uses this. It's kinda bad to have it here but it makes gridmanager less messy

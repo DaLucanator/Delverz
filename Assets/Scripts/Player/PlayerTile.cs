@@ -7,13 +7,14 @@ public class PlayerTile : DelverzTile
     [SerializeField] PlayerInputScript myPlayerInputScript;
     private float treasureAmount;
     private float currentSpeed  = 1f;
-    private int TreasureAmountDisplay;
+    private int treasureAmountDisplay;
     private bool isDead, hasSword;
     private Ability currentAbility = Ability.Null;
     private Ability innateAbility = Ability.Null;
     private Ability pickupAbility = Ability.Null;
-    [SerializeField]private GameObject bloodSplat;
-    [SerializeField] private GameObject mySprite;
+    private PlayerColour playerColour;
+    [SerializeField] private GameObject bloodSplat;
+    [SerializeField] private SpriteRenderer mySprite;
 
 
     private List<PressurePlateTile> pressurePlateTiles = new List<PressurePlateTile>();
@@ -43,10 +44,27 @@ public class PlayerTile : DelverzTile
         mySword = swordToSet;
     }
 
+    public void SetColour(PlayerColour colourToSet)
+    {
+        playerColour = colourToSet;
+    }
 
     public void PickupTreasure(int treasureToAdd)
     {
         treasureAmount += treasureToAdd;
+        Mathf.RoundToInt(treasureAmount);
+        treasureAmountDisplay = (int)treasureAmount;
+
+        UIControllerParent.current.SetScore(playerColour, treasureAmountDisplay);
+    }
+
+    public void DeductTreasure()
+    {
+        treasureAmount -= (treasureAmount * 0.1f);
+        Mathf.RoundToInt(treasureAmount);
+        treasureAmountDisplay = (int)treasureAmount;
+
+        UIControllerParent.current.SetScore(playerColour, treasureAmountDisplay);
     }
 
     //the rest of the movement is handled by PlayerInputScript
@@ -103,13 +121,11 @@ public class PlayerTile : DelverzTile
             Instantiate(bloodSplat, transform.position, Quaternion.identity);
             GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
             isDead = true;
+
             //Disable Input
             myPlayerInputScript.Die(true);
-
             //Deduct Treasure
-            treasureAmount -= (treasureAmount * 0.1f);
-            Mathf.RoundToInt(treasureAmount);
-            TreasureAmountDisplay = (int)treasureAmount;
+            DeductTreasure();
 
             StartCoroutine(RespawnTimer(5f));
         }
@@ -170,8 +186,10 @@ public class PlayerTile : DelverzTile
     {
         StopCoroutine(InvisibilityPotion());
         //go invisible
+        mySprite.enabled = false;
         yield return new WaitForSeconds(10f);
         //stop going Invisible
+        mySprite.enabled = true;
     }
 
     public IEnumerator SpeedPotion()

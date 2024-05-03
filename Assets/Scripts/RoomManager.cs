@@ -23,6 +23,7 @@ public class RoomManager : MonoBehaviour
     private List<RoomData> roomsToSpawn = new List<RoomData>();
     private Vector3Int verticalOffset = new Vector3Int (0,15,0);
     private int roomsSpawned = 0;
+    private int roomsDeSpawned = 0;
 
     private void Start()
     {
@@ -82,6 +83,27 @@ public class RoomManager : MonoBehaviour
         }
 
         roomsSpawned++;
+
+        if(roomsSpawned > 4)
+        {
+            DeSpawnRoom();
+        }
     }
+
+    public void DeSpawnRoom()
+    {
+        RoomData currentRoomData = roomsToSpawn[roomsSpawned];
+
+        for (int i = 0; i < currentRoomData.tilePoses.Count; i++)
+        {
+            currentTilemap.SetTile(currentRoomData.tilePoses[i] + (verticalOffset * roomsSpawned), tileIDs.tileIDs[currentRoomData.tileIDs[i]]);
+            currentTilemap.SetTile(currentRoomData.tilePoses[i] + (verticalOffset * roomsDeSpawned), null);
+        }
+
+        roomsDeSpawned++;
+
+    }
+
+
 }
 

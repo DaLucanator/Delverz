@@ -27,6 +27,7 @@ public class PlayerInputScript : MonoBehaviour
         if (inputManager.playerCount == 1)
         {
             myPlayerVisualHandler.SetColour(PlayerColour.yellow);
+            myPlayerTile.SetColour(PlayerColour.yellow);
             myPlayerVisualHandler.SetRoleExplicit(0);
             rotOffset = rotOffset1;
         }

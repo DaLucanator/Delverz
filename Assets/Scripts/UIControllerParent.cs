@@ -33,4 +33,12 @@ public class UIControllerParent : MonoBehaviour
         else if (colourToSet == PlayerColour.green) { greenUI.SetRole(roleToSet); }
     }
 
+    public void SetScore(PlayerColour colourToSet, int scoreToSet)
+    {
+        if (colourToSet == PlayerColour.yellow) { yellowUI.SetScore(scoreToSet); }
+        else if (colourToSet == PlayerColour.blue) { blueUI.SetScore(scoreToSet); }
+        else if (colourToSet == PlayerColour.red) { redUI.SetScore(scoreToSet); }
+        else if (colourToSet == PlayerColour.green) { greenUI.SetScore(scoreToSet); }
+    }
+
 }

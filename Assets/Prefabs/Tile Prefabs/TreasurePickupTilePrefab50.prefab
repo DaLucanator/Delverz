@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6740845537791975262}
-  - component: {fileID: -130663339819165841}
   - component: {fileID: 3350005142416179932}
+  - component: {fileID: 7788205892515125741}
   m_Layer: 0
-  m_Name: AbilityPickupTilePrefab
+  m_Name: TreasurePickupTilePrefab50
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,21 +34,6 @@ Transform:
   - {fileID: 8523559564098157735}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-130663339819165841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764452270606256282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bead4b4a03331640bd74a0553d4ea04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colliderType: 4
-  abilityToPickup: {fileID: 11400000, guid: b62bcc0957671bc4390383ee83055146, type: 2}
-  spriteRenderer: {fileID: 3700067050630819904}
 --- !u!61 &3350005142416179932
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -94,6 +79,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9375, y: 0.9375}
   m_EdgeRadius: 0
+--- !u!114 &7788205892515125741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764452270606256282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134fa2c0c2e92a1429f0d15011d19f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderType: 4
+  treasureAmount: 50
+  mySprite: {fileID: 3700067050630819904}
 --- !u!1 &2900598121597562414
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 876f52572fe6e73409f0c181da3cc1ff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dedc5b153bff91c48af8c86b9c4f47c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
