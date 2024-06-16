@@ -11,5 +11,7 @@ public class ShooterTile : PoweredTile
     {
         GameObject currentProjectile = Instantiate(projectileToSpawn, transform.position + spawnPos, Quaternion.identity);
         currentProjectile.GetComponent<ProjectileTile>().SetDirection(spawnPos);
+
+        if(SoundManager.current.CanPlaySound(SoundToPlay.arrowTrap)) { mySound.Play(); }
     }
 }

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46bfeb11fa807446a13eddd3db00d4e, type: 3}
   m_Name: The Lost Heir
   m_EditorClassIdentifier: 
-  yellow: {fileID: 21300000, guid: e700733cc5dae394c8bc634ca8c30595, type: 3}
+  yellow: {fileID: 21300000, guid: a152ed97b7e6cec41a11b9b48af9917d, type: 3}
   red: {fileID: 21300000, guid: 08f324e523f7bf64cb6c25241f12f573, type: 3}
   blue: {fileID: 21300000, guid: 7f29f55c5867b1b48b0b06c762b96da8, type: 3}
   green: {fileID: 21300000, guid: 9395672b807b3a74fafe65933168d8d5, type: 3}
-  yellowSmall: {fileID: 0}
+  yellowSmall: {fileID: 21300000, guid: a152ed97b7e6cec41a11b9b48af9917d, type: 3}
   redSmall: {fileID: 0}
   blueSmall: {fileID: 0}
   greenSmall: {fileID: 0}

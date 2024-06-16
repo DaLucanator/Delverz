@@ -7,8 +7,8 @@ using TMPro;
 public class PlayerInputScript : MonoBehaviour
 {
     PlayerInput input;
-    private InputAction move, fire;
-    private Vector2Int moveDir;
+    private InputAction move, fire, select;
+    private Vector2 moveDir;
     private Vector2 fireDir;
     private bool canMove = true, canFire = true, isDead, joined, ready;
     private float delayTime = 0.03125f, rotOffset;
@@ -29,23 +29,28 @@ public class PlayerInputScript : MonoBehaviour
             myPlayerVisualHandler.SetColour(PlayerColour.yellow);
             myPlayerTile.SetColour(PlayerColour.yellow);
             myPlayerVisualHandler.SetRoleExplicit(0);
-            rotOffset = rotOffset1;
+            //This is for SAE Arcade Machine
+            //rotOffset = rotOffset1;
         }
         if (inputManager.playerCount == 2)
         {
             myPlayerVisualHandler.SetColour(PlayerColour.blue);
+            myPlayerTile.SetColour(PlayerColour.blue);
             myPlayerVisualHandler.SetRoleExplicit(1);
         }
         if (inputManager.playerCount == 3)
         {
             myPlayerVisualHandler.SetColour(PlayerColour.red);
+            myPlayerTile.SetColour(PlayerColour.red);
             myPlayerVisualHandler.SetRoleExplicit(2);
         }
         if (inputManager.playerCount == 4)
         {
             myPlayerVisualHandler.SetColour(PlayerColour.green);
+            myPlayerTile.SetColour(PlayerColour.green);
             myPlayerVisualHandler.SetRoleExplicit(3);
-            rotOffset = rotOffset2;
+            //This is for SAE Arcade Machine
+            //rotOffset = rotOffset2;
         }
 
         input = GetComponent<PlayerInput>();
@@ -67,8 +72,19 @@ public class PlayerInputScript : MonoBehaviour
 
         moveDirTemp = Quaternion.AngleAxis(rotOffset, Vector3.forward) * moveDirTemp;
 
-        moveDir.x = Mathf.RoundToInt(moveDirTemp.x);
-        moveDir.y = Mathf.RoundToInt(moveDirTemp.y);
+        moveDirTemp.x = Mathf.RoundToInt(moveDirTemp.x);
+        moveDirTemp.y = Mathf.RoundToInt(moveDirTemp.y);
+
+        //if it's a diagonal move 3 pixels
+        //multiply by 1.5
+        if(moveDirTemp.x != 0 && moveDirTemp.y != 0) { moveDirTemp *= 1.5f; }
+
+        //if it's a straight move 4 pixels
+        //multiply by 2
+        else if (moveDirTemp.x != 0 || moveDirTemp.y != 0) { moveDirTemp *= 2f; }
+
+        moveDir = moveDirTemp;
+
     }
 
     void FireInput(InputAction.CallbackContext context)
@@ -77,6 +93,7 @@ public class PlayerInputScript : MonoBehaviour
 
         Fire();
     }
+
 
     void FireCancel(InputAction.CallbackContext context)
     {
@@ -123,7 +140,7 @@ public class PlayerInputScript : MonoBehaviour
         if (canMove && moveDir != Vector2.zero && !isDead && SceneController.current.IsMainScene())
         {
             Vector2 moveDirFloat = moveDir;
-            moveDirFloat *= 0.125f * myPlayerTile.ReturnCurrentSpeed();
+            moveDirFloat *= 0.0625f * myPlayerTile.ReturnCurrentSpeed();
             Vector3 movePos = new Vector3(transform.position.x + moveDirFloat.x, transform.position.y + moveDirFloat.y, 0f);
 
             Bounds moveBounds = new Bounds(movePos, myPlayerTile.ReturnBounds().size);
@@ -183,11 +200,12 @@ public class PlayerInputScript : MonoBehaviour
 
     private void Select()
     {
-        if(SceneController.current.IsCharacterSelectScene())
+        SceneController.current.ReloadScene();
+        /*if(SceneController.current.IsCharacterSelectScene())
         {
             if (joined == true) { ready = true; }
             else if (joined == false) { joined = true; }
-        }
+        }*/
     }
 
     private void Back()

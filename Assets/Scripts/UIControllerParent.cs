@@ -7,7 +7,7 @@ public class UIControllerParent : MonoBehaviour
     [SerializeField] private UIController yellowUI, blueUI, redUI, greenUI;
 
     public static UIControllerParent current;
-    private bool yellowInMain = true, blueInMain, redInMain, greenInMain;
+    private bool yellowInMain = true, blueInMain = true, redInMain = true, greenInMain = true;
 
     private void Awake()
     {
@@ -39,6 +39,14 @@ public class UIControllerParent : MonoBehaviour
         else if (colourToSet == PlayerColour.blue) { blueUI.SetScore(scoreToSet); }
         else if (colourToSet == PlayerColour.red) { redUI.SetScore(scoreToSet); }
         else if (colourToSet == PlayerColour.green) { greenUI.SetScore(scoreToSet); }
+    }
+
+    public void PickupABility(PlayerColour colourToSet, Sprite abilityToPickup)
+    {
+        if (colourToSet == PlayerColour.yellow) { yellowUI.PickupAbility(abilityToPickup); }
+        else if (colourToSet == PlayerColour.blue) { blueUI.PickupAbility(abilityToPickup); }
+        else if (colourToSet == PlayerColour.red) { redUI.PickupAbility(abilityToPickup); }
+        else if (colourToSet == PlayerColour.green) { greenUI.PickupAbility(abilityToPickup); }
     }
 
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: Treasure100Tile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: b908a770078a80b4184c28760470f2b9, type: 3}
+  m_DefaultSprite: {fileID: -1610357994, guid: 2db9e30a1a8e2ae44be43e0ac8a72ef2, type: 3}
   m_DefaultGameObject: {fileID: 764452270606256282, guid: cfeec2230ce04834cbe0a2d8565a66f2, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

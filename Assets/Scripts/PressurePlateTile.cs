@@ -16,7 +16,9 @@ public class PressurePlateTile : DelverzTile
 
     private void PowerTiles()
     {
-        foreach(PoweredTile tileToPower in tilesToPower) 
+        isPowered = true;
+
+        foreach (PoweredTile tileToPower in tilesToPower) 
         {
             tileToPower.PowerTile();
         }
@@ -31,13 +33,10 @@ public class PressurePlateTile : DelverzTile
 
             if (tileToPower is DoorTile)
             {
-                Debug.Log("boop");
                 DoorTile doorTile = tileToPower as DoorTile;
                 doorTile.PowerTile(!doorTile.ReturnIsPowered());
             }
         }
-
-        isPowered = true;
     }
 
     public override void Trigger(PlayerTile incomingTile)

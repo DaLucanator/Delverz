@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: PresurePlateTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 21300000, guid: f5049b32e4e84dc479c21929b9bebe0c, type: 3}
+  m_DefaultSprite: {fileID: 1740739519, guid: 2db9e30a1a8e2ae44be43e0ac8a72ef2, type: 3}
   m_DefaultGameObject: {fileID: 764452270606256282, guid: 91bf6ee9d69129a46b87e78313e33c73, type: 3}
   m_DefaultColliderType: 0
   m_TilingRules: []

@@ -22,6 +22,11 @@ public class SceneController : MonoBehaviour
         else return false;
     }
 
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+    }
+
     public bool IsScoreScene()
     {
         if (SceneManager.GetActiveScene().name == "ScoreScene")

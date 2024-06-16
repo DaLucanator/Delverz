@@ -5,12 +5,13 @@ using UnityEngine;
 public class PoweredTile : DelverzTile
 {
     [SerializeField] protected bool isNetworkedTile;
+    protected AudioSource mySound;
 
     protected override void Start()
     {
         base.Start();
         if (!isNetworkedTile) { TrapClock.current.tick += PowerTile; }
-
+        mySound = gameObject.GetComponent<AudioSource>();
     }
 
     public virtual void PowerTile()

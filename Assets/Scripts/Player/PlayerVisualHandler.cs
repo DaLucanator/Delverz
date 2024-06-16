@@ -64,7 +64,7 @@ public class PlayerVisualHandler : MonoBehaviour
         UIControllerParent.current.SetRole(myPlayerColour, myPlayerRole);
     }
 
-    public void CheckAnimState(Vector2Int moveDir)
+    public void CheckAnimState(Vector2 moveDir)
     {
         if(moveDir == Vector2.zero) 
         {

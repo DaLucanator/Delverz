@@ -7,7 +7,8 @@ public enum Ability
     Null,
     Crossbow,
     Sword,
-    SpeedPotion
+    SpeedPotion,
+    InivisibilityPotion
 }
 
 public class AbilityManager : MonoBehaviour
@@ -17,10 +18,13 @@ public class AbilityManager : MonoBehaviour
     private Dictionary<Ability, Action<Vector3, PlayerTile>> Abilities = new Dictionary<Ability, Action<Vector3, PlayerTile>>()
     {
         { Ability.Crossbow, (Vector3, playerTile) => current.CrossbowAbility(Vector3, playerTile) },
-        { Ability.Sword, (Vector3, playerTile) => current.SwordAbility(Vector3, playerTile) }
+        { Ability.Sword, (Vector3, playerTile) => current.SwordAbility(Vector3, playerTile) },
+        { Ability.SpeedPotion, (Vector3, playerTile) => current.SpeedPotionAbility(Vector3, playerTile) },
+        { Ability.InivisibilityPotion, (Vector3, playerTile) => current.InvisibilityPotionAbility(Vector3, playerTile) }
     };
 
-    [SerializeField] private GameObject crossbowBolt, sword, shield, fireball;
+    [SerializeField] private GameObject crossbowBolt, sword;
+    [SerializeField] private AudioSource crossbowFire, swordSound;
 
     void Awake()
     {
@@ -39,6 +43,8 @@ public class AbilityManager : MonoBehaviour
         currentProjectile.SetDirection(abilityDirection);
 
         playerTile.SpendAbility();
+
+        if (SoundManager.current.CanPlaySound(SoundToPlay.crossbowFire)) { crossbowFire.Play(); }
     }
 
     private void SwordAbility(Vector3 abilityDirection, PlayerTile playerTile)
@@ -51,6 +57,8 @@ public class AbilityManager : MonoBehaviour
         else { currentSword = playerTile.ReturnSword(); }
 
         currentSword.ChangeDirection(abilityDirection);
+
+        if (SoundManager.current.CanPlaySound(SoundToPlay.sword)) { swordSound.Play(); }
     }
 
     private void InvisibilityPotionAbility(Vector3 abilityDirection, PlayerTile playerTile)

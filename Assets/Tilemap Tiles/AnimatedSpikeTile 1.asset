@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: AnimatedSpikeTile 1
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 360457023, guid: d2c3404fa1e83b548a497dda18e55053, type: 3}
+  m_DefaultSprite: {fileID: -1276024810, guid: 2db9e30a1a8e2ae44be43e0ac8a72ef2, type: 3}
   m_DefaultGameObject: {fileID: 764452270606256282, guid: f703d3a0ddcf90446a61dd7ab4fa1e4f, type: 3}
   m_DefaultColliderType: 0
   m_TilingRules: []

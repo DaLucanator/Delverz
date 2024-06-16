@@ -6,7 +6,7 @@ public class ProjectileTile : DelverzTile
     private Vector3 moveDirection;
     [SerializeField] private SpriteRenderer spriteNorth, spriteEast, spriteSouth, spriteWest;
     [SerializeField] private GameObject north, east, south, west;
-    private float moveAmount = 0.3125f;
+    private float moveAmount = 0.5f;
     private bool shouldDestroySelf, canMove = false;
     private float delayTime = 0.03125f;
 

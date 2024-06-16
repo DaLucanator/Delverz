@@ -8,6 +8,7 @@ public class DoorTile : PoweredTile
     [SerializeField] private SpawnableSpikeTile mySpikeTile;
     [SerializeField] private SpawnableWallTile myWallTile;
     [SerializeField] private SpriteRenderer mySpriteRenderer;
+    [SerializeField] private AudioSource doorUp, doorDown;
 
     protected override void Start()
     {
@@ -52,6 +53,8 @@ public class DoorTile : PoweredTile
 
             mySpikeTile.PopulateTile();
             myWallTile.PopulateTile();
+
+            if (SoundManager.current.CanPlaySound(SoundToPlay.doorUp)) { doorUp.Play(); }
         }
 
         //open the door
@@ -62,6 +65,8 @@ public class DoorTile : PoweredTile
 
             if (mySpriteRenderer != null) { mySpriteRenderer.enabled = false; }
             isOpen = true;
+
+            if (SoundManager.current.CanPlaySound(SoundToPlay.doorDown)) { doorDown.Play(); }
         }
     }
 }

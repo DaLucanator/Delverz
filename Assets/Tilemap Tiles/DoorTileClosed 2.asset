@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: DoorTileClosed 2
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -277083358, guid: a843b620f87729341b7722f3c642ec0f, type: 3}
+  m_DefaultSprite: {fileID: 1620398456, guid: 2db9e30a1a8e2ae44be43e0ac8a72ef2, type: 3}
   m_DefaultGameObject: {fileID: 764452270606256282, guid: 60f7bae07fdb2c94195fb081cc55f0af, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

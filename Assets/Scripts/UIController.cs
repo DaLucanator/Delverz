@@ -20,8 +20,14 @@ public class UIController : MonoBehaviour
     public void SetRole(PlayerRole myPlayerRole)
     {
         characterPortraitRendererMain.sprite = myPlayerRole.ReturnPortraitSpriteSmall(myPlayerColour);
-        abilityRendererMain.sprite = myPlayerRole.ReturnAbilitySpriteSmall();
     }
+
+    public void PickupAbility(Sprite abilitySprite)
+    {
+        abilityRendererMain.sprite = abilitySprite;
+    }
+
+
 
     public void SetScore(int ScoreToset)
     {

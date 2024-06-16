@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: ShooterNorthTile 1
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 1435820243, guid: ddd076ed0311042499369328a4214779, type: 3}
+  m_DefaultSprite: {fileID: -1282447545, guid: 2db9e30a1a8e2ae44be43e0ac8a72ef2, type: 3}
   m_DefaultGameObject: {fileID: 764452270606256282, guid: f0745cd21c3dd4b48a7e7205f0fd0de8, type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

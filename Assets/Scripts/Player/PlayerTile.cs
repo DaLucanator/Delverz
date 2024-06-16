@@ -15,6 +15,7 @@ public class PlayerTile : DelverzTile
     private PlayerColour playerColour;
     [SerializeField] private GameObject bloodSplat;
     [SerializeField] private SpriteRenderer mySprite;
+    [SerializeField] private AudioSource deathSplat;
 
 
     private List<PressurePlateTile> pressurePlateTiles = new List<PressurePlateTile>();
@@ -83,6 +84,7 @@ public class PlayerTile : DelverzTile
         {
             if(!tilesToTrigger.Contains(pressurePlate)) 
             {
+                Debug.Log("aaa");
                 pressurePlate.DePower();
                 tilesToRemove.Add(pressurePlate);
             }
@@ -126,6 +128,8 @@ public class PlayerTile : DelverzTile
             myPlayerInputScript.Die(true);
             //Deduct Treasure
             DeductTreasure();
+            //Death Sound
+            if (SoundManager.current.CanPlaySound(SoundToPlay.deathSplat)) { deathSplat.Play(); }
 
             StartCoroutine(RespawnTimer(5f));
         }
@@ -143,32 +147,34 @@ public class PlayerTile : DelverzTile
 
     public bool canPickupAbility()
     {
-        if (pickupAbility == Ability.Null) { return true; }
+        if (currentAbility == Ability.Null) { return true; }
         else return false;
     }
     public void PickupAbility(AbilityScriptableObject abilityToPickup)
     {
-        pickupAbility = abilityToPickup.ReturnAbility();
+        currentAbility = abilityToPickup.ReturnAbility();
+        UIControllerParent.current.PickupABility(playerColour, abilityToPickup.ReturnSprite());
         Debug.Log("you picked up " + currentAbility.ToString());
     }
 
     public void SpendAbility()
     {
-        if(currentAbility == pickupAbility) { currentAbility = Ability.Null; }
+        //if(currentAbility == pickupAbility) { currentAbility = Ability.Null; }
         //if the current ability is innateability start the timer
-        pickupAbility = Ability.Null;
+        UIControllerParent.current.PickupABility(playerColour, null);
+        currentAbility = Ability.Null;
     }
 
     private IEnumerator RespawnTimer(float timeToWait)
     {
-
+        mySprite.enabled = false;
         yield return new WaitForSeconds(5f);
 
         Vector3 positionToRespawn = RespawnManager.current.ReturnRespawnPos(this);
 
         if (positionToRespawn != new Vector3 (0,0, -1000)) 
         {
-            myPlayerInputScript.EnableSprite(true);
+            mySprite.enabled = true;
             transform.SetPositionAndRotation(positionToRespawn, Quaternion.identity);
             bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
             GridManager.current.AddToTileDictionary(tileLayer, bounds, this);

@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: The Cultist
   m_EditorClassIdentifier: 
   yellow: {fileID: 21300000, guid: a5d4a1144d296854084d6883052427a5, type: 3}
-  red: {fileID: 21300000, guid: 8ae036160e2c955448c4df973a727771, type: 3}
+  red: {fileID: 21300000, guid: 93efc9c36f63e5f42993a703a4c10ead, type: 3}
   blue: {fileID: 21300000, guid: 97317b1d1e174c24689cad574a54b982, type: 3}
   green: {fileID: 21300000, guid: ffd620261b0f64349b78830103060a1e, type: 3}
+  yellowSmall: {fileID: 0}
+  redSmall: {fileID: 21300000, guid: 93efc9c36f63e5f42993a703a4c10ead, type: 3}
+  blueSmall: {fileID: 0}
+  greenSmall: {fileID: 0}
   yellowAnim: {fileID: 22100000, guid: e094b8f0fbeb62341a7b30e05530872a, type: 2}
   redAnim: {fileID: 22100000, guid: 1910f6d98c8fa224797837c393beba5a, type: 2}
   blueAnim: {fileID: 22100000, guid: 3b5e0728bfdfc2646bdcb156b0af8215, type: 2}

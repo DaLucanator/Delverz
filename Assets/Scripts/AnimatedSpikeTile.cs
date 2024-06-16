@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime;
@@ -10,6 +11,7 @@ public class AnimatedSpikeTile : PoweredTile
     [SerializeField] private bool isPowered;
     [SerializeField] private SpawnableSpikeTile mySpikeTile;
     [SerializeField] private SpriteRenderer mySpriteRenderer;
+    [SerializeField] private AudioSource spikeUp, spikeDown;
 
     protected override void Start()
     {
@@ -54,6 +56,8 @@ public class AnimatedSpikeTile : PoweredTile
             if (mySpriteRenderer != null) { mySpriteRenderer.enabled = true; } 
 
             mySpikeTile.PopulateTile();
+
+            if (SoundManager.current.CanPlaySound(SoundToPlay.spikeUp)) { spikeUp.Play(); }
         }
 
         //Depower the spikes
@@ -63,6 +67,8 @@ public class AnimatedSpikeTile : PoweredTile
 
             if (mySpriteRenderer != null) { mySpriteRenderer.enabled = false; }
             isPowered = false;
+
+            if (SoundManager.current.CanPlaySound(SoundToPlay.spikeDown)) { spikeDown.Play(); }
         }
     }
 }
