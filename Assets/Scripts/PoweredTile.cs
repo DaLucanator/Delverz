@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PoweredTile : DelverzTile
 {
     [SerializeField] protected bool isNetworkedTile;
+    [SerializeField] private List<SpriteRenderer> myColors = new List<SpriteRenderer>();
     protected AudioSource mySound;
 
     protected override void Start()
@@ -30,5 +32,8 @@ public class PoweredTile : DelverzTile
 
     }
 
-
+    public void SetColor(int colorToSet)
+    {
+        myColors[colorToSet].enabled = true;
+    }
 }

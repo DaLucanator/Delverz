@@ -7,7 +7,7 @@ public class PlayerRole : ScriptableObject
 {
     [SerializeField] private Sprite yellow, red, blue, green, yellowSmall, redSmall, blueSmall, greenSmall;
     [SerializeField] private AnimatorOverrideController yellowAnim, redAnim, blueAnim, greenAnim;
-    [TextArea]
+    [SerializeField] private AnimatorOverrideController invincibilityAnim;
     [SerializeField] private string roleName, abilityDescription;
     [SerializeField] private AbilityScriptableObject innateAbility;
 
@@ -55,4 +55,10 @@ public class PlayerRole : ScriptableObject
 
         else return null;
     }
+
+    public AnimatorOverrideController ReturnInvincibilityAnim()
+    {
+        return invincibilityAnim;
+    }
+
 }

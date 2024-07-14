@@ -24,6 +24,7 @@ MonoBehaviour:
   redAnim: {fileID: 22100000, guid: fa6de0fc88a3c9b49aac5206f737ba80, type: 2}
   blueAnim: {fileID: 22100000, guid: 771b03b62428abe46b86909c230c74b6, type: 2}
   greenAnim: {fileID: 22100000, guid: a53863e69f8329043ade3978315f1f5e, type: 2}
+  invincibilityAnim: {fileID: 22100000, guid: e8af505fed7784640b92dfb8058d2535, type: 2}
   roleName: The Witch
   abilityDescription: "Fire an \nexplosive \nprojectile"
   innateAbility: {fileID: 11400000, guid: b62bcc0957671bc4390383ee83055146, type: 2}

@@ -19,7 +19,7 @@ public class AbilityPickupTile : DelverzTile
         {
             incomingTile.PickupAbility(abilityToPickup);
             spriteRenderer.sprite = null;
-            DestroySelf();
+            //DestroySelf();
         }
     }
 

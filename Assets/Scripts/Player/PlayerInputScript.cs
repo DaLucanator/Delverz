@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using System;
 
 public class PlayerInputScript : MonoBehaviour
 {
@@ -63,7 +64,6 @@ public class PlayerInputScript : MonoBehaviour
 
         fire.performed += FireInput;
         fire.canceled += FireCancel;
-
     }
 
     void MoveInput(InputAction.CallbackContext context)
@@ -100,12 +100,11 @@ public class PlayerInputScript : MonoBehaviour
         canFire = true;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Move();
         myPlayerVisualHandler.CheckAnimState(moveDir);
     }
-
 
     //Movement
     private void Move()

@@ -24,6 +24,7 @@ MonoBehaviour:
   redAnim: {fileID: 0}
   blueAnim: {fileID: 0}
   greenAnim: {fileID: 0}
+  invincibilityAnim: {fileID: 22100000, guid: 03b501612e377b84d9c72a476a2e596b, type: 2}
   roleName: "The Lost \nHeir"
   abilityDescription: "Turn into \na bat"
   innateAbility: {fileID: 11400000, guid: b62bcc0957671bc4390383ee83055146, type: 2}

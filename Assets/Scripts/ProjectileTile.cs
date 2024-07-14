@@ -58,10 +58,12 @@ public class ProjectileTile : DelverzTile
 
     }
 
-    protected override void FixedUpdate()
+    protected override void Update()
     {
         base.FixedUpdate();
-        if(canMove)
+
+        if (GameController.current.ReturnIsOffScreen(transform.position)) { DestroySelf(); }
+        else if (canMove)
         {
             Move();
 
@@ -79,8 +81,19 @@ public class ProjectileTile : DelverzTile
                 {
                     Reflect();
                     isSword = true;
+                    tileToTrigger.Die();
                 }
-                tileToTrigger.Die();
+                else if(tileToTrigger is PlayerTile)
+                {
+                    PlayerTile tileToCheck = tileToTrigger as PlayerTile;
+                    if(tileToCheck.ReturnIsInvincible())
+                    {
+                        Reflect();
+                        isSword = true;
+                    }
+                    else { tileToTrigger.Die(); }
+                }
+                else { tileToTrigger.Die(); }
             }
             if (tilesToTrigger.Count > 0 && !isSword) { DestroySelf(); }
 
@@ -107,8 +120,16 @@ public class ProjectileTile : DelverzTile
 
     public override void Trigger(PlayerTile incomingTile)
     {
-        incomingTile.Die();
-        DestroySelf();
+        if (incomingTile.ReturnIsInvincible())
+        {
+            Reflect();
+        }
+        else 
+        { 
+            incomingTile.Die();
+            DestroySelf();
+        }
+
     }
 
     private IEnumerator MoveDelay()
@@ -119,6 +140,11 @@ public class ProjectileTile : DelverzTile
 
     public override void Die()
     {
-        DestroySelf();
+    }
+
+    public override void DestroySelf()
+    {
+        GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
+        Destroy(gameObject);
     }
 }

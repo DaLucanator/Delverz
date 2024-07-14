@@ -88,11 +88,14 @@ public class GridManager : MonoBehaviour
                     //If I'm a bat and incoming tils is a player or a wall return hardcollision
 
                     //--TRIGGERING COLLISIONS--
+                    //-AIR-
+                    //if I'm air and incoming tile is a player return triggering collision
+                    else if (myColliderType == ColliderType.air && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }
                     //-PLAYER-
                     //if I'm a player and incoming tile is a sword that isn't mine return triggering collision
                     else if (myColliderType == ColliderType.player && (otherColliderType == ColliderType.sword && tileIAmTraversingTo != myTile.ReturnSword())) { intersectData.tilesToTrigger.Add(boundsY.Value); }
-                    //I'f I'm a player and incoming tile is a projectile or a groundObject return triggering collision
-                    else if (myColliderType == ColliderType.player && (otherColliderType == ColliderType.projectile || otherColliderType == ColliderType.groundObject)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
+                    //I'f I'm a player and incoming tile is a projectile or a groundObject or air return triggering collision
+                    else if (myColliderType == ColliderType.player && (otherColliderType == ColliderType.projectile || otherColliderType == ColliderType.groundObject || otherColliderType == ColliderType.air)) { intersectData.tilesToTrigger.Add(boundsY.Value); }
                     //-GROUNDOBJECT-
                     //if I'm a ground object and incoming tile is a player return triggering collision
                     else if (myColliderType == ColliderType.groundObject && otherColliderType == ColliderType.player && tileIAmTraversingTo != myTile) { intersectData.tilesToTrigger.Add(boundsY.Value); }

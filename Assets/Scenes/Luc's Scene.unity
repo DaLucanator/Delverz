@@ -1798,6 +1798,7 @@ Transform:
   - {fileID: 771453073}
   - {fileID: 1387833850}
   - {fileID: 1508019887}
+  - {fileID: 1130386311}
   - {fileID: 985525378}
   - {fileID: 176333745}
   - {fileID: 732757526}
@@ -2331,6 +2332,7 @@ MonoBehaviour:
     - roomsToRandomize:
       - {fileID: 4900000, guid: 7f87cf4a6ebdbdb4b8ceab1107f5c2b7, type: 3}
   tileIDs: {fileID: 11400000, guid: 5af88dfaafac7c84095d62741f99481e, type: 2}
+  Y3: {fileID: 1130386311}
 --- !u!4 &541717993
 Transform:
   m_ObjectHideFlags: 0
@@ -4084,6 +4086,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1130386310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1130386311}
+  m_Layer: 0
+  m_Name: Y3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1130386311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130386310}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 481753104}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1134068548
 GameObject:
   m_ObjectHideFlags: 0
@@ -5197,7 +5230,7 @@ Transform:
   m_GameObject: {fileID: 1508019886}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -15, z: 0}
+  m_LocalPosition: {x: 0, y: -9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

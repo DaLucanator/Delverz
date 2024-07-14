@@ -4,4 +4,9 @@ public class SpikeTile : DelverzTile
     {
         incomingTile.Die();
     }
+
+    public override void DestroySelf()
+    {
+        base.DestroySelf();
+    }
 }

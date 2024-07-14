@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 200;
         current = this;
     }
 
@@ -28,18 +29,26 @@ public class GameController : MonoBehaviour
     {
         if(vectorToCheck.x < boundaryX1.position.x) { return true; }
         if (vectorToCheck.x > boundaryX2.position.x) { return true; }
+        if (vectorToCheck.y > boundaryY1.position.y) { return true; }
         if (vectorToCheck.y < boundaryY2.position.y) { return true; }
 
         else return false;
-    } 
+    }
 
-    private void FixedUpdate()
+    public bool ReturnIsBelowScreen(Vector3 vectorToCheck)
+    {
+        if (vectorToCheck.y < boundaryY2.position.y) { return true; }
+
+        else return false;
+    }
+
+    private void Update()
     {
         if (canMove)
         {
+            canMove = false;
             transform.SetPositionAndRotation(transform.position + moveDirection, Quaternion.identity);
             StartCoroutine(MoveDelay());
-            canMove = false;
 
             if(transform.position.y >= spawnOffset)
             {

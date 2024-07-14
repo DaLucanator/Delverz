@@ -35,9 +35,9 @@ public class AnimatedSpikeTile : PoweredTile
     {
         if (!isNetworkedTile)
         {
-            if (isPowered) { TrapClock.current.onTick += PowerTile; }
+            if (isPowered) { TrapClock.current.onTick -= PowerTile; }
 
-            if (!isPowered) { TrapClock.current.offTick += PowerTile; }
+            if (!isPowered) { TrapClock.current.offTick -= PowerTile; }
         }
         base.DestroySelf();
     }
@@ -57,7 +57,7 @@ public class AnimatedSpikeTile : PoweredTile
 
             mySpikeTile.PopulateTile();
 
-            if (SoundManager.current.CanPlaySound(SoundToPlay.spikeUp)) { spikeUp.Play(); }
+            //if (SoundManager.current.CanPlaySound(SoundToPlay.spikeUp)) { spikeUp.Play(); }
         }
 
         //Depower the spikes
@@ -68,7 +68,7 @@ public class AnimatedSpikeTile : PoweredTile
             if (mySpriteRenderer != null) { mySpriteRenderer.enabled = false; }
             isPowered = false;
 
-            if (SoundManager.current.CanPlaySound(SoundToPlay.spikeDown)) { spikeDown.Play(); }
+            //if (SoundManager.current.CanPlaySound(SoundToPlay.spikeDown)) { spikeDown.Play(); }
         }
     }
 }

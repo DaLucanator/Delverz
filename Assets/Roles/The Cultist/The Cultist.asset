@@ -24,6 +24,7 @@ MonoBehaviour:
   redAnim: {fileID: 22100000, guid: 1910f6d98c8fa224797837c393beba5a, type: 2}
   blueAnim: {fileID: 22100000, guid: 3b5e0728bfdfc2646bdcb156b0af8215, type: 2}
   greenAnim: {fileID: 22100000, guid: 8c667cd604ca53c4388fcd8951351c43, type: 2}
+  invincibilityAnim: {fileID: 22100000, guid: f3f0ac20f7fcd3a48ac781dc5ad596cb, type: 2}
   roleName: The Cultist
   abilityDescription: "Fire a \nchaotic \nprojectile"
   innateAbility: {fileID: 11400000, guid: b62bcc0957671bc4390383ee83055146, type: 2}

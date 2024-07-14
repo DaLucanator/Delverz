@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class DelverzTile : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class DelverzTile : MonoBehaviour
     private protected int tileLayer;
 
     private protected Bounds bounds;
+    private protected Vector3Int myTilemapPos = new Vector3Int(-1000,-1000,-1000);
     private protected List<DelverzTile> tilesToTrigger = new List<DelverzTile>();
     protected BoxCollider2D myCollider;
 
@@ -28,10 +30,17 @@ public class DelverzTile : MonoBehaviour
     protected virtual void Start()
     {
         myCollider = this.GetComponent<BoxCollider2D>();
+        Vector3 pos = transform.TransformPoint(bounds.center);
         bounds = myCollider.bounds;
-        bounds.center = transform.position;
+        bounds.center = pos;
+        bounds.center = new Vector3(bounds.center.x, bounds.center.y, 0);
         myCollider.enabled = false;
         GridManager.current.AddToTileDictionary(tileLayer, bounds, this);
+    }
+
+    public void SetTilemapPos( Vector3Int posToSet)
+    {
+        myTilemapPos = posToSet;
     }
 
     //only PlayerTile & SwordTile uses this. It's kinda bad to have it here but it makes gridmanager less messy
@@ -63,7 +72,13 @@ public class DelverzTile : MonoBehaviour
     public virtual void DestroySelf()
     {
         GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
-        if (gameObject != null) { Destroy(gameObject); }
+        if (myTilemapPos != new Vector3Int(-1000, -1000, -1000)) { RoomManager.current.RemoveTile(myTilemapPos); }
+    }
+
+    public void TrueDestroySelf()
+    {
+        GridManager.current.RemoveTileFromDictionary(tileLayer, bounds);
+        RoomManager.current.TrueRemoveTile(myTilemapPos);
     }
 
     public virtual bool CanMove(Bounds moveBounds)
@@ -92,10 +107,12 @@ public class DelverzTile : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        /*
         if(SceneController.current.IsMainScene())
         {
             if (GameController.current.ReturnIsOffScreen(transform.position)) { DestroySelf(); }
         }
+        */
 
     }
     protected virtual void Update()

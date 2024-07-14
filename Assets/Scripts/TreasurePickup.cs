@@ -18,7 +18,7 @@ public class TreasurePickup : DelverzTile
             canPickup = false;
             incomingTile.PickupTreasure(treasureAmount);
             mySprite.sprite = null;
-            DestroySelf();
+            //DestroySelf();
         }
     }
 }

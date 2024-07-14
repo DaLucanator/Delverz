@@ -8,13 +8,14 @@ public class PlayerTile : DelverzTile
     private float treasureAmount;
     private float currentSpeed  = 1f;
     private int treasureAmountDisplay;
-    private bool isDead, hasSword;
+    private bool isDead, hasSword, isInvincible;
     private Ability currentAbility = Ability.Null;
     private Ability innateAbility = Ability.Null;
     private Ability pickupAbility = Ability.Null;
     private PlayerColour playerColour;
     [SerializeField] private GameObject bloodSplat;
-    [SerializeField] private SpriteRenderer mySprite;
+    [SerializeField] private GameObject respawnYellow, respawnBlue, respawnRed, respawnGreen;
+    [SerializeField] private SpriteRenderer mySprite, myInvinciblitySprite;
     [SerializeField] private AudioSource deathSplat;
 
 
@@ -33,6 +34,11 @@ public class PlayerTile : DelverzTile
     public float ReturnCurrentSpeed()
     {
         return currentSpeed;
+    }
+
+    public bool ReturnIsInvincible()
+    {
+        return isInvincible;
     }
 
     public void SetHasSword(bool shouldHaveSword)
@@ -82,10 +88,11 @@ public class PlayerTile : DelverzTile
         //depower any pressure plate tiles that aren't in tilesToTrigger anymore and remove them from that list
         foreach (PressurePlateTile pressurePlate in pressurePlateTiles)
         {
+
             if(!tilesToTrigger.Contains(pressurePlate)) 
             {
                 Debug.Log("aaa");
-                pressurePlate.DePower();
+                if (pressurePlate != null) { pressurePlate.DePower(); }
                 tilesToRemove.Add(pressurePlate);
             }
         }
@@ -117,7 +124,7 @@ public class PlayerTile : DelverzTile
 
     public override void Die()
     {
-        if(!isDead)
+        if(!isDead && !isInvincible)
         {
             myPlayerInputScript.EnableSprite(false);
             Instantiate(bloodSplat, transform.position, Quaternion.identity);
@@ -174,6 +181,11 @@ public class PlayerTile : DelverzTile
 
         if (positionToRespawn != new Vector3 (0,0, -1000)) 
         {
+            isInvincible = true;
+            Instantiate(ReturnRespawn(), positionToRespawn, Quaternion.identity);
+            yield return new WaitForSeconds(0.66f);
+            StartCoroutine(InvincibilityTimer(3f));
+
             mySprite.enabled = true;
             transform.SetPositionAndRotation(positionToRespawn, Quaternion.identity);
             bounds = new Bounds(transform.position, Vector3.one * 0.96875f);
@@ -186,6 +198,28 @@ public class PlayerTile : DelverzTile
         {
             RespawnTimer(0.5f);
         }
+    }
+
+    private GameObject ReturnRespawn()
+    {
+        if (playerColour == PlayerColour.yellow) { return respawnYellow; }
+        else if (playerColour == PlayerColour.blue) { return respawnBlue; }
+        else if (playerColour == PlayerColour.red) { return respawnRed; }
+        else if (playerColour == PlayerColour.green) { return respawnGreen; }
+
+        else return null;
+    }
+
+    private IEnumerator InvincibilityTimer( float timetoInvincibilise)
+    {
+        StopCoroutine(InvincibilityTimer(timetoInvincibilise));
+        isInvincible = true;
+        myInvinciblitySprite.enabled = true;
+        yield return new WaitForSeconds(timetoInvincibilise);
+
+        myInvinciblitySprite.enabled = false;
+        isInvincible = false;
+
     }
 
     public IEnumerator InvisibilityPotion()

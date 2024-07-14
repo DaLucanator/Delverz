@@ -32,10 +32,11 @@ public class DoorTile : PoweredTile
     {
         if (!isNetworkedTile)
         {
-            if (isOpen) { TrapClock.current.onTick += PowerTile; }
+            if (isOpen) { TrapClock.current.onTick -= PowerTile; }
 
-            if (!isOpen) { TrapClock.current.offTick += PowerTile; }
+            if (!isOpen) { TrapClock.current.offTick -= PowerTile; }
         }
+        base.DestroySelf();
     }
 
     public bool ReturnIsPowered()
@@ -54,7 +55,7 @@ public class DoorTile : PoweredTile
             mySpikeTile.PopulateTile();
             myWallTile.PopulateTile();
 
-            if (SoundManager.current.CanPlaySound(SoundToPlay.doorUp)) { doorUp.Play(); }
+            //if (SoundManager.current.CanPlaySound(SoundToPlay.doorUp)) { doorUp.Play(); }
         }
 
         //open the door
@@ -66,7 +67,7 @@ public class DoorTile : PoweredTile
             if (mySpriteRenderer != null) { mySpriteRenderer.enabled = false; }
             isOpen = true;
 
-            if (SoundManager.current.CanPlaySound(SoundToPlay.doorDown)) { doorDown.Play(); }
+            //if (SoundManager.current.CanPlaySound(SoundToPlay.doorDown)) { doorDown.Play(); }
         }
     }
 }

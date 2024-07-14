@@ -33,6 +33,7 @@ public class PlayerVisualHandler : MonoBehaviour
 
     [SerializeField] private PlayerRole[] playerRoles = new PlayerRole[4];
     [SerializeField] private Animator myAnimator;
+    [SerializeField] private Animator invincibleAnimator;
 
 
     public void SetColour(PlayerColour colourToSet)
@@ -45,6 +46,7 @@ public class PlayerVisualHandler : MonoBehaviour
         myRoleInt = roleNum;
         myPlayerRole = playerRoles[myRoleInt];
         myAnimator.runtimeAnimatorController = myPlayerRole.ReturnAnimatorController(myPlayerColour);
+        invincibleAnimator.runtimeAnimatorController = myPlayerRole.ReturnInvincibilityAnim();
 
         UIControllerParent.current.SetRole(myPlayerColour, myPlayerRole);
 
@@ -60,6 +62,7 @@ public class PlayerVisualHandler : MonoBehaviour
 
         myPlayerRole = playerRoles[myRoleInt];
         myAnimator.runtimeAnimatorController = myPlayerRole.ReturnAnimatorController(myPlayerColour);
+        invincibleAnimator.runtimeAnimatorController = myPlayerRole.ReturnInvincibilityAnim();
 
         UIControllerParent.current.SetRole(myPlayerColour, myPlayerRole);
     }
@@ -84,6 +87,7 @@ public class PlayerVisualHandler : MonoBehaviour
         {
             currentState = stateToChangeTo;
             myAnimator.Play(stateToChangeTo.ToString());
+            invincibleAnimator.Play(stateToChangeTo.ToString());
         }
     }
 

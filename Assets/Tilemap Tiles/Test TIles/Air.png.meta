@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a61488826993f5849a4ba4357c7191cf
+guid: 05fb5ffef3b2d4442a16bb2f6d87c61e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -1067,6 +1067,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Air_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55a3e3a3652735f49a6ba9cd537a4514
+      internalID: 2054516351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Air_46
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54c2d7dcc2a0db3429f5206c32f0e4d6
+      internalID: 1322558780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1118,6 +1160,8 @@ TextureImporter:
       Air_42: -2075396201
       Air_43: 2136325311
       Air_44: 240095817
+      Air_45: 2054516351
+      Air_46: 1322558780
       Air_5: 702234507
       Air_6: 1189225418
       Air_7: -745783520

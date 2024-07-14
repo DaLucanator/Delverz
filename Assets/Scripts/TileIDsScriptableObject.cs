@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
 [CreateAssetMenu(fileName = "Scriptable Objects", menuName = "ScriptableObjects/TileIDs")]
 public class TileIDsScriptableObject : ScriptableObject
 {
     public List<TileBase> tileIDs = new List<TileBase>();
+    [SerializeField] private List<TileBase> tileIDsEditor = new List<TileBase>();
     [SerializeField] private TileBase pressurePlate1, pressurePlate2;
     [SerializeField] private List<TileBase> poweredTiles1 = new List<TileBase>();
     [SerializeField] private List<TileBase> poweredTiles2 = new List<TileBase>();
@@ -15,7 +17,7 @@ public class TileIDsScriptableObject : ScriptableObject
     {
         for (int i = 0; i < tileIDs.Count; i++)
         {
-            if (tileIDs[i] == tile)
+            if (tileIDsEditor[i] == tile)
             {
                 return i;
             }

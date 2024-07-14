@@ -24,6 +24,7 @@ MonoBehaviour:
   redAnim: {fileID: 22100000, guid: c5a86405604feed4da5b7f49181ea1ef, type: 2}
   blueAnim: {fileID: 22100000, guid: a63b7f7f95f959244b1c1b53220abe85, type: 2}
   greenAnim: {fileID: 22100000, guid: d69b53cf5d00c2c4aa572c6d095b6b65, type: 2}
+  invincibilityAnim: {fileID: 22100000, guid: 5161b17542016a74aa2b772187fb2d53, type: 2}
   roleName: "The Black \nKnight"
   abilityDescription: "Push \nother \nplayers"
   innateAbility: {fileID: 11400000, guid: b62bcc0957671bc4390383ee83055146, type: 2}
